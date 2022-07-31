@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Categories</title>
+    <%- include('headerfiles') %>
+
+    <style>
+    </style>
+
+    <script>
+
+        function insertCatValues() {
+            $('#catform').validate();
+            if ($('#catform').valid()) {
+                let formcontrols = document.getElementById("catform").elements;
+                let formdata = new FormData();
+                for (let i = 0; i < formcontrols.length; i++) {
+                    if (formcontrols[i].type !== "button") {
+                        formdata.append(formcontrols[i].name, formcontrols[i].value);
+                    }
+                }
+
+                let httpreq = new XMLHttpRequest();
+                httpreq.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        alert(this.response);
+                        document.getElementById("catform").reset();
+                        getUserData();
+                    }
+                }
+                httpreq.open('post', "/admin/insertc", true);
+                httpreq.send(formdata);
+            }
+        }
+
+        function getUserData() {
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(JSON.parse(this.response));
+                    var data = JSON.parse(this.response);
+
+                    var tableTag = `<table class="table table-dark table-hover">`;
+                    tableTag += `<thead><tr><th>Cat_id</th><th>Cat_name</th><th>Cat_desc</th><th>Delete/Edit</th></tr></thead>`;
+
+
+                    tableTag += `<tbody>`;
+                    data.forEach(function (value, index) {
+                        tableTag += `<tr>`;
+                        tableTag += `<td>${index+1}</td>`;
+                        tableTag += `<td>${value.cat_name}</td>`;
+                        tableTag += `<td>${value.cat_desc}</td>`;
+
+                        tableTag += `<td>`;
+
+                        tableTag += `<button onclick="deleteCat('${value.cat_id}')" type="button" class="btn btn-danger btn-sm">
+                         <i class="fa fa-trash-alt"></i></button>`;
+
+                        tableTag += `<button onclick="updateCat('${value.cat_name}', '${value.cat_desc}')" type="button"
+                                data-bs-toggle="modal" data-bs-target="#UpdateCatModal"
+                                    class="ms-3 btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>`;
+
+                        tableTag += `</td>`;
+
+                        tableTag += `</tr>`;
+                    });
+                    tableTag += `</tbody></table>`;
+
+                    document.getElementById("tableBody").innerHTML = tableTag;
+                }
+            }
+            http.open("get", "/admin/getdata", true);
+            http.send();
+        }
+
+        function deleteCat(cat_id) {
+                var http = new XMLHttpRequest();
+                http.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        alert(this.response);
+                        getUserData();
+                    }
+                }
+                http.open("get", `/admin/deletecat?cat_id=${cat_id}`, true);
+                http.send();
+        }
+
+        function updateCat(cat_name, cat_desc) {
+            // console.log(cat_name, Cat_desc);
+
+            document.getElementById("catnameEdit").value = cat_name;
+            document.getElementById("catdescEdit").value = cat_desc;
+
+        }
+
+        function editCatValues() {
+            var cat_name = document.getElementById("catnameEdit").value;
+            var cat_desc = document.getElementById("catdescEdit").value;
+
+            var formData = new FormData();
+            formData.append("cat_name", cat_name);
+            formData.append("cat_desc", cat_desc);
+
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.response);
+                    alert(this.response);
+                    getUserData();
+                }
+            }
+            http.open("post", "/admin/updateCat", true);
+            http.send(formData);
+        }
+
+
+    </script>
+
+
+</head>
+
+
+<body onload="getUserData()">
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="text-center mt-3 mb-5 display-5">Manage Categories</h1>
+
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success mb-3" >
+                <i class="fa fa-plus" ></i>  Add New Category
+            </button>
+
+            <div class="modal fade" id="exampleModal">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add Category Title</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
+                                <span aria-hidden="true"><i class="fa fa-xmark"></i></span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <form id="catform">
+                                <div class="form-group mb-3">
+                                    <label for="">Enter Category Name</label>
+                                    <input type="text" name="catname" id="catname" class="form-control" data-rule-required="true"
+                                           data-msg-required="Enter Category Name"/>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="">Enter Category Description</label>
+                                    <input type="text" name="catdesc" id="catdesc" class="form-control" data-rule-required="true"
+                                           data-msg-required="Enter Description"/>
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <input type="button" id="btnncat" onclick="insertCatValues()" value="SUBMIT"
+                                           class="btn btn-primary"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           <div id="tableBody"></div>
+
+
+            <div class="modal fade" id="UpdateCatModal">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Update Category</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <form id="catform">
+
+                                <div class="form-group mb-3">
+                                    <label for="">Category Name</label>
+                                    <input type="text" readonly name="catnameEdit" id="catnameEdit" class="form-control" data-rule-required="true"
+                                           data-msg-required="Enter Category Name"/>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="">Category Description</label>
+                                    <input type="text" name="catdescEdit" id="catdescEdit" class="form-control" data-rule-required="true"
+                                           data-msg-required="Enter Description"/>
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <input type="button" id="btnncatEdit" onclick="editCatValues()" value="UPDATE"
+                                           class="btn btn-primary"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
