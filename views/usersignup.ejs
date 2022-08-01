@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Categories</title>
+    <%- include('headerfiles') %>
+
+    <style>
+        .error {
+            color: red;
+        }
+
+        #admin_body {
+            background-color: #2c3034;
+        }
+    </style>
+
+    <script>
+        function UserInsert() {
+            $('#userform').validate();
+            if ($('#userform').valid()) {
+                let formcontrols = document.getElementById("userform").elements;
+                let formdata = new FormData();
+                for (let i = 0; i < formcontrols.length; i++) {
+                    if (formcontrols[i].type !== "button") {
+                        if (formcontrols[i].type === "file") {
+                            formdata.append(formcontrols[i].name, formcontrols[i].files[0]);
+                        } else {
+                            formdata.append(formcontrols[i].name, formcontrols[i].value);
+                        }
+                    }
+                }
+
+                let httpreq = new XMLHttpRequest();
+                httpreq.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        let CheckResponse = document.getElementById("userresponse");
+                        if (this.response === "exist") {
+                            CheckResponse.className = `alert alert-danger`;
+                            CheckResponse.innerText = `Username already exist.`;
+                        } else {
+                            CheckResponse.className = `alert alert-success`;
+                            CheckResponse.innerText = `Username added successfully`;
+                            document.getElementById("userform").reset();
+                        }
+
+                    }
+                }
+                httpreq.open('post', "/insertuser", true);
+                httpreq.send(formdata);
+            }
+        }
+
+    </script>
+
+
+</head>
+
+<body id="admin_body">
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">User Signup</h1>
+
+            <form id="userform">
+
+                <div class="form-group mb-3">
+                    <input type="text" name="fullname" id="fullname"
+                           class="form-control" data-rule-required="true"
+                           placeholder="Enter Username"
+                           data-msg-required="*Username Required"/>
+                </div>
+
+                <div class="form-group mb-3">
+                    <input type="text" name="fathername" id="fathername"
+                           class="form-control" data-rule-required="true"
+                           placeholder="Enter Father Name"
+                           data-msg-required="*Father Name Required"/>
+                </div>
+
+                <div class="form-group mb-3">
+                    <input type="email" name="email" id="email" class="form-control"
+                           data-rule-required="true"
+                           placeholder="Enter E-Mail"
+                           data-msg-required="*Required Email"/>
+                </div>
+
+                <div class="form-group mb-3">
+                    <input type="text" name="phone_no" id="phone_no" class="form-control"
+                           data-rule-required="true"
+                           maxlength="10"
+                           minlength="10"
+                           data-rule-number="true"
+                           placeholder="Enter Mobile Number"
+                           data-msg-required="*Required MobileNumber"/>
+                </div>
+
+                <div class="form-group mb-3">
+                    <input type="password" name="password" id="password"
+                           class="form-control" data-rule-required="true"
+                           placeholder="Enter Password"
+                           data-msg-required="Enter Password"/>
+                </div>
+
+                <div class="form-group mb-3">
+                    <input type="password" name="confirm_password" id="confirm_password"
+                           class="form-control" data-rule-required="true"
+                           data-rule-equalto="#password"
+                           placeholder="Confirm Password"
+                           data-msg-required="Enter Password"/>
+                </div>
+
+                <div class="form-group mb-3">
+                    <input type="file" name="photo" id="photo"
+                           class="form-control" data-rule-required="true"
+                           placeholder="Upload Photo"
+                           data-msg-required="*Photo Required"/>
+                </div>
+
+
+                <div class="form-group mt-2 mb-3">
+                    <input type="button" id="btnncat" onclick="UserInsert()" value="SIGNUP"
+                           class="btn btn-primary"/>
+                </div>
+            </form>
+            <div id="userresponse"></div>
+
+        </div>
+
+        <!--            <div id="AdmintableBody"></div>-->
+
+
+    </div>
+</div>
+</div>
+
+</body>

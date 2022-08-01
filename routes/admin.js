@@ -56,7 +56,7 @@ router.post("/updateCat", (req, res) => {
 });
 
 
-//=======ADMIN
+//=======ADMIN=======
 
 
 router.get('/adminview', function(req, res, next) {
@@ -69,11 +69,25 @@ router.post('/insert-admin-data',(req, res, next)=> {
   let email = req.body.email;
   let pno = req.body.pno;
   let password = req.body.password;
-  let Query ="insert into `admin` (`username`,`email`,`pno`,`password`) values ('"+username+"','"+email+"','"+pno+"','"+password+"')";
-  conn.query(Query,function (err){
-    if (err) throw err;
-    res.send("Data Inserted");
-  })
+  let confirm_password = req.body.confirm_password;
+
+  if (password != confirm_password) {
+    res.send("notsame");
+  }else{
+    let CheckUser = `SELECT * FROM admin WHERE username="${username}"`;
+    conn.query(CheckUser,(err,data)=>{
+      if (err) throw err;
+      if(data.length > 0){
+        res.send('exist');
+      }else{
+        let Query ="insert into `admin` (`username`,`email`,`pno`,`password`) values ('"+username+"','"+email+"','"+pno+"','"+password+"')";
+        conn.query(Query,function (err){
+          if (err) throw err;
+          res.send("Data Inserted");
+        });
+      }
+    });
+  }
 });
 
 
