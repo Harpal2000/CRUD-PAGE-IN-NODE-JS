@@ -49,4 +49,12 @@ router.post('/insertuser', (req, res) => {
     }
 });
 
+router.get('/get-user-data', function(req, res, next) {
+    var Query = "select * from usersignup";
+    conn.query(Query,function (err,rows){
+        if (err) throw err;
+        console.log(rows);
+        res.send(rows);
+    })
+});
 module.exports = router;

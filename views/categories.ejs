@@ -5,7 +5,7 @@
     <%- include('headerfiles') %>
 
     <style>
-        #cat_body{
+        #cat_body {
             background-color: #2c3034;
         }
     </style>
@@ -56,7 +56,7 @@
                     tableTag += `<tbody>`;
                     data.forEach(function (value, index) {
                         tableTag += `<tr>`;
-                        tableTag += `<td>${index+1}</td>`;
+                        tableTag += `<td>${index + 1}</td>`;
                         tableTag += `<td>${value.cat_name}</td>`;
                         tableTag += `<td>${value.cat_desc}</td>`;
 
@@ -84,15 +84,15 @@
         }
 
         function deleteCat(cat_id) {
-                var http = new XMLHttpRequest();
-                http.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        alert(this.response);
-                        getUserData();
-                    }
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    alert(this.response);
+                    getUserData();
                 }
-                http.open("get", `/admin/deletecat?cat_id=${cat_id}`, true);
-                http.send();
+            }
+            http.open("get", `/admin/deletecat?cat_id=${cat_id}`, true);
+            http.send();
         }
 
         function updateCat(cat_name, cat_desc) {
@@ -134,96 +134,99 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom" >Manage Categories</h1>
+            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">Manage Categories</h1>
 
-            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success mb-3" >
-                <i class="fa fa-plus" ></i>  Add New Category
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success mb-3">
+                <i class="fa fa-plus"></i> Add New Category
             </button>
 
             <div class="modal fade" id="exampleModal">
                 <div class="modal-dialog">
 
-                    <div class="modal-content">
-                        < class="modal-header">
-                            <h5 class="modal-title">Add Category Title</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
-                                <span aria-hidden="true"><i class="fa fa-xmark"></i></span>
-                            </button>
-                        </>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add Category Title</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
+                                    <span aria-hidden="true"><i class="fa fa-xmark"></i></span>
+                                </button>
+                            </div>
 
-                        <div class="modal-body">
 
-                            <form id="catform">
-                                <div class="form-group mb-3">
-<!--                                    <label for="">Enter Category Name</label>-->
-                                    <input type="text" name="catname" id="catname"
-                                           class="form-control" data-rule-required="true"
-                                           placeholder="Enter Category Name"
-                                           data-msg-required="Enter Category Name"/>
-                                </div>
-                                <div class="form-group mb-3">
-<!--                                    <label for="">Enter Category Description</label>-->
-                                    <input type="text" name="catdesc" id="catdesc"
-                                           class="form-control" data-rule-required="true"
-                                           placeholder="Enter Category Description"
-                                           data-msg-required="Enter Description"/>
-                                </div>
+                            <div class="modal-body">
 
-                                <div class="form-group mt-2">
-                                    <input type="button" id="btnncat" onclick="insertCatValues()" value="SUBMIT"
-                                           class="btn btn-primary"/>
-                                </div>
-                            </form>
+                                <form id="catform">
+                                    <div class="form-group mb-3">
+                                        <!--                                    <label for="">Enter Category Name</label>-->
+                                        <input type="text" name="catname" id="catname"
+                                               class="form-control" data-rule-required="true"
+                                               placeholder="Enter Category Name"
+                                               data-msg-required="Enter Category Name"/>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <!--                                    <label for="">Enter Category Description</label>-->
+                                        <input type="text" name="catdesc" id="catdesc"
+                                               class="form-control" data-rule-required="true"
+                                               placeholder="Enter Category Description"
+                                               data-msg-required="Enter Description"/>
+                                    </div>
+
+                                    <div class="form-group mt-2">
+                                        <input type="button" id="btnncat" onclick="insertCatValues()" value="SUBMIT"
+                                               class="btn btn-primary"/>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-           <div id="tableBody"></div>
+                <div id="tableBody"></div>
 
 
-            <div class="modal fade" id="UpdateCatModal">
-                <div class="modal-dialog">
+                <div class="modal fade" id="UpdateCatModal">
+                    <div class="modal-dialog">
 
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Update Category</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Update Category</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
 
-                        <div class="modal-body">
+                            <div class="modal-body">
 
-                            <form id="catform">
+                                <form id="catform">
 
-                                <div class="form-group mb-3">
-<!--                                    <label for="">Category Name</label>-->
-                                    <input type="text" readonly name="catnameEdit" id="catnameEdit"
-                                           class="form-control" data-rule-required="true"
-                                           placeholder="Enter Category Name"
-                                           data-msg-required="Enter Category Name"/>
-                                </div>
-                                <div class="form-group mb-3">
-<!--                                    <label for="">Category Description</label>-->
-                                    <input type="text" name="catdescEdit" id="catdescEdit"
-                                           class="form-control" data-rule-required="true"
-                                           placeholder="Enter Category Description"
-                                           data-msg-required="Enter Description"/>
-                                </div>
+                                    <div class="form-group mb-3">
+                                        <!--                                    <label for="">Category Name</label>-->
+                                        <input type="text" readonly name="catnameEdit" id="catnameEdit"
+                                               class="form-control" data-rule-required="true"
+                                               placeholder="Enter Category Name"
+                                               data-msg-required="Enter Category Name"/>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <!--                                    <label for="">Category Description</label>-->
+                                        <input type="text" name="catdescEdit" id="catdescEdit"
+                                               class="form-control" data-rule-required="true"
+                                               placeholder="Enter Category Description"
+                                               data-msg-required="Enter Description"/>
+                                    </div>
 
-                                <div class="form-group mt-2">
-                                    <input type="button" id="btnncatEdit" onclick="editCatValues()" value="UPDATE"
-                                           class="btn btn-primary"/>
-                                </div>
-                            </form>
+                                    <div class="form-group mt-2">
+                                        <input type="button" id="btnncatEdit" onclick="editCatValues()" value="UPDATE"
+                                               class="btn btn-primary"/>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
 
 </body>

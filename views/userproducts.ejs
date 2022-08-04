@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Categories</title>
+    <%- include('headerfiles') %>
+
+    <style>
+        .error {
+            color: red;
+        }
+
+        #admin_body {
+            background-color: #2c3034;
+        }
+    </style>
+
+    <script>
+        function InsertUserProduct() {
+            $('#userproductform').validate();
+            if ($('#userproductform').valid()) {
+                let formcontrols = document.getElementById("userproductform").elements;
+                let formdata = new FormData();
+                for (let i = 0; i < formcontrols.length; i++) {
+                    if (formcontrols[i].type !== "button") {
+                        if (formcontrols[i].type === "file") {
+                            formdata.append(formcontrols[i].name, formcontrols[i].files[0]);
+                        } else {
+                            formdata.append(formcontrols[i].name, formcontrols[i].value);
+                        }
+                    }
+                }
+
+                let httpreq = new XMLHttpRequest();
+                httpreq.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        let CheckResponse = document.getElementById("userresponse");
+                        if (this.response === "exist") {
+                            CheckResponse.className = `alert alert-danger`;
+                            CheckResponse.innerText = `User already exist.`;
+                        } else {
+                            CheckResponse.className = `alert alert-success`;
+                            CheckResponse.innerText = `User added successfully`;
+                            document.getElementById("userproductform").reset();
+                        }
+                    }
+                }
+
+                httpreq.open('post', "/users/insert-user-product", true);
+                httpreq.send(formdata);
+            }
+        }
+
+        function catInfo() {
+                let http = new XMLHttpRequest();
+                http.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(JSON.parse(this.response));
+                        let data = JSON.parse(this.response);
+
+                        let tableTag =`<select name="category" id="category" class="form-control"
+                                data-rule-required="true" >`;
+                        tableTag+= `<option value=""> Select Category Id</option>`;
+
+                        data.forEach(function (value) {
+                           tableTag+= ` <option value="${value.cat_id}">${value.cat_id}</option>`;
+                        });
+                        tableTag+=`</select>`
+
+
+                        document.getElementById("getId").innerHTML = tableTag;
+                    }
+                }
+                http.open("get", "/users/get-catid-data", true);
+                http.send();
+            }
+
+
+
+
+
+    </script>
+
+
+</head>
+
+<body  id="admin_body" onload="catInfo()">
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">User Signup</h1>
+
+            <div class="container">
+                <form id="userproductform">
+
+
+                    <div class="form-group mb-3">
+                        <input type="text" name="name" id="name"
+                               class="form-control" data-rule-required="true"
+                               placeholder="Enter Name"
+                               data-msg-required="*Name Required"/>
+                    </div>
+
+                    <div class="form-group mb-3" id="getId">
+                        <select name="category" id="category" class="form-control"
+                                data-rule-required="true" >
+                            <option id="getId"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="text" name="price" id="price" class="form-control"
+                               data-rule-required="true"
+                               data-rule-number="true"
+                               placeholder="Enter Price"
+                               data-msg-required="*Required Price"/>
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <input type="text" name="description" id="description"
+                               class="form-control" data-rule-required="true"
+                               placeholder="Enter description"
+                               data-msg-required="*Description Required"/>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="file" name="image" id="image"
+                               class="form-control" data-rule-required="true"
+                               placeholder="Upload Image"
+                               data-msg-required="*Image Required"/>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="email" name="user_email" id="user_email"
+                               class="form-control"
+                               placeholder="Enter Email"
+                               data-msg-required="*User Email Required"/>
+                    </div>
+
+                    <div class="form-group mt-2 mb-3">
+                        <input type="button" id="btnncat" onclick="InsertUserProduct()" value="SIGNUP"
+                               class="btn btn-primary"/>
+                    </div>
+                </form>
+            </div>
+
+            <div id="userresponse"></div>
+
+        </div>
+
+    </div>
+</div>
+</body>

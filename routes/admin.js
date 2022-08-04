@@ -15,8 +15,8 @@ router.get('/category', function(req, res, next) {
 
 router.post('/insertc', function(req, res, next) {
   console.log(req.body);
-  let cat_name = req.body.catname;
-  let desc = req.body.catdesc;
+  let cat_name = req.body.cat_name;
+  let desc = req.body.cat_desc;
   let Query ="insert into `categories` (`cat_name`,`cat_desc`) values ('"+cat_name+"','"+desc+"')";
   conn.query(Query,function (err){
     if (err) throw err;
@@ -90,15 +90,6 @@ router.post('/insert-admin-data',(req, res, next)=> {
   }
 });
 
-
-router.get('/get-admin-data', function(req, res, next) {
-  var Query = "select * from admin";
-  conn.query(Query,function (err,rows){
-    if (err) throw err;
-    // console.log(rows);
-    res.send(rows);
-  })
-});
 
 router.get('/delete',(req,res)=>{
   var username = req.query.username;

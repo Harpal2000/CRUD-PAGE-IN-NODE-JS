@@ -16,7 +16,7 @@
 
     <script>
         function UserInsert() {
-            $('#userform').validate();
+            $('#userform').validate();0
             if ($('#userform').valid()) {
                 let formcontrols = document.getElementById("userform").elements;
                 let formdata = new FormData();
@@ -36,10 +36,10 @@
                         let CheckResponse = document.getElementById("userresponse");
                         if (this.response === "exist") {
                             CheckResponse.className = `alert alert-danger`;
-                            CheckResponse.innerText = `Username already exist.`;
+                            CheckResponse.innerText = `User already exist.`;
                         } else {
                             CheckResponse.className = `alert alert-success`;
-                            CheckResponse.innerText = `Username added successfully`;
+                            CheckResponse.innerText = `User added successfully`;
                             document.getElementById("userform").reset();
                         }
 
@@ -50,12 +50,30 @@
             }
         }
 
+        function UserData() {
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(JSON.parse(this.response));
+                    var data = JSON.parse(this.response);
+                    console.log(this.response);
+
+                    let tableTag = '';
+                    data.forEach(function (value) {
+                       tableTag += `<img src="${value.photo}" class="card-img-top" alt="#"/>`;
+                    });
+                    document.getElementById("userformview").innerHTML = tableTag;
+                }
+            }
+            http.open("get", "/get-user-data", true);
+            http.send();
+        }
     </script>
 
 
 </head>
 
-<body id="admin_body">
+<body onload="UserData()" id="admin_body">
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
@@ -126,11 +144,17 @@
 
         </div>
 
-        <!--            <div id="AdmintableBody"></div>-->
-
+        <div class="card" style="width: 18rem;" id="userformview">
+            <img src="" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
 
     </div>
 </div>
-</div>
+<!--</div>-->
 
 </body>
