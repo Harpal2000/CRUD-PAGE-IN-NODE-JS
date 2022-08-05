@@ -1,5 +1,6 @@
 var express = require('express');
 const conn = require("../connection");
+const session = require('express-session')
 var router = express.Router();
 
 /* GET home page. */
@@ -9,6 +10,25 @@ router.get('/', function (req, res, next) {
 
 router.get('/usersignup', (req, res) => {
     res.render('usersignup');
+});
+
+router.get('/user_login', function(req, res, next) {
+    res.render('userlogin');
+});
+router.post('/checkuser', function(req, res, next) {
+let email = req.body.email;
+let password = req.body.password;
+let Query="select * from usersignup where email='"+email+"' and password='"+password+"'";
+conn.query(Query,function (err,row){
+    if(err) throw err;
+    if(row.length>0){
+        session.username= email;
+        res.send('loggedin')
+    }
+    else{
+        res.send('error')
+    }
+})
 });
 
 

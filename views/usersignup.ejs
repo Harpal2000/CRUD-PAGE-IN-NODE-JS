@@ -50,24 +50,25 @@
             }
         }
 
-        function UserData() {
-            var http = new XMLHttpRequest();
-            http.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(JSON.parse(this.response));
-                    var data = JSON.parse(this.response);
-                    console.log(this.response);
+        // function UserData() {
+        //     var http = new XMLHttpRequest();
+        //     http.onreadystatechange = function () {
+        //         if (this.readyState == 4 && this.status == 200) {
+        //             console.log(JSON.parse(this.response));
+        //             var data = JSON.parse(this.response);
+        //             console.log(this.response);
+        //
+        //             let tableTag = '';
+        //             data.forEach(function (value) {
+        //                tableTag += `<img src="${value.photo}" class="card-img-top" alt="#"/>`;
+        //             });
+        //             document.getElementById("userformview").innerHTML = tableTag;
+        //         }
+        //     }
+        //     http.open("get", "/get-user-data", true);
+        //     http.send();
+        // }
 
-                    let tableTag = '';
-                    data.forEach(function (value) {
-                       tableTag += `<img src="${value.photo}" class="card-img-top" alt="#"/>`;
-                    });
-                    document.getElementById("userformview").innerHTML = tableTag;
-                }
-            }
-            http.open("get", "/get-user-data", true);
-            http.send();
-        }
     </script>
 
 

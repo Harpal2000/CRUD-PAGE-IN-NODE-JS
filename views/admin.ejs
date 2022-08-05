@@ -28,9 +28,6 @@
                 let httpreq = new XMLHttpRequest();
                 httpreq.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
-                        // alert(this.response);
-                        // document.getElementById("adminform").reset();
-                        // getAdminData();
                         let CheckResponse = document.getElementById("response");
                         if(this.response === "exist"){
                             CheckResponse.className = `alert alert-danger`;
@@ -40,6 +37,7 @@
                             CheckResponse.className = `alert alert-success`;
                             CheckResponse.innerText = `Username added successfully`;
                             document.getElementById("adminform").reset();
+
                         }
 
                     }
@@ -86,7 +84,7 @@
                     tableTag += `</tbody></table>`;
 
 
-                    document.getElementById("AdmintableBody").innerHTML = tableTag;
+                    document.getElementById("AdminTableBody").innerHTML = tableTag;
                 }
             }
             http.open("get", "/admin/get-admin-data", true);
@@ -114,10 +112,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">Manage User</h1>
+            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">Manage Admin</h1>
 
             <button type="button" data-bs-toggle="modal" data-bs-target="#AdminModal" class="btn btn-success mb-3" >
-                <i class="fa fa-plus" ></i>  Add New User
+                <i class="fa fa-plus" ></i>  Add New Admin
             </button>
 
             <div class="modal fade" id="AdminModal">
@@ -125,7 +123,7 @@
 
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Add New User</h5>
+                            <h5 class="modal-title">Add New Admin</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -188,7 +186,7 @@
                 </div>
             </div>
 
-            <div id="AdmintableBody"></div>
+            <div id="AdminTableBody"></div>
 
 
         </div>
