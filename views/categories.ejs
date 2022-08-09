@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Categories</title>
-    <%- include('headerfilesadmin') %>
+    <%- include('headerfiles') %>
 
     <style>
         #cat_body {
@@ -97,7 +97,6 @@
 
         function updateCat(cat_name, cat_desc) {
             // console.log(cat_name, Cat_desc);
-
             document.getElementById("catnameEdit").value = cat_name;
             document.getElementById("catdescEdit").value = cat_desc;
 
@@ -131,6 +130,7 @@
 
 
 <body onload="getUserData()" id="cat_body">
+<%- include('headerfilesadmin')%>
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">

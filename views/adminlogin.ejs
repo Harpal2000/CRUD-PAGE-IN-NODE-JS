@@ -30,7 +30,7 @@
                     }
                 }
             }
-            http.open('post','/admin/checkadmin',true);
+            http.open('post','/checkadmin',true);
             http.send(formdata);
         }
     </script>
@@ -39,6 +39,7 @@
 
 
 <body id="cat_body">
+<%- include('publicheader')%>
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">

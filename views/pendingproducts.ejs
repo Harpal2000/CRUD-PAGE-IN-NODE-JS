@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pending Products</title>
+    <%- include('headerfiles') %>
+
+    <style>
+        .error {
+            color: red;
+        }
+
+        #admin_body {
+            background-color: #2c3034;
+        }
+    </style>
+
+    <script>
+        function pendingProductData() {
+            let http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(JSON.parse(this.response));
+                    let data = JSON.parse(this.response);
+
+                    let tableTag = `<table class="table table-dark table-hover">`;
+                    tableTag += `<thead><tr><th>Id No</th><th>Name</th>
+                                 <th>Category</th>
+                                 <th>&#8377; Price</th>
+                                 <th>E-mail</th>
+                                 <th>Product Photo</th>
+                                 <th>Action</th>
+                                  </tr></thead>`;
+
+                    tableTag += `<tbody>`;
+                    data.forEach(function (value, index) {
+                        tableTag += `<tr>`;
+                        tableTag += `<td>${index + 1}</td>`;
+                        tableTag += `<td>${value.name}</td>`;
+                        tableTag += `<td>${value.category}</td>`;
+                        tableTag += `<td>${value.price}</td>`;
+                        tableTag += `<td>${value.user_email}</td>`;
+                        tableTag += `<td><img src="../${value.image}" class="" height="120px" width="200px" alt=""/></td>`;
+                        tableTag += `<td>`;
+                        tableTag += `<button type="button"
+                                        class="btn btn-primary btn-sm" onclick="updatePen('${value.p_id}')"  data-bs-toggle="modal" data-bs-target="#ProductModal">
+                                         <i class="fa-solid fa-hourglass-start"></i> START AUCTION</button>`;
+                        tableTag += `</td>`;
+                        tableTag += `</tr>`;
+
+                    });
+                    tableTag += `</tbody></table>`;
+                    document.getElementById("productTableBody").innerHTML = tableTag;
+
+                }
+            }
+            http.open("get", "/admin/pending-data", true);
+            http.send();
+        }
+
+        function updatePen(p_id){
+            document.getElementById("p_id").value = p_id;
+        }
+
+        function UpdateProductStatus(){
+            let p_id = document.getElementById("p_id").value;
+            let start_date = document.getElementById("start_date").value;
+            let end_date = document.getElementById("end_date").value;
+
+            let formData = new FormData();
+            formData.append("p_id", p_id);
+            formData.append("start_date", start_date);
+            formData.append("end_date", end_date);
+
+            let http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.response);
+                    alert(this.response);
+                    document.getElementById("productForm").reset();
+                }
+            }
+            http.open("post", `/admin/updateStatus`, true);
+            http.send(formData);
+        }
+
+
+        $( function() {
+            $( "#start_date" ).datepicker();
+        } );
+        $( function() {
+            $( "#end_date" ).datepicker();
+        } );
+
+
+    </script>
+
+
+</head>
+
+<body onload="pendingProductData()" id="admin_body">
+<%- include('headerfilesadmin')%>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 offset-md-0">
+            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">Pending Product Details</h1>
+
+            <div class="modal fade" id="ProductModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Update Products Status</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form id="productForm">
+                                <div class="form-group mb-3">
+                                    <input type="text" name="start_date" id="start_date"
+                                           class="form-control" data-rule-required="true"
+                                           placeholder="Auction Starting date"
+                                           data-msg-required="*Starting date Required"/>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <input type="text" name="end_date" id="end_date" class="form-control"
+                                           data-rule-required="true"
+                                           placeholder="Auction Ending Date"
+                                           data-msg-required="*Ending Date Required"/>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="hidden" name="p_id" id="p_id" class="form-control"/>
+                                </div>
+
+                                <div class="form-group mt-2 mb-3">
+                                    <input type="button" id="btnncat" onclick="UpdateProductStatus()" value="SUBMIT"
+                                           class="btn btn-primary"/>
+                                </div>
+
+                            </form>
+                            <div id="response"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="productTableBody"></div>
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

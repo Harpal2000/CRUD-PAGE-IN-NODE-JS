@@ -77,4 +77,35 @@ router.get('/get-user-data', function(req, res, next) {
         res.send(rows);
     })
 });
+
+
+
+router.get('/adminlogin', function(req, res, next) {
+    res.render('adminlogin');
+});
+
+router.post('/checkadmin', function(req, res) {
+    let username = req.body.username;
+    let password = req.body.password;
+    let Query="select * from admin where username='"+username+"' and password='"+password+"'";
+    conn.query(Query,function (err,row){
+        if(err) throw err;
+        if(row.length > 0){
+            session.useradmin = username;
+            res.send('login')
+        }
+        else{
+            res.send('error')
+        }
+    })
+});
+
+
+
+
+
+
+// practice code for photo container
+
+
 module.exports = router;

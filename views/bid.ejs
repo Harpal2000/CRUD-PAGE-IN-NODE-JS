@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Categories</title>
+    <%- include('headerfiles') %>
+
+    <style>
+        .error {
+            color: red;
+        }
+
+        #admin_body {
+            background-color: #2c3034;
+        }
+    </style>
+
+    <script>
+
+
+        function UserData() {
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(JSON.parse(this.response));
+                    var data = JSON.parse(this.response);
+                    console.log(this.response);
+
+                    let tableTag = '';
+                    data.forEach(function (value) {
+                        tableTag += ` <div class="card justify-content-around" style="max-width: 17rem; display: inline-flex;
+                                            margin-bottom: 1rem; margin-left: 1rem;">`;
+                        tableTag += `<img src="../${value.image}" class="card-img-top" alt="#" height="200px" width="100px"/>`;
+                        tableTag += `<div class="card-body">
+                                  <h5 class="card-title">Card title</h5>
+                                   <p class="card-text">Some quick example text to build </p>
+                                    <a href="#" class="btn btn-primary" onclick="AddBid('${value.p_id}')" data-bs-toggle="modal" data-bs-target="#BidModal">Add Bid</a>
+                                       </div>`
+                        tableTag += `</div>`
+                    });
+                    document.getElementById("photoView").innerHTML = tableTag;
+                }
+            }
+            http.open("get", "/users/photoview", true);
+            http.send();
+        }
+
+        function AddBid(p_id){
+            document.getElementById("p_id").value = p_id;
+        }
+
+        function InsertBid(){
+            var amount = document.getElementById("amount").value;
+            var p_id = document.getElementById("p_id").value;
+
+            var formData = new FormData();
+            formData.append("amount", amount);
+            formData.append("p_id", p_id);
+
+
+            let httpreq = new XMLHttpRequest();
+                httpreq.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        alert(this.response);
+                        // document.getElementById("bidForm").reset();
+                    }
+                }
+                httpreq.open('post', "/users/insertBid", true);
+                httpreq.send(formData);
+
+        }
+
+    </script>
+</head>
+
+<body onload="UserData()" id="admin_body">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xxl-10 offset-1">
+            <h1 class="text-center mt-3 mb-5 display-5 text-light ">Daily Auctions</h1>
+
+            <div id="photoView" class="justify-content-around">
+            </div>
+
+            <div class="modal fade" id="BidModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add Bid</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form id="bidForm">
+                                <div class="form-group mb-3">
+                                    <input type="text" name="amount" id="amount"
+                                           class="form-control" data-rule-required="true"
+                                           placeholder="Enter Bid Amount"
+                                           data-msg-required="*Amount Required"/>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <input type="text" name="p_id" id="p_id" class="form-control"
+                                           data-rule-required="true"
+                                           placeholder="Enter Product Id"
+                                           data-msg-required="*Required"/>
+                                </div>
+<!--                                <div class="form-group mb-3">-->
+<!--                                    <input type="hidden" name="p_id" id="p_id" class="form-control"/>-->
+<!--                                </div>-->
+
+                                <div class="form-group mt-2 mb-3">
+                                    <input type="button" id="btnncat" onclick="InsertBid()" value="SUBMIT"
+                                           class="btn btn-primary"/>
+                                </div>
+
+                            </form>
+                            <div id="response"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

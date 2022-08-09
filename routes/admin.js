@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const conn = require('../connection')
 const session = require('express-session')
+const {response} = require("express");
 
 
 /* GET users listing. */
@@ -15,25 +16,6 @@ router.get('/', function(req, res, next) {
 //   res.render('categories');
 // });
 
-router.get('/adminlogin', function(req, res, next) {
-  res.render('adminlogin');
-});
-
-router.post('/checkadmin', function(req, res) {
-  let username = req.body.username;
-  let password = req.body.password;
-  let Query="select * from admin where username='"+username+"' and password='"+password+"'";
-  conn.query(Query,function (err,row){
-    if(err) throw err;
-    if(row.length > 0){
-      session.useradmin = username;
-      res.send('login')
-    }
-    else{
-      res.send('error')
-    }
-  })
-});
 
 router.get('/categories', function (req, res) {
   if (session.useradmin !== undefined)
@@ -91,15 +73,14 @@ router.post("/updateCat", (req, res) => {
 
 
 router.get('/adminview', function(req, res, next) {
-  res.render('admin');
+  if(session.useradmin!==undefined){
+    res.render('admin');
+  }
+  else{
+    res.redirect('/adminlogin')
+  }
 });
 
-// router.get('/adminview', function (req, res) {
-//   if (session.userv !== undefined)
-//     res.render('admin', {name: session.userv})
-//   else
-//     res.redirect('/admin/adminlogin')
-// })
 
 router.post('/insert-admin-data',(req, res, next)=> {
   // console.log(req.body);
@@ -107,10 +88,9 @@ router.post('/insert-admin-data',(req, res, next)=> {
   let email = req.body.email;
   let pno = req.body.pno;
   let password = req.body.password;
-  let confirm_password = req.body.confirm_password;
 
-  if (password != confirm_password) {
-    res.send("notsame");
+  if (password === '_,%^&*') {
+    res.send("NotAllowed");
   }else{
     let CheckUser = `SELECT * FROM admin WHERE username="${username}"`;
     conn.query(CheckUser,(err,data)=>{
@@ -136,14 +116,50 @@ router.get('/get-admin-data', function(req, res, next) {
   })
 });
 
-
-
 router.get('/delete',(req,res)=>{
-  var username = req.query.username;
-  var Query = `delete from admin where username="${username}"`;
+  let username = req.query.username;
+  let Query = `delete from admin where username="${username}"`;
   conn.query(Query,function (err){
     if (err) throw err;
     res.send('Row Deleted')
+  })
+});
+
+
+
+
+// pending product code
+
+router.get('/pending',(req, res)=>{
+  if(session.useradmin!==undefined){
+    res.render('pendingproducts');
+  }
+  else{
+    res.redirect('/adminlogin');
+  }
+})
+
+router.get('/pending-data',(req, res)=>{
+  let Query = `select * from  user_products `;
+  console.log(Query);
+  conn.query(Query, function (err,rows) {
+    if (err) throw err;
+    res.send(rows);
+  });
+
+})
+
+router.post("/updateStatus", (req, res) => {
+  let p_id = req.body.p_id;
+  let start_date = req.body.start_date;
+  let end_date = req.body.end_date;
+  let status = req.body.status;
+
+  let Query = `update user_products set  start_date="${start_date}",end_date="${end_date}", status="Active" where p_id="${p_id}"`;
+  console.log(Query)
+  conn.query(Query, (error) => {
+    if (error) throw error;
+    res.send("Status Updated.");
   })
 });
 
