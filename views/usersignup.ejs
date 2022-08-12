@@ -12,11 +12,74 @@
         #admin_body {
             background-color: #2c3034;
         }
+
+        body {
+            color: #000;
+            overflow-x: hidden;
+            height: 100%;
+            /*background-image: url("https://i.imgur.com/GMmCQHC.png");*/
+            background-repeat: no-repeat;
+            background-size: 100% 100%
+        }
+
+        .card {
+            padding: 30px 40px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            border: none !important;
+            box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2)
+        }
+
+        .blue-text {
+            color: #00BCD4
+        }
+
+        .form-control-label {
+            margin-bottom: 0
+        }
+
+        input, textarea, button {
+            padding: 8px 15px;
+            border-radius: 5px !important;
+            margin: 5px 0px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            font-size: 18px !important;
+            font-weight: 300
+        }
+
+        input:focus, textarea:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            border: 1px solid #00BCD4;
+            outline-width: 0;
+            font-weight: 400
+        }
+
+        .btn-block {
+            text-transform: uppercase;
+            font-size: 15px !important;
+            font-weight: 400;
+            height: 43px;
+            cursor: pointer
+        }
+
+        .btn-block:hover {
+            color: #fff !important
+        }
+
+        button:focus {
+            -moz-box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            outline-width: 0
+        }
     </style>
 
     <script>
         function UserInsert() {
-            $('#userform').validate();0
+            $('#userform').validate();
             if ($('#userform').valid()) {
                 let formcontrols = document.getElementById("userform").elements;
                 let formdata = new FormData();
@@ -36,7 +99,7 @@
                         let CheckResponse = document.getElementById("userresponse");
                         if (this.response === "exist") {
                             CheckResponse.className = `alert alert-danger`;
-                            CheckResponse.innerText = `User already exist.`;
+                            CheckResponse.innerText = `User already exist with this email.`;
                         } else {
                             CheckResponse.className = `alert alert-success`;
                             CheckResponse.innerText = `User added successfully`;
@@ -50,103 +113,91 @@
             }
         }
 
-        // function UserData() {
-        //     var http = new XMLHttpRequest();
-        //     http.onreadystatechange = function () {
-        //         if (this.readyState == 4 && this.status == 200) {
-        //             console.log(JSON.parse(this.response));
-        //             var data = JSON.parse(this.response);
-        //             console.log(this.response);
-        //
-        //             let tableTag = '';
-        //             data.forEach(function (value) {
-        //                tableTag += `<img src="${value.photo}" class="card-img-top" alt="#"/>`;
-        //             });
-        //             document.getElementById("userformview").innerHTML = tableTag;
-        //         }
-        //     }
-        //     http.open("get", "/get-user-data", true);
-        //     http.send();
-        // }
+
 
     </script>
 
 
 </head>
 
-<body onload="UserData()" id="admin_body">
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">User Signup</h1>
+<body  id="admin_body">
+<%- include('userheader')%>
+<div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+            <div class="card">
+                <h5 class="text-center mb-4 border-bottom">User Registration</h5>
+                <form class="form-card" id="userform">
+                    <div class="row justify-content-between text-left mb-3">
+                        <div class="form-group col-sm-6 flex-column d-flex"><input type="text" name="fullname"
+                                                                                       id="fullname"
+                                                                                       class="form-control"
+                                                                                       data-rule-required="true"
+                                                                                       placeholder="Enter Username"
+                                                                                       data-msg-required="*Username Required"/>
+                        </div>
 
-            <form id="userform">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <input type="text" name="fathername"
+                                                                                       id="fathername"
+                                                                                       class="form-control"
+                                                                                       data-rule-required="true"
+                                                                                       placeholder="Enter Father Name"
+                                                                                       data-msg-required="*Father Name Required"/>
+                        </div>
+                    </div>
 
-                <div class="form-group mb-3">
-                    <input type="text" name="fullname" id="fullname"
-                           class="form-control" data-rule-required="true"
-                           placeholder="Enter Username"
-                           data-msg-required="*Username Required"/>
-                </div>
+                    <div class="row justify-content-between text-left mb-3">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <input type="email" name="email"
+                                                                                        id="email" class="form-control"
+                                                                                        data-rule-required="true"
+                                                                                        placeholder="Enter E-Mail"
+                                                                                        data-msg-required="*Required Email"/>
+                        </div>
 
-                <div class="form-group mb-3">
-                    <input type="text" name="fathername" id="fathername"
-                           class="form-control" data-rule-required="true"
-                           placeholder="Enter Father Name"
-                           data-msg-required="*Father Name Required"/>
-                </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <input type="text" name="phone_no"
+                                                                                         id="phone_no"
+                                                                                         class="form-control"
+                                                                                         data-rule-required="true"
+                                                                                         maxlength="10" minlength="10"
+                                                                                         data-rule-number="true"
+                                                                                         placeholder="Enter Mobile Number"
+                                                                                         data-msg-required="*Required MobileNumber"/>
+                        </div>
+                    </div>
 
-                <div class="form-group mb-3">
-                    <input type="email" name="email" id="email" class="form-control"
-                           data-rule-required="true"
-                           placeholder="Enter E-Mail"
-                           data-msg-required="*Required Email"/>
-                </div>
+                    <div class="row justify-content-between text-left mb-3">
+                        <div class="form-group col-sm-6 flex-column d-flex"><input type="password" name="password"
+                                                                                   id="password" class="form-control"
+                                                                                   data-rule-required="true"
+                                                                                   placeholder="Enter Password"
+                                                                                   data-msg-required="Enter Password"/>
+                        </div>
 
-                <div class="form-group mb-3">
-                    <input type="text" name="phone_no" id="phone_no" class="form-control"
-                           data-rule-required="true"
-                           maxlength="10"
-                           minlength="10"
-                           data-rule-number="true"
-                           placeholder="Enter Mobile Number"
-                           data-msg-required="*Required MobileNumber"/>
-                </div>
+                        <div class="form-group col-sm-6  flex-column d-flex"><input
+                                    type="password" name="confirm_password" id="confirm_password"
+                                    class="form-control" data-rule-required="true"
+                                    data-rule-equalto="#password" placeholder="Confirm Password"
+                                    data-msg-required="Enter Password"/></div>
 
-                <div class="form-group mb-3">
-                    <input type="password" name="password" id="password"
-                           class="form-control" data-rule-required="true"
-                           placeholder="Enter Password"
-                           data-msg-required="Enter Password"/>
-                </div>
-
-                <div class="form-group mb-3">
-                    <input type="password" name="confirm_password" id="confirm_password"
-                           class="form-control" data-rule-required="true"
-                           data-rule-equalto="#password"
-                           placeholder="Confirm Password"
-                           data-msg-required="Enter Password"/>
-                </div>
-
-                <div class="form-group mb-3">
-                    <input type="file" name="photo" id="photo"
-                           class="form-control" data-rule-required="true"
-                           placeholder="Upload Photo"
-                           data-msg-required="*Photo Required"/>
-                </div>
-
-
-                <div class="form-group mt-2 mb-3">
-                    <input type="button" id="btnncat" onclick="UserInsert()" value="SIGNUP"
-                           class="btn btn-primary"/>
-                </div>
-            </form>
-            <div id="userresponse"></div>
-
+                    </div>
+                    <div class="row justify-content-between text-left mb-3">
+                        <div class="form-group col-12 flex-column d-flex"><label class="form-control-label px-3">
+                                Upload Your Photo<span class="text-danger"> *</span></label> <input
+                                    type="file" name="photo" id="photo"
+                                    class="form-control" data-rule-required="true" placeholder="Upload Photo"
+                                    data-msg-required="*Photo Required"/></div>
+                    </div>
+                    <div class="row justify-content-end mb-3">
+                        <div class="form-group col-sm-6">
+                            <input type="button" id="btnncat" onclick="UserInsert()" value="REGISTER"
+                                   class="btn-block btn-primary w-100"/>
+                        </div>
+                    </div>
+                    <div id="userresponse"></div>
+                </form>
+            </div>
         </div>
-
     </div>
 </div>
-<!--</div>-->
 
 </body>

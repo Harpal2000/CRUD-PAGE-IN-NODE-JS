@@ -25,7 +25,7 @@
                     let tableTag = `<table class="table table-dark table-hover">`;
                     tableTag += `<thead><tr><th>Id No</th><th>Name</th>
                                  <th>Category</th>
-                                 <th>&#8377; Price</th>
+                                 <th>&#8377; Initial Bid</th>
                                  <th>E-mail</th>
                                  <th>Product Photo</th>
                                  <th>Action</th>
@@ -39,7 +39,7 @@
                         tableTag += `<td>${value.category}</td>`;
                         tableTag += `<td>${value.price}</td>`;
                         tableTag += `<td>${value.user_email}</td>`;
-                        tableTag += `<td><img src="../${value.image}" class="" height="120px" width="200px" alt=""/></td>`;
+                        tableTag += `<td><img src="../${value.image}" class="" height="120px" width="150px" alt=""/></td>`;
                         tableTag += `<td>`;
                         tableTag += `<button type="button"
                                         class="btn btn-primary btn-sm" onclick="updatePen('${value.p_id}')"  data-bs-toggle="modal" data-bs-target="#ProductModal">

@@ -1,0 +1,38 @@
+
+.auction-cards{
+    margin-top:3rem;
+}
+
+.countdown-auction{
+    font-family: sans-serif;
+    color: rgb(2, 2, 2);
+    /* display: inline-block; */
+    font-weight: 100;
+    text-align: left;
+    font-size: 15px;
+  }
+  
+  
+  .countdown-number-auction {
+    padding: 0px;
+    border-radius: 3px;
+    /* background: #f6f6f6; */
+    display: inline-block;
+  }
+  
+  .countdown-time-auction {
+    padding: 3px 0px 3px 0px;
+    border-radius: 3px;
+    /* background: #f6f6f6; */
+    display: inline-block;
+    /* font-weight: bold; */
+  }
+  
+  .countdown-text-auction {
+    display: block;
+    padding-top: 2px;
+    font-size: 7px;
+    color: #090b0b;
+    font-weight: bold;
+    padding-right: 6px;
+  }

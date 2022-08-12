@@ -3,6 +3,8 @@ const conn = require("../connection");
 var router = express.Router();
 const session = require('express-session')
 
+
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     res.send('respond with a resource');
@@ -17,7 +19,7 @@ router.get('/user-products', function (req, res, next) {
 
 router.post('/insert-user-product', (req, res) => {
     // console.log(req.body);
-    let id = req.body.id;
+    let p_id = req.body.p_id;
     let name = req.body.name;
     let category = req.body.category;
     let image = req.files.image;
@@ -32,14 +34,13 @@ router.post('/insert-user-product', (req, res) => {
 
 
     console.log(image);
-
-    if (price > 100000) {
+    if (price > 100000000) {
         res.send("enter less value");
     } else {
         image.mv(realpath, function (err) {
             if (err) throw err;
         })
-        let CheckUser = `SELECT * FROM user_products WHERE id="${id}"`;
+        let CheckUser = `SELECT * FROM user_products WHERE p_id="${p_id}"`;
         conn.query(CheckUser, (err, data) => {
             if (err) throw err;
             if (data.length > 0) {
@@ -59,9 +60,7 @@ router.post('/insert-user-product', (req, res) => {
 router.get('/get-catName-data', function (req, res, next) {
     var Query = "select cat_name,cat_id from categories";
     conn.query(Query, function (err, rows) {
-        if (err) throw err;
-        // console.log(rows);
-        res.send(rows);
+            res.send(rows)
     })
 });
 
@@ -87,8 +86,9 @@ router.get('/add-bid', (req, res) => {
 
 });
 
-router.get('/photoview', function(req, res, next) {
-    var Query = "select * from user_products";
+router.get('/photoview', function(req, res) {
+    var Query = "select * from user_products where user_email !='"+ session.username+"'";
+    console.log(Query);
     conn.query(Query,function (err,rows){
         if (err) throw err;
         console.log(rows);
@@ -98,55 +98,58 @@ router.get('/photoview', function(req, res, next) {
 router.post('/insertBid',(req,res)=> {
     let amount = req.body.amount;
     let p_id = req.body.p_id;
-    let user_email = req.body.user_email;
+    let u_email = req.body.u_email;
     let curr_date = req.body.curr_date;
     let price = req.body.price;
     let start_date = req.body.start_date;
     let end_date = req.body.end_date;
 
     let c_date = new Date();
+    let day=c_date.getDate();
+    let mon=c_date.getMonth();
+    let year=c_date.getFullYear();
+    let today_date=year+"-"+mon+"-"+day;
 
+    // let CheckDate = `select start_date from user_products where p_id = "${p_id}"`;
+    // console.log(CheckDate);
+    // conn.query(CheckDate, function (err,value) {
+    //     if (err) throw err;
+    //     console.log(value[0]);
+    // });
 
-    let CheckDate = `select start_date from user_products where start_date between start_date and end_date`;
-    console.log(CheckDate);
-    conn.query(CheckDate, function (err) {
-        if (err) throw err;
-    });
-    let CheckD = `select end_date from user_products `;
-    console.log(CheckD);
-    conn.query(CheckD, function (err) {
-        if (err) throw err;
-    });
-
-    if (amount > 0) {
-        let CheckPrice = `select price from user_products where p_id="${p_id}"`;
+    if (amount > 0 ) {
+        let CheckPrice = `select price,end_date from user_products where p_id="${p_id}"`;
         console.log(CheckPrice);
         console.log(amount);
-        conn.query(CheckPrice, function (err) {
+        conn.query(CheckPrice, function (err, rows) {
+            console.log(rows[0]);
             if (err) throw err;
-            if(amount < CheckPrice){
-                res.send("Low Bid Value")
+            if (err) {
+                res.send("Error");
+            } else {
+                if (amount > rows[0]) {
+                    console.log("High Bid Value")
+                if (today_date === rows[0].end_date){
+                    console.log("Inavlid Date")
+                }
+
+
+
+
+                }
             }
         });
-
-    } else if (c_date < CheckDate || c_date > CheckD) {
-        res.send('Enter valid Date')
-
-    }else if(p_id > 0){
-        let CheckId = `SELECT * FROM user_products WHERE p_id="${p_id}"`;
-        console.log(CheckId);
-        conn.query(CheckId, (err, data) => {
+    } else if (amount > 0) {
+        let CheckD = `select end_date from user_products where p_id = "${p_id}"`;
+        console.log(CheckD);
+        conn.query(CheckD, function (err,data) {
             if (err) throw err;
-            if (data.length > 0) {
-                let updateBid = `update bid set amount="${amount}" where p_id="${p_id}"`;
-                conn.query(updateBid, function (err) {
-                    if (err) throw err;
-                    res.send("Bid Updated");
-                });
+            if(today_date === data[0]) {
+                console.log("Bid closed")
             }
-        })
-    } else {
-        let InsertBid = "insert into bid (p_id,user_email,amount,curr_date) values ('" +p_id+ "','" +session.username+ "','" +amount+ "','" +c_date+ "')";
+            });
+    }else {
+        let InsertBid = "insert into bid (p_id,u_email,amount,curr_date) values ('" +p_id+ "','" +session.username+ "','" +amount+ "','" +today_date+ "')";
         console.log(InsertBid);
         conn.query(InsertBid, function (err) {
             if (err) throw err;

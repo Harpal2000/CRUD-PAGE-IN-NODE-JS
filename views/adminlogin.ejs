@@ -5,33 +5,77 @@
     <%- include('headerfiles') %>
 
     <style>
+        .error {
+            color: red;
+        }
         #cat_body {
             background-color: #2c3034;
         }
+
+        body {
+            background: #000
+        }
+
+        .card {
+            border: none;
+            max-height: 370px
+        }
+
+        .forms-inputs {
+            position: relative
+        }
+
+        .forms-inputs span {
+            position: absolute;
+            top: -18px;
+            left: 10px;
+            background-color: #fff;
+            padding: 5px 10px;
+            font-size: 15px
+        }
+
+        .forms-inputs input {
+            height: 50px;
+            border: 2px solid #eee
+        }
+
+        .forms-inputs input:focus {
+            box-shadow: none;
+            outline: none;
+            border: 2px solid #000
+        }
+
+        .btn {
+            height: 50px
+        }
+
+
     </style>
 
     <script>
-        function AdminLogin(){
-            var formcontrols = document.getElementById("adminlogin").elements;
-            var formdata = new FormData();
-            for(let i=0;i<formcontrols.length;i++){
-                if(formcontrols[i].type !== "button")
-                    formdata.append(formcontrols[i].name, formcontrols[i].value);
-            }
-            var http=new XMLHttpRequest();
-            http.onreadystatechange = function (){
-                if(this.readyState === 4 && this.status === 200){
-                    // alert(this.response);
-                    if(this.response === "login"){
-                        window.location.href="/admin/categories";
-                    }
-                    else{
-                        document.getElementById('error').innerHTML="<div class='alert alert-danger mt-5'>Incorrect username/Password</div>";
+        function AdminLogin() {
+            $('#adminlogin').validate();
+            if ($('#adminlogin').valid()) {
+                var formcontrols = document.getElementById("adminlogin").elements;
+                var formdata = new FormData();
+                for (let i = 0; i < formcontrols.length; i++) {
+                    if (formcontrols[i].type !== "button")
+                        formdata.append(formcontrols[i].name, formcontrols[i].value);
+                }
+                var http = new XMLHttpRequest();
+                http.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        // alert(this.response);
+                        if (this.response === "login") {
+                            window.location.href = "/admin/categories";
+                        } else {
+                            document.getElementById('error').innerHTML = "<div class='alert alert-danger mt-5'>Incorrect username/Password</div>";
+                        }
                     }
                 }
+                http.open('post', '/checkadmin', true);
+                http.send(formdata);
             }
-            http.open('post','/checkadmin',true);
-            http.send(formdata);
         }
     </script>
 
@@ -39,34 +83,39 @@
 
 
 <body id="cat_body">
-<%- include('publicheader')%>
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">Admin login</h1>
-
-            <div class="container">
-
+<%- include('headerfilesadmin') %>
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-7">
+            <div class="card px-5 py-5">
                 <form id="adminlogin">
-                    <div class="form-group mb-3">
-                        <input type="text" name="username" id="username"
-                               class="form-control" data-rule-required="true"
-                               placeholder="Enter Username"
-                               data-msg-required="*Username Required"/>
+                    <div class="text-center">
+                        <h2 class="text-center text-dark mt-0 mb-5">Login As Admin</h2>
                     </div>
-                    <div class="form-group mb-3">
-                        <input type="password" name="password" id="password"
-                               class="form-control" data-rule-required="true"
-                               placeholder="Enter Password"
-                               data-msg-required="*Password Required"/>
+                    <div class="form-data">
+                        <div class="forms-inputs mb-3 form-group"><span>Username</span> <input type="text" name="username"
+                                                                                             id="username"
+                                                                                             class="form-control"
+                                                                                             data-rule-required="true"
+                                                                                             data-msg-required="*Username Required"/>
+
+                        </div>
+                        <div class="forms-inputs mb-3 form-group"><span>Password</span> <input type="password" name="password"
+                                                                                    id="password"
+                                                                                    class="form-control"
+                                                                                    data-rule-required="true"
+                                                                                    data-msg-required="*Password Required"/>
+
+                        </div>
+                        <div class="mb-6 form-group">
+                            <input type="button" id="btnncat" onclick="AdminLogin()" value="SUBMIT"
+                                   class="btn btn-dark w-100"/>
+                            <div id="error"></div>
+                        </div>
                     </div>
 
-                    <div class="form-group mt-2">
-                        <input type="button" id="btnncat" onclick="AdminLogin()" value="SUBMIT"
-                               class="btn btn-primary"/>
-                        <div id="error"></div>
-                    </div>
                 </form>
+
             </div>
         </div>
     </div>

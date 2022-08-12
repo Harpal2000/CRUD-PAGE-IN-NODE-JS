@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+.b-home {
+  padding: 12px 8px 12px 8px;
+  background-color: #bc6539d3;
+  border-radius: 7px;
+}
+
+.n1 {
+  /* background: #2Eb1a1; */
+  /* background: #2Eb1a1; */
+  background: #0d1e28;
+  padding: 5px 40px;
+}
+
+.n1 ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.n1 ul li {
+  padding: 15px 0;
+  cursor: pointer;
+}
+
+.n1 ul li.items {
+  position: relative;
+  width: auto;
+  margin: 0 16px;
+  text-align: center;
+  order: 3;
+}
+
+.n1 ul li.items:after {
+  position: absolute;
+  content: '';
+  left: 0;
+  bottom: 5px;
+  height: 2px;
+  width: 100%;
+  background: rgb(121 79 30);
+  opacity: 0;
+  transition: all 0.2s linear;
+}
+
+
+.n1 ul li.items:hover:after{
+  opacity: 1;
+  bottom: 8px;
+}
+.n1 ul li.logo {
+  flex: 1;
+  color: white;
+  font-size: 23px;
+  font-weight: 600;
+  cursor: default;
+  user-select: none;
+}
+
+.n1 ul li a {
+  color: #f9a01fd6;
+  font-size: 18px;
+  text-decoration: none;
+  transition: .4s;
+}
+
+.n1 ul li:hover a {
+  color: #f9a01fd6;
+  /* color: #e0674fd3; */
+}
+
+.n1 ul li i {
+  font-size: 23px;
+}
+
+.n1 ul li.btn {
+  display: none;
+}
+
+.n1 ul li.btn.hide i:before {
+  content: '\f00d';
+}
+
+@media all and (max-width: 900px) {
+  .n1 {
+    padding: 5px 30px;
+  }
+
+  .n1 ul li.items {
+    width: 100%;
+    display: none;
+  }
+
+  .n1 ul li.items.show {
+    display: block;
+  }
+
+  .n1 ul li.btn {
+    display: block;
+  }
+
+  nav ul li.items:hover {
+    border-radius: 5px;
+    box-shadow: inset 0 0 5px rgb(121 79 30),
+      inset 0 0 10px #66ffff;
+  }
+
+  .n1 ul li.items:hover:after {
+    opacity: 0;
+  }
+}
+
+/* Card Timer */
+
+.countdown1{
+  font-family: sans-serif;
+  color: rgb(2, 2, 2);
+  display: inline-block;
+  font-weight: 100;
+  text-align: center;
+  font-size: 13px;
+}
+
+
+.countdown-number1 {
+  padding: 0px;
+  border-radius: 3px;
+  background: #f6f6f6;
+  display: inline-block;
+}
+
+.countdown-number2 {
+  padding: 0px;
+  border-radius: 3px;
+  background: #f6f6f6;
+  display: inline-block;
+}
+
+.countdown-time {
+  padding: 3px 0px 3px 0px;
+  border-radius: 3px;
+  background: #f6f6f6;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.countdown-text1 {
+  display: block;
+  padding-top: 2px;
+  font-size: 7px;
+  color: #090b0b;
+  font-weight: bold;
+  padding-right: 6px;
+}
+
+
