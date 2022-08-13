@@ -36,6 +36,19 @@
 </nav>
 
 <script>
+
+    $(document).ready(function () {
+        $('.btn').click(function () {
+            $('.items').toggleClass("show");
+            $('ul li').toggleClass("hide");
+        });
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+
     function logout(){
         //alert();
         let http=new XMLHttpRequest();
@@ -48,4 +61,9 @@
         http.open('get','/users/logout',true);
         http.send();
     }
+
+
+
+
+
 </script>

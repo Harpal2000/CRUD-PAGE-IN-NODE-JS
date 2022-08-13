@@ -534,6 +534,8 @@
                                         style="fill:#decccc;"></path>
                                 </svg></span><span class="text-warning me-1"> 4.0</span><span class="fs-6 text-muted">
                                 (${value.p_id})</span></div>
+                         <div class="lh-1 mt-3 mb-4"><span class="text-dark">Product Status: ${value.status}</span>
+                        </div>
                         <div class="lh-1 mt-3 mb-4"><span class="text-dark fw-bold">Max Bid: &#8377; ${value.price}</span>
                         </div>
                         <div class="card-footer pt-0 pb-0 pr-0 pl-0 mt-1 ml-2">
@@ -559,10 +561,10 @@
                                         <span class="seconds countdown-time"></span>
                                         <span class="countdown-text1">SEC</span>
                                     </div>
-    </div>
-    <span><a href="" class="btn btn-light ml-1 mb-3 mt-0"
-             style="background-color:rgb(196, 65, 65);color:white;">Bid Now</a></span>
-</div></div></div></div>`
+                                </div>
+                                <span><a href="" class="btn btn-light ml-1 mb-3 mt-0"
+                                     style="background-color:rgb(196, 65, 65);color:white;">Bid Now</a></span>
+                                </div></div></div></div>`
                 });
                 document.getElementById("photoView").innerHTML = tableTag;
             }
@@ -571,19 +573,6 @@
         http.send();
     }
 
-
-    // Navigation bar icon script
-    $(document).ready(function () {
-        $('.btn').click(function () {
-            $('.items').toggleClass("show");
-            $('ul li').toggleClass("hide");
-        });
-
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-    });
 
     const slidehome = document.querySelectorAll('.myslide1'),
         dothome = document.querySelectorAll('.dot1');

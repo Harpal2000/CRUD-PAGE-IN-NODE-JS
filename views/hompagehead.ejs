@@ -34,3 +34,16 @@
         <li class="btn"><a href="#"><i class="fas fa-bars"></i></a></li>
     </ul>
 </nav>
+<script>
+    $(document).ready(function () {
+        $('.btn').click(function () {
+            $('.items').toggleClass("show");
+            $('ul li').toggleClass("hide");
+        });
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+</script>

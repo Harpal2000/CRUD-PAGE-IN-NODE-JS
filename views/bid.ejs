@@ -28,7 +28,7 @@
                     let tableTag = ``;
 
                     data.forEach(function (value) {
-                        tableTag += `<div class="card mb-3" style="max-width: 100%">
+                        tableTag += `<div class="card mb-3  border-dark" style="max-width: 100%">
                                 <div class="row g-2">
                                   <div class="col-md-3">
                                     <img src="../${value.image}" class="rounded-start" alt="..." height="300px" width="300px"/>
@@ -38,8 +38,9 @@
                                       <h5 class="card-title fw-bold">${value.name}</h5>
                                       <p class="card-text">${value.description}.</p>
                                       <h6 class="card-text">Initial Bid: (${value.price})</h6>
+                                      <h6 class="card-text">Product Status: (${value.status})</h6>
                                       <p class="card-text "><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    <div class="card-footer mt-4 text-center">
+                                    <div class=" mt-4 text-center">
                                     <a href="#" class="btn btn-primary mt-3 " onclick="AddBid('${value.p_id}')" data-bs-toggle="modal"
                                         data-bs-target="#BidModal">Add Bid Now</a>
                                     </div>
@@ -53,8 +54,8 @@
                                       </tr></thead>
                                        <tbody>
                                      <tr>
-                                     <td>${value.user_email}</td>
-                                     <td>${value.price}</td>
+                                     <td>${value.fullname}</td>
+                                     <td>${value.amount}</td>
                                      </tr>
                                     </tbody></table>
                                     </div>
