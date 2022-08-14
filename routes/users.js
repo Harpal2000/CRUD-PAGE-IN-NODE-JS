@@ -146,5 +146,16 @@ router.post('/insertBid',(req,res)=> {
     }
 })
 
+//user profile portal
+
+router.get('/profile', (req, res) => {
+    if (session.username !== undefined)
+        res.render('userprofile');
+    else
+        res.redirect('/user_login')
+
+});
+
+
 
 module.exports = router;
