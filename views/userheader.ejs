@@ -27,9 +27,6 @@
                              title="Hurry !! 50% off on all Auctions !! Coupon Code `DRM50B` Use it before expired !!">Announcements</a>
         </li>
         <li class="items"><a href="offers">offers</a></li>
-        <li class="items">
-            <a class="nav-link" onclick="logout()" style="cursor:pointer;">Logout</a>
-        </li>
         <li class="items"><a href="/users/profile"><img src="/images/login1.png"></a></li>
         <li class="btn"><a href="#"><i class="fas fa-bars"></i></a></li>
     </ul>
@@ -49,18 +46,6 @@
         })
     });
 
-    function logout(){
-        //alert();
-        let http=new XMLHttpRequest();
-        http.onreadystatechange = function (){
-            if(this.readyState === 4 && this.status === 200){
-                if(this.response === "logout")
-                    window.location.href="/user_login";
-            }
-        }
-        http.open('get','/users/logout',true);
-        http.send();
-    }
 
 
 

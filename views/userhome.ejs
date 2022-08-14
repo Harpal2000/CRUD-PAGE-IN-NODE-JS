@@ -323,10 +323,11 @@
 <body onload="UserData()">
 <%- include('userheader') %>
 <div class="container">
-    <h2>Welcome, <%= username %></h2>
+<!--    <h2>Welcome, <%= username %></h2>-->
 </div>
 
 <div style="background-color:  #1f2833;">
+
     <div class="container-fluid  mb-1 " style="padding:0 0 0 0">
         <div class="slider1">
             <!-- fade css -->
@@ -369,11 +370,6 @@
                 </div>
                 <img src="/images/slider1.jpg" style="width: 100%; height: 100%;" alt="">
             </div>
-            <!-- /fade css -->
-
-            <!-- onclick js -->
-            <a class="prev1" style="color:#00a7ff" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next1" style="color:#00a7ff" onclick="plusSlides(1)">&#10095;</a>
 
             <div class="dotsbox" style="text-align:center">
                 <span class="dot1" onclick="currentSlide(1)"></span>
@@ -579,7 +575,7 @@
     let counterhome = 1;
     slidefun(counterhome);
 
-    let timerhome = setInterval(autoSlide, 8000);
+    let timerhome = setInterval(autoSlide, 3000);
 
     function autoSlide() {
         counterhome += 1;
@@ -600,7 +596,7 @@
 
     function resetTimer() {
         clearInterval(timerhome);
-        timerhome = setInterval(autoSlide, 8000);
+        timerhome = setInterval(autoSlide, 3000);
     }
 
     function slidefun(n) {
