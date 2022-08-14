@@ -56,8 +56,128 @@
 
     </style>
 
+
+    <script>
+        function ProfileData() {
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(JSON.parse(this.response));
+                    var data = JSON.parse(this.response);
+                    console.log(this.response);
+                    let pForm = ``;
+                    let pInfo = ``;
+                    data.forEach(function (value) {
+                        pInfo+= `
+                                 <div class="mt-3">
+                                <h4>${value.fullname}</h4>
+                                <p class="text-secondary mb-1">${value.phone_no}</p>
+                                <p class="text-muted font-size-sm">${value.email}</p>
+                                <button class="btn btn-primary">Follow</button>
+                                <button class="btn btn-outline-primary">Message</button>
+                            </div>
+
+                        `
+
+                        pForm += `
+                             <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Full Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" class="form-control" name="fullname" id="fullname" value="${value.fullname}"/>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Father Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" class="form-control" name="fathername"
+                                       id="fathername" value="${value.fathername}"/>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="email" class="form-control" name="email"
+                                      readonly id="email" value="${value.email}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Phone</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" class="form-control"  name="phone_no"
+                                       id="phone_no" value="${value.phone_no}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Password</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" class="form-control" name="password"
+                                       id="password" value="${value.password}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="button" onclick="UpdateProfile()" class="btn btn-primary px-4" value="Save Changes">
+                            </div>
+                    `
+                    });
+                    document.getElementById("profileForm").innerHTML = pForm;
+                    document.getElementById("profileInfo").innerHTML = pInfo;
+                }
+            }
+            http.open("get", "/users/profileview", true);
+            http.send();
+        }
+
+
+        function UpdateProfile(){
+
+            let fullname = document.getElementById("fullname").value;
+            let fathername = document.getElementById("fathername").value;
+            let email = document.getElementById("email").value;
+            let phone_no = document.getElementById("phone_no").value;
+            let password = document.getElementById("password").value;
+
+
+            let formData = new FormData();
+            formData.append("fullname", fullname);
+            formData.append("fathername", fathername);
+            formData.append("email", email);
+            formData.append("phone_no", phone_no);
+            formData.append("password", password);
+
+
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.response);
+                    alert(this.response);
+                    ProfileData();
+                }
+            }
+            http.open("post", "/users/updateProfile", true);
+            http.send(formData);
+
+        }
+
+    </script>
+
+
+
+
+
 </head>
-<body>
+<body onload="ProfileData()">
 <div class="container">
     <div class="main-body">
 
@@ -72,72 +192,24 @@
         <!-- /Breadcrumb -->
 
         <div class="row gutters-sm">
+
             <div class="col-md-4 mb-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
                                  class="rounded-circle" width="150">
-                            <div class="mt-3">
-                                <h4>John Doe</h4>
-                                <p class="text-secondary mb-1">Full Stack Developer</p>
-                                <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                                <button class="btn btn-primary">Follow</button>
-                                <button class="btn btn-outline-primary">Message</button>
-                            </div>
+                           <div id="profileInfo"></div>
                         </div>
                     </div>
                 </div>
 
             </div>
+
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Full Name</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="John Doe"/>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Email</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="john@example.com">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Phone</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="(239) 816-9029">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Mobile</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="(320) 380-4539">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Address</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="Bay Area, San Francisco, CA">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3"></div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="button" class="btn btn-primary px-4" value="Save Changes">
-                            </div>
+                        <div id="profileForm"></div>
                         </div>
                     </div>
                 </div>
@@ -146,11 +218,5 @@
         </div>
 
     </div>
-</div>
-
-
-<script type="text/javascript">
-
-</script>
 </body>
 </html>
