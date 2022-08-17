@@ -59,7 +59,7 @@ router.post('/insertuser', (req, res) => {
                 res.send('exist');
             } else {
                 let Query = "insert into usersignup (email,fullname,password,fathername,photo,phone_no,confirm_password) values ('" + email + "','" + fullname + "','" + password + "','" + fathername + "','" + dbpath + "','" + phone_no + "','" + confirm_password + "')";
-                console.log(Query);
+                // console.log(Query);
                 conn.query(Query, function (err) {
                     if (err) throw err;
                     res.send("Data Inserted");
@@ -73,7 +73,7 @@ router.get('/get-user-data', function(req, res, next) {
     var Query = "select * from usersignup";
     conn.query(Query,function (err,rows){
         if (err) throw err;
-        console.log(rows);
+        // console.log(rows);
         res.send(rows);
     })
 });

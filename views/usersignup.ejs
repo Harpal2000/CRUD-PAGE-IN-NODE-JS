@@ -102,7 +102,7 @@
                             CheckResponse.innerText = `User already exist with this email.`;
                         } else {
                             CheckResponse.className = `alert alert-success`;
-                            CheckResponse.innerText = `User added successfully`;
+                            CheckResponse.innerText = `Register successfully`;
                             document.getElementById("userform").reset();
                         }
 
@@ -121,81 +121,91 @@
 </head>
 
 <body  id="admin_body">
-<%- include('userheader')%>
+
 <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-            <div class="card">
-                <h5 class="text-center mb-4 border-bottom">User Registration</h5>
-                <form class="form-card" id="userform">
-                    <div class="row justify-content-between text-left mb-3">
-                        <div class="form-group col-sm-6 flex-column d-flex"><input type="text" name="fullname"
-                                                                                       id="fullname"
-                                                                                       class="form-control"
-                                                                                       data-rule-required="true"
-                                                                                       placeholder="Enter Username"
-                                                                                       data-msg-required="*Username Required"/>
-                        </div>
-
-                        <div class="form-group col-sm-6 flex-column d-flex"> <input type="text" name="fathername"
-                                                                                       id="fathername"
-                                                                                       class="form-control"
-                                                                                       data-rule-required="true"
-                                                                                       placeholder="Enter Father Name"
-                                                                                       data-msg-required="*Father Name Required"/>
-                        </div>
+            <div class="form">
+                <div class="modalBody">
+                    <div class="form-title text-center pt-5">
+                        <h4>Register Yourself Here </h4>
                     </div>
+                    <div class="d-flex flex-column text-center">
+                        <form id="userform">
+                            <div id="fc1">
 
-                    <div class="row justify-content-between text-left mb-3">
-                        <div class="form-group col-sm-6 flex-column d-flex"> <input type="email" name="email"
-                                                                                        id="email" class="form-control"
-                                                                                        data-rule-required="true"
-                                                                                        placeholder="Enter E-Mail"
-                                                                                        data-msg-required="*Required Email"/>
-                        </div>
+                                <input type="text" name="fullname" id="fullname"
+                                       data-rule-required="true"
+                                       placeholder="Enter Username"
+                                       data-msg-required="*E-Mail Required">
 
-                        <div class="form-group col-sm-6 flex-column d-flex"> <input type="text" name="phone_no"
-                                                                                         id="phone_no"
-                                                                                         class="form-control"
-                                                                                         data-rule-required="true"
-                                                                                         maxlength="10" minlength="10"
-                                                                                         data-rule-number="true"
-                                                                                         placeholder="Enter Mobile Number"
-                                                                                         data-msg-required="*Required MobileNumber"/>
-                        </div>
+                            </div>
+                            <div id="fc1">
+
+                                <input type="text" name="fathername" id="fathername"
+                                       data-rule-required="true"
+                                       placeholder="Enter Father Name"
+                                       data-msg-required="*Password Required">
+
+                            </div>
+                            <div id="fc1">
+
+                                <input type="email" name="email" id="email"
+                                       data-rule-required="true"
+                                       placeholder="Enter E-Mail"
+                                       data-msg-required="*Password Required">
+
+                            </div>
+                            <div id="fc1">
+
+                                <input type="text" name="phone_no" id="phone_no"
+                                       data-rule-required="true"
+                                       maxlength="10" minlength="10"
+                                       data-rule-number="true"
+                                       placeholder="Enter Mobile Number"
+                                       data-msg-required="*Password Required">
+
+                            </div>
+                            <div id="fc1">
+
+                                <input type="password" name="password" id="password"
+                                       data-rule-required="true"
+                                       placeholder="Enter Password"
+                                       data-msg-required="*Password Required">
+
+                            </div>
+                            <div id="fc1">
+
+                                <input type="password"  name="confirm_password" id="confirm_password"
+                                       data-rule-required="true"
+                                       data-rule-equalto="#password"
+                                       placeholder="Enter Password"
+                                       data-msg-required="*Enter Password">
+
+                            </div>
+                            <label for="photo" class="text-light justify-content-start">Upload Your Profile Photo</label>
+                            <div id="fc1">
+                                <input type="file"   name="photo" id="photo"
+                                       data-rule-required="true"
+                                       placeholder="Upload Photo"
+                                       data-msg-required="*Password Required">
+
+                            </div>
+
+
+                            <div id="container">
+                                <input type="button" id="btnncat" onclick="UserInsert()" value="REGISTER"
+                                       class="btn-userLogin"/>
+                            </div>
+                            <p class="text">Have an account?
+                                <a href="/user_login">Login Here</a>
+                            </p>
+                        </form>
+
                     </div>
-
-                    <div class="row justify-content-between text-left mb-3">
-                        <div class="form-group col-sm-6 flex-column d-flex"><input type="password" name="password"
-                                                                                   id="password" class="form-control"
-                                                                                   data-rule-required="true"
-                                                                                   placeholder="Enter Password"
-                                                                                   data-msg-required="Enter Password"/>
-                        </div>
-
-                        <div class="form-group col-sm-6  flex-column d-flex"><input
-                                    type="password" name="confirm_password" id="confirm_password"
-                                    class="form-control" data-rule-required="true"
-                                    data-rule-equalto="#password" placeholder="Confirm Password"
-                                    data-msg-required="Enter Password"/></div>
-
-                    </div>
-                    <div class="row justify-content-between text-left mb-3">
-                        <div class="form-group col-12 flex-column d-flex"><label class="form-control-label px-3">
-                                Upload Your Photo<span class="text-danger"> *</span></label> <input
-                                    type="file" name="photo" id="photo"
-                                    class="form-control" data-rule-required="true" placeholder="Upload Photo"
-                                    data-msg-required="*Photo Required"/></div>
-                    </div>
-                    <div class="row justify-content-end mb-3">
-                        <div class="form-group col-sm-6">
-                            <input type="button" id="btnncat" onclick="UserInsert()" value="REGISTER"
-                                   class="btn-block btn-primary w-100"/>
-                        </div>
-                    </div>
-                    <div id="userresponse"></div>
-                </form>
+                </div>
             </div>
+            <div id="userresponse"></div>
         </div>
     </div>
 </div>

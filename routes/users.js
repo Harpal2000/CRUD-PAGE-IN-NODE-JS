@@ -4,7 +4,6 @@ var router = express.Router();
 const session = require('express-session')
 
 
-
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     res.send('respond with a resource');
@@ -47,7 +46,7 @@ router.post('/insert-user-product', (req, res) => {
                 res.send('exist');
             } else {
                 let Query = "insert into user_products (name,category,price,description,image,user_email) values ('" + name + "','" + category + "','" + price + "','" + description + "','" + dbpath + "','" + session.username + "')";
-                console.log(Query);
+                // console.log(Query);
                 conn.query(Query, function (err) {
                     if (err) throw err;
                     res.send("Data Inserted");
@@ -60,7 +59,7 @@ router.post('/insert-user-product', (req, res) => {
 router.get('/get-catName-data', function (req, res, next) {
     var Query = "select cat_name,cat_id from categories";
     conn.query(Query, function (err, rows) {
-            res.send(rows)
+        res.send(rows)
     })
 });
 
@@ -71,13 +70,49 @@ router.get('/userhome', function (req, res) {
     else
         res.redirect('/user_login')
 })
- router.get('/logout',function (req,res){
-     session.username = undefined;
-     res.send('logout')
- })
+router.get('/logout', function (req, res) {
+    session.username = undefined;
+    res.send('logout')
+})
 
 
 //Add Bid code
+
+
+router.get('/BidPlace', function (req, res) {
+    let p_id = req.query.p_id;
+    let Query = `select p_id from user_products where p_id = "${p_id}"`;
+    // console.log(Query);
+    conn.query(Query, function (err, row) {
+        if (err) throw err;
+        if (row.length > 0) {
+            console.log(row);
+            res.send(row);
+        } else {
+            res.send('No data Found')
+        }
+
+    })
+});
+
+router.get('/Bidingview', function (req, res) {
+    let p_id = req.query.pid;
+    // console.log(p_id);
+    var Query = `select * from user_products where p_id = ${p_id}`;
+    // console.log(Query);
+    conn.query(Query, function (err, rows) {
+        if (err) throw err;
+        if (rows.length > 0) {
+            // console.log(rows);
+            res.send(rows);
+        } else {
+            res.send('No Product Found')
+        }
+
+    })
+});
+
+
 router.get('/add-bid', (req, res) => {
     if (session.username !== undefined)
         res.render('bid');
@@ -86,21 +121,73 @@ router.get('/add-bid', (req, res) => {
 
 });
 
-router.get('/photoview', function(req, res) {
-    var Query = "select * from user_products where status='active' and user_email !='"+ session.username+"'";
-    console.log(Query);
-    conn.query(Query,function (err,rows){
+router.get('/photoview', function (req, res) {
+    var Query = `select * from user_products where status='active' and user_email !='${session.username}'`;
+    // console.log(Query);
+    conn.query(Query, function (err, rows) {
         if (err) throw err;
-        if(rows.length > 0){
+        if (rows.length > 0) {
             // console.log(rows);
             res.send(rows);
-        }else{
+        } else {
             res.send('No Product Found')
         }
 
     })
 });
-router.post('/insertBid',(req,res)=> {
+
+
+router.get('/Bidder', function (req, res) {
+    let p_id = req.query.pid;
+    let Query = `select * from bid inner join user_products on user_products.p_id = bid.p_id where bid.p_id="${p_id}"`;
+    // console.log(Query);
+    conn.query(Query, function (err, rows) {
+        if (err) throw err;
+        if (rows.length > 0) {
+            // console.log(rows);
+            res.send(rows);
+        } else {
+            res.send('No Product Found')
+        }
+    })
+});
+
+router.get('/BidLeader', function (req, res) {
+    let p_id = req.query.pid;
+    let Query = `select  MAX(amount) as maxAmount ,u_email from bid inner join user_products on bid.p_id = user_products.p_id where bid.p_id=${p_id}`;
+    // console.log(Query);
+    conn.query(Query, function (err, rows) {
+        if (err) throw err;
+        if (rows.length > 0) {
+            // console.log(rows);
+            res.send(rows);
+        } else {
+            res.send('No Product Found')
+        }
+
+    })
+});
+
+router.get('/getEndDate', function (req, res) {
+    // console.log(req.query);
+    let p_id = req.query.pid;
+    let Query = `select end_date from user_products where p_id=${p_id}`;
+    // console.log(Query);
+    conn.query(Query, function (err, rows) {
+        if (err) throw err;
+
+        if (rows.length > 0) {
+            console.log(rows);
+            res.send(rows);
+        } else {
+            res.send('No Date Found')
+        }
+    })
+});
+
+
+
+router.post('/insertBid', (req, res) => {
     let amount = req.body.amount;
     let p_id = req.body.p_id;
     let u_email = req.body.u_email;
@@ -111,36 +198,43 @@ router.post('/insertBid',(req,res)=> {
 
     let c_date = new Date();
     let day = c_date.getDate();
-    let mon = c_date.getMonth();
+    let mon = c_date.getMonth() + 1;
     let year = c_date.getFullYear();
     let today_date = mon + "/" + day + "/" + year;
+    // console.log(today_date);
 
     if (amount > 0) {
         let CheckPrice = `select price,end_date from user_products where p_id="${p_id}"`;
-        console.log(CheckPrice);
+        // console.log(CheckPrice);
         // console.log(amount);
         conn.query(CheckPrice, function (err, rows) {
-            console.log(rows);
+            // console.log(rows);
             // if (err) throw err;
             if (err) {
-                res.send("Error");
+               return res.send("Error");
             } else {
-                console.log(rows[0].price)
-                if (amount > rows[0].price) {
-                    console.log("High Bid Value")
-                    console.log(rows[0].end_date);
-                    if (today_date <= rows[0].end_date) {
-                        console.log("Inavlid Date")
-                        let InsertBid = "insert into bid (p_id,u_email,amount,curr_date) values ('" + p_id + "','" + session.username + "','" + amount + "','" + today_date + "')";
-                        console.log(InsertBid);
-                        conn.query(InsertBid, function (err) {
-                            if (err) throw err;
-                            res.send("Bid Inserted");
-                        });
-
-                    }
-
+                if (amount < rows[0].price) {
+                    return res.send("lowAmount");
                 }
+
+                let currentDate = new Date(`${today_date}`);
+                currentDate = currentDate.getTime();
+
+                let endDate = new Date(`${rows[0].end_date}`);
+                endDate = endDate.getTime();
+                let diff = currentDate - endDate;
+
+                if (diff > 0) {
+                    return res.send("dateEnded");
+                }
+                let InsertBid = "insert into bid (p_id,u_email,amount) values ('" + p_id + "','" + session.username + "','" + amount + "')";
+                console.log(InsertBid);
+                conn.query(InsertBid, function (err) {
+                    if (err) {
+                        return res.send("Error");
+                    }
+                    res.send("BidInserted");
+                });
             }
         });
     }
@@ -156,15 +250,15 @@ router.get('/profile', (req, res) => {
 
 });
 
-router.get('/profileview', function(req, res) {
-    var Query = "select * from usersignup where email = '"+ session.username+"'";
-    console.log(Query);
-    conn.query(Query,function (err,row){
+router.get('/profileview', function (req, res) {
+    var Query = "select * from usersignup where email = '" + session.username + "'";
+    // console.log(Query);
+    conn.query(Query, function (err, row) {
         if (err) throw err;
-        if(row.length > 0){
+        if (row.length > 0) {
             // console.log(rows);
             res.send(row);
-        }else{
+        } else {
             res.send('No data Found')
         }
 
@@ -172,16 +266,15 @@ router.get('/profileview', function(req, res) {
 });
 
 router.post("/updateProfile", (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     let fullname = req.body.fullname;
     let fathername = req.body.fathername;
     let phone_no = req.body.phone_no;
     let password = req.body.password;
 
 
-
     var Query = `update usersignup set  fullname="${fullname}",fathername="${fathername}",password="${password}",phone_no="${phone_no}" where email = '${session.username}'`;
-    console.log(Query);
+    // console.log(Query);
     conn.query(Query, (error) => {
         if (error) throw error;
         res.send("Data Updated.");

@@ -1,90 +1,36 @@
-<div class="container">]
-    <div class=" text-center mt-5 ">
-
-        <h1>Bootstrap Contact Form</h1>
-
-
-    </div>
-
-
-    <div class="row ">
-        <div class="col-lg-7 mx-auto">
-            <div class="card mt-2 mx-auto p-4 bg-light">
-                <div class="card-body bg-light">
-
-                    <div class="container">
-                        <form id="userproductform" role="form">
-                            <div class="controls">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="form_name">Name</label>
-                                            <input type="text" name="name" id="name"
-                                                   class="form-control" data-rule-required="true"
-                                                   placeholder="Enter Name"
-                                                   data-msg-required="*Name Required"/>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="form_lastname">Lastname *</label>
-                                            <select name="category" id="category" class="form-control"
-                                                    data-rule-required="true" >
-                                                <option id="getId"></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="form_email">Email *</label>
-                                            <input type="text" name="price" id="price" class="form-control"
-                                                   data-rule-required="true"
-                                                   data-rule-number="true"
-                                                   placeholder="Enter Price"
-                                                   data-msg-required="*Required Price"/>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="form_need">Please specify your need *</label>
-                                            <input type="text" name="description" id="description"
-                                                   class="form-control" data-rule-required="true"
-                                                   placeholder="Enter description"
-                                                   data-msg-required="*Description Required"/>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="form_message">Message *</label>
-                                            <input type="file" name="image" id="image"
-                                                   class="form-control" data-rule-required="true"
-                                                   placeholder="Upload Image"
-                                                   data-msg-required="*Image Required"/>
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="col-md-12">
-
-                                        <input type="button" id="btnncat" onclick="InsertUserProduct()" value="SIGNUP"
-                                               class="btn btn-primary"/>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </form>
+<form class="card-body cardbody-color p-lg-5" id="userlogin">
+        <div class="modal-body">
+            <div class="form-title text-center">
+                <h4>Login</h4>
+            </div>
+            <div class="d-flex flex-column text-center">
+                <form>
+                    <div class="form-control einput">
+                        < <input type="email" class="form-control" name="email" id="email"
+                                 data-rule-required="true"
+                                 placeholder="Enter E-Mail"
+                                 data-msg-required="*E-Mail Required">
+                        <label for="">Email Id</label>
                     </div>
-                </div>
+                    <div class="form-control pass-input">
+                        <input type="password" class="form-control" name="password" id="password"
+                               data-rule-required="true"
+                               placeholder="Enter Password"
+                               data-msg-required="*Password Required">
+                        <label for="">Password</label>
+                    </div>
+
+                    <div id="container">
+                        <input type="button" class="btn btn-color px-5 mb-5 w-100 text-center btn-userLogin"
+                               onclick="UserLoginValues()" value="LOGIN"/>
+                    </div>
+                    <p class="text">Don't have a account?
+                        <a href="/usersignup">Create Account</a>
+                    </p>
+                </form>
+                <div id="error"></div>
             </div>
         </div>
-    </div>
-</div>
+</form>
+
+

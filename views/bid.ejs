@@ -12,18 +12,128 @@
         #admin_body {
             background-color: #2c3034;
         }
+
+        *, *:before, *:after {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            /*color: #384047;*/
+        }
+
+        form {
+            max-width: 200px;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background: #f4f7f8;
+            border-radius: 8px;
+
+        }
+
+        form > h1 {
+            margin: 0 0 30px 0;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        input[type="text"] {
+            /*background: rgba(255, 255, 255, 0.1);*/
+            border: none;
+            font-size: 14px;
+            height: auto;
+            margin: 0;
+            outline: 0;
+            padding: 12px;
+            max-width: 100%;
+            background-color: #e8eeef;
+            color: #8a97a0;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+            margin-bottom: 30px;
+
+        }
+
+
+        fieldset {
+            margin-bottom: 20px;
+            border: none;
+        }
+
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        label.light {
+            font-weight: 300;
+            display: inline;
+        }
+
+
+        @media screen and (min-width: 480px) {
+
+            form {
+                max-width: 350px;
+            }
+
+        }
+
+        .coming-soon > h2 {
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 3rem;
+        }
+
+        .coming-soon {
+            /*min-height: 100vh;*/
+            display: flex;
+            /*align-items: center;*/
+            flex-direction: column;
+            /*justify-content: start;*/
+            /*background-image: url("./images/example1.jpg");*/
+            /*background-size: 100%;*/
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: space-around;
+            /*text-align: center;*/
+            /*margin-bottom: 40%;*/
+        }
+
+        .day,
+        .hour,
+        .minute,
+        .second {
+            font-size: 1rem;
+        }
+
+        #tt {
+            font-size: 1rem;
+        }
+
+        .waiting {
+            height: 50vh;
+        }
+
     </style>
 
     <script>
 
 
-        function UserData() {
+        function BidData() {
+
+            let pid = localStorage.getItem("pid");
+
             var http = new XMLHttpRequest();
             http.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    console.log(JSON.parse(this.response));
+                    // console.log(JSON.parse(this.response));
                     var data = JSON.parse(this.response);
-                    console.log(this.response);
+                    // console.log(this.response);
 
                     let tableTag = ``;
 
@@ -31,7 +141,7 @@
                         tableTag += `<div class="card mb-3  border-dark" style="max-width: 100%">
                                 <div class="row g-2">
                                   <div class="col-md-3">
-                                    <img src="../${value.image}" class="rounded-start" alt="..." height="300px" width="300px"/>
+                                    <img src="../${value.image}" class="rounded-start" alt="..." height="340px" width="300px"/>
                                   </div>
                                   <div class="col-md-5">
                                     <div class="card-body">
@@ -40,40 +150,115 @@
                                       <h6 class="card-text">Initial Bid: (${value.price})</h6>
                                       <h6 class="card-text">Product Status: (${value.status})</h6>
                                       <p class="card-text "><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    <div class=" mt-4 text-center">
-                                    <a href="#" class="btn btn-primary mt-3 " onclick="AddBid('${value.p_id}')" data-bs-toggle="modal"
-                                        data-bs-target="#BidModal">Add Bid Now</a>
-                                    </div>
+                                        <section class="coming-soon">
+                                               <div>
+                                                 <h2>Bid End In</h2>
+                                                 <div class="countdown">
+                                                   <div class="container-day">
+                                                     <h3 class="day">Time</h3>
+                                                     <h3 id="tt">Day</h3>
+                                                   </div>
+                                                   <div class="container-hour">
+                                                     <h3 class="hour">Time</h3>
+                                                     <h3 id="tt">Hrs</h3>
+                                                   </div>
+                                                     <div class="container-minute">
+                                                    <h3 class="minute">Time</h3>
+                                                     <h3 id="tt">Min</h3>
+                                                   </div>
+                                                   <div class="container-second">
+                                                     <h3 class="second">Time</h3>
+                                                     <h3 id="tt">Sec</h3>
+                                                   </div>
+                                                 </div>
+                                               </div>
+                                        </section>
                                      </div>
                                   </div>
                                     <div class="col-md-4">
-                                    <table class="table table-light table-hover">
-                                          <thead><tr>
-                                     <th>Bidder Name</th>
-                                     <th>Bid Amount</th>
-                                      </tr></thead>
-                                       <tbody>
-                                     <tr>
-                                     <td>${value.fullname}</td>
-                                     <td>${value.amount}</td>
-                                     </tr>
-                                    </tbody></table>
-                                    </div>
-                                  </div>
-                                 </div>
+                                   <form>
+                                        <h1 class="display-8">Place Bid Here: </h1>
+
+                                        <fieldset>
+                                            <div class="form-group mb-3">
+
+                                                <input type="text" name="amount" id="amount"
+                                                       class="form-control" data-rule-required="true"
+                                                       placeholder=" Bid Amount"
+                                                       data-msg-required="*Amount Required"/>
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <input type="hidden" name="p_id" id="p_id" class="form-control"
+                                                       data-rule-required="true" value="${value.p_id}"
+                                                       placeholder="Enter Product Id"
+                                                       data-msg-required="*Required">
+
+                                                <input type="button" id="btnncat" onclick="InsertBid()" value="PLACE BID"
+                                                       class="btn btn-primary "/>
+                                            </div>
+                                        </fieldset>
+
+                                    </form>
+                                    </div></div></div>
                                `
 
                     });
                     document.getElementById("photoView").innerHTML = tableTag;
                 }
             }
-            http.open("get", "/users/photoview", true);
+            http.open("get", "/users/Bidingview?pid=" + pid, true);
             http.send();
         }
 
-        function AddBid(p_id) {
-            document.getElementById("p_id").value = p_id;
+
+
+
+        function getDate() {
+            let pid = localStorage.getItem("pid");
+            // console.log("PID  - ",pid);
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(JSON.parse(this.response));
+                    let eDate = JSON.parse(this.response)
+                    // console.log("-------------")
+                    // console.log(eDate[0].end_date)
+                    localStorage.setItem("endDate", eDate[0].end_date);
+                    // countdown();
+                }
+            }
+            http.open("get", "/users/getEndDate?pid=" + pid, true);
+            http.send();
         }
+
+        function countdown() {
+            let eDate = localStorage.getItem("endDate");
+            let end_date = `${eDate[6]}${eDate[7]}${eDate[8]}${eDate[9]}-${eDate[0]}${eDate[1]}-${eDate[3]}${eDate[4]}`
+            console.log(end_date)
+
+            // const countDate = new Date("2022-08-30").getTime();
+            const countDate = new Date(end_date).getTime();
+            const now = new Date().getTime();
+            const remainingTime = countDate - now;
+
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            const textDay = Math.floor(remainingTime / day);
+            const textHour = Math.floor((remainingTime % day) / hour);
+            const textMinute = Math.floor((remainingTime % hour) / minute);
+            const textSecond = Math.floor((remainingTime % minute) / second);
+
+            document.querySelector(".day").innerText = textDay > 0 ? textDay : 0;
+            document.querySelector(".hour").innerText = textHour > 0 ? textHour : 0;
+            document.querySelector(".minute").innerText = textMinute > 0 ? textMinute : 0;
+            document.querySelector(".second").innerText = textSecond > 0 ? textSecond : 0;
+        }
+        setInterval(countdown, 500);
+
 
         function InsertBid() {
             var amount = document.getElementById("amount").value;
@@ -87,7 +272,8 @@
             let httpreq = new XMLHttpRequest();
             httpreq.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
-                    alert(this.response);
+                    // alert(this.response);
+                   console.log(this.response)
                     // document.getElementById("bidForm").reset();
                 }
             }
@@ -96,62 +282,124 @@
 
         }
 
+        function BidderData() {
+            let pid = localStorage.getItem("pid");
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(JSON.parse(this.response));
+                    var data = JSON.parse(this.response);
+                    // console.log(this.response);
+
+                    let tableTag = `
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Last 10 Bidders</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                         <table class="table table-light table-hover">
+                                          <thead><tr>
+                                     <th>Bidder E-mail</th>
+                                     <th>Bid Amount</th>
+                                      </tr></thead> `;
+                    tableTag += `<tbody>`;
+                    data.forEach(function (value) {
+                        tableTag += `
+                                     <tr>
+                                     <td>${value.u_email}</td>
+                                     <td>${value.amount}</td>
+                                     </tr>`
+
+                    });
+                    tableTag += `</tbody>`;
+                    tableTag += `</table>`;
+                    tableTag += ` </div></div>`;
+
+                    document.getElementById("bidderview").innerHTML = tableTag;
+                }
+            }
+            http.open("get", "/users/Bidder?pid=" + pid, true);
+            http.send();
+        }
+
+        function BidLeader() {
+            let pid = localStorage.getItem("pid");
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(JSON.parse(this.response));
+                    var data = JSON.parse(this.response);
+                    // console.log(this.response);
+
+                    let tableTag = `
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Highest Bidder</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                         <table class="table table-light table-hover">
+                                          <thead><tr>
+                                     <th>Bidder E-mail</th>
+                                     <th>Bid Amount</th>
+                                      </tr></thead>
+                                       `;
+                    tableTag += ` <tbody>`;
+                    data.forEach(function (value) {
+                        tableTag += `
+                                     <tr>
+                                     <td>${value.u_email}</td>
+                                     <td>${value.maxAmount}</td>
+                                     </tr>
+                               `
+
+                    });
+                    tableTag += `</tbody>`;
+                    tableTag += `</table></div></div>`;
+
+                    document.getElementById("bidleader").innerHTML = tableTag;
+                }
+            }
+            http.open("get", "/users/BidLeader?pid=" + pid, true);
+            http.send();
+        }
+
+        function onloadData() {
+            BidderData()
+            BidData()
+            BidLeader()
+            getDate()
+
+        }
+
     </script>
 </head>
 
-<body onload="UserData()" id="admin_body">
+<body onload="onloadData()" id="admin_body">
 <%- include('userheader') %>
 <div class="container-fluid">
+    <div id="error"></div>
     <div class="row">
         <div class="col-xxl-10 offset-1">
             <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom ">Daily Auctions</h1>
 
-            <div id="photoView" class="justify-content-around">
-            </div>
-
-            <div class="modal fade" id="BidModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Add Bid</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                        <div class="modal-body">
-                            <form id="bidForm">
-                                <div class="form-group mb-3">
-                                    <input type="text" name="amount" id="amount"
-                                           class="form-control" data-rule-required="true"
-                                           placeholder="Enter Bid Amount"
-                                           data-msg-required="*Amount Required"/>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <input type="text" name="p_id" id="p_id" class="form-control"
-                                           data-rule-required="true"
-                                           placeholder="Enter Product Id"
-                                           data-msg-required="*Required"/>
-                                </div>
-                                <div class="form-group mt-2 mb-3">
-                                    <input type="button" id="btnncat" onclick="InsertBid()" value="SUBMIT"
-                                           class="btn btn-primary"/>
-                                </div>
-
-                            </form>
-                            <div id="response"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="photoView" class="justify-content-around"></div>
 
 
         </div>
     </div>
 </div>
 
-<div id="photoView"></div>
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-sm-6">
+            <div id="bidderview"></div>
+        </div>
+        <div class="col-sm-6">
+            <div id="bidleader"></div>
+        </div>
+    </div>
+
+</div>
 
 
 </body>

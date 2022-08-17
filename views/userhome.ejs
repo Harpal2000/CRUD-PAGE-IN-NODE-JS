@@ -323,7 +323,7 @@
 <body onload="UserData()">
 <%- include('userheader') %>
 <div class="container">
-<!--    <h2>Welcome, <%= username %></h2>-->
+    <!--    <h2>Welcome, <%= username %></h2>-->
 </div>
 
 <div style="background-color:  #1f2833;">
@@ -493,9 +493,9 @@
         var http = new XMLHttpRequest();
         http.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                console.log(JSON.parse(this.response));
+                // console.log(JSON.parse(this.response));
                 var data = JSON.parse(this.response);
-                console.log(this.response);
+                // console.log(this.response);
 
                 let tableTag = '';
                 data.forEach(function (value) {
@@ -558,8 +558,8 @@
                                         <span class="countdown-text1">SEC</span>
                                     </div>
                                 </div>
-                                <span><a href="/users/add-bid" class="btn btn-light ml-1 mb-3 mt-0"
-                                     style="background-color:rgb(196, 65, 65);color:white;">Bid Now</a></span>
+                                <span><button onclick="PlaceBid(${value.p_id})" class="btn btn-light ml-1 mb-3 mt-0"
+                                     style="background-color:rgb(196, 65, 65);color:white;">Bid Now</button></span>
                                 </div></div></div></div>`
                 });
                 document.getElementById("photoView").innerHTML = tableTag;
@@ -567,6 +567,26 @@
         }
         http.open("get", "/users/photoview", true);
         http.send();
+    }
+
+
+    function PlaceBid(p_id) {
+        // console.log(p_id);
+        localStorage.setItem("pid", p_id);
+        window.location.href = "/users/add-bid";
+        // let http=new XMLHttpRequest();
+        // http.onreadystatechange = function (){
+        //     if(this.readyState === 4 && this.status === 200){
+        //         if( this.response){
+        //             // window.location.href=`/users/add-bid`;
+        //             window.location.href="/users/add-bid";
+        //         }else{
+        //             alert("no data found")
+        //         }
+        //     }
+        // }
+        // http.open('get',`/users/BidPlace?p_id=${p_id}`,true);
+        // http.send();
     }
 
 
