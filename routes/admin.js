@@ -27,7 +27,7 @@ router.get('/categories', function (req, res) {
 
 
 router.post('/insertc', function(req, res, next) {
-  console.log(req.body);
+  // console.log(req.body);
   let cat_name = req.body.cat_name;
   let desc = req.body.cat_desc;
   let Query ="insert into `categories` (`cat_name`,`cat_desc`) values ('"+cat_name+"','"+desc+"')";
@@ -141,7 +141,7 @@ router.get('/pending',(req, res)=>{
 
 router.get('/pending-data',(req, res)=>{
   let Query = `select * from  user_products `;
-  console.log(Query);
+  // console.log(Query);
   conn.query(Query, function (err,rows) {
     if (err) throw err;
     res.send(rows);
@@ -156,12 +156,37 @@ router.post("/updateStatus", (req, res) => {
   let status = req.body.status;
 
   let Query = `update user_products set  start_date="${start_date}",end_date="${end_date}", status="Active" where p_id="${p_id}"`;
-  console.log(Query)
+  // console.log(Query)
   conn.query(Query, (error) => {
     if (error) throw error;
     res.send("Status Updated.");
   })
 });
+
+
+
+router.get('/winners', (req, res) => {
+  if (session.useradmin !== undefined)
+    res.render('winners');
+  else
+    res.redirect('/adminlogin')
+
+});
+
+router.get('/bidClosed', function (req, res) {
+  let Query = `select  MAX(amount) as maxAmount ,u_email,p_id,curr_date from bid `;
+  conn.query(Query, function (err, rows) {
+    if (err) throw err;
+    if (rows.length > 0) {
+      res.send(rows);
+    } else {
+      res.send('No Winner Found')
+    }
+
+  })
+});
+
+
 
 
 module.exports = router;

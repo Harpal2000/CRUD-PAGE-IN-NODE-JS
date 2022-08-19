@@ -201,15 +201,10 @@ router.post('/insertBid', (req, res) => {
     let mon = c_date.getMonth() + 1;
     let year = c_date.getFullYear();
     let today_date = mon + "/" + day + "/" + year;
-    // console.log(today_date);
 
     if (amount > 0) {
         let CheckPrice = `select price,end_date from user_products where p_id="${p_id}"`;
-        // console.log(CheckPrice);
-        // console.log(amount);
         conn.query(CheckPrice, function (err, rows) {
-            // console.log(rows);
-            // if (err) throw err;
             if (err) {
                return res.send("Error");
             } else {
@@ -224,8 +219,15 @@ router.post('/insertBid', (req, res) => {
                 endDate = endDate.getTime();
                 let diff = currentDate - endDate;
 
-                if (diff > 0) {
-                    return res.send("dateEnded");
+                if (diff >= 0) {
+                    let Update = `update user_products set status="closed" where p_id = ${p_id}`;
+                    conn.query(Update, function (err) {
+                        if (err) {
+                            return res.send("Error");
+                        }
+                        return res.send("BidClosed");
+                    });
+
                 }
                 let InsertBid = "insert into bid (p_id,u_email,amount) values ('" + p_id + "','" + session.username + "','" + amount + "')";
                 console.log(InsertBid);
@@ -280,5 +282,10 @@ router.post("/updateProfile", (req, res) => {
         res.send("Data Updated.");
     })
 });
+
+
+
+
+
 
 module.exports = router;
