@@ -44,7 +44,7 @@ router.post('/insertuser', (req, res) => {
     let password = req.body.password;
     let confirm_password = req.body.confirm_password;
 
-    console.log(photo);
+    // console.log(photo);
 
     if (password != confirm_password) {
         res.send("notsame");

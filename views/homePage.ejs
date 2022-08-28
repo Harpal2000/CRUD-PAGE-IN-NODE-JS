@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/stylesheets/expanding-cards.css">
-    <link rel="stylesheet" href="/stylesheets/home-footer.css">
+    <link rel="stylesheet" href="/stylesheets/home-slider.css">
+    <link rel="stylesheet" href="/stylesheets/home.css">
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
@@ -30,10 +30,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
+    <script>
+        function HData() {
+            MainData()
+            getDate()
+        }
+    </script>
 
 </head>
 
-<body onload="MainData()">
+<body onload="HData()">
 <%- include('hompagehead') %>
 
 <div class="content head-content" data-aos="zoom">
@@ -47,8 +53,8 @@
                 <!-- fade css -->
                 <div class="myslide2 fade2">
                     <div class="txt">
-                        <h1><a class="btn btn-dark b-home" href="" style="padding: 12px 8px 12px 8px;background-color: #bc6539d3;
-                     border-radius: 7px;">Start Bidding Now</a></h1>
+                        <h1><a class="btn1 btn-dark b-home" href="" style="padding: 12px 8px 12px 8px;background-color: #bc6539d3;
+                     border-radius: 7px; color: white">Start Bidding Now</a></h1>
                         <p class="display-4 lead">Bid to Win<br><span class="text-primary font-weight-bolds">
                                 Highest & Unique</span> Bid to Unpack Your Dreams</p>
                     </div>
@@ -158,15 +164,16 @@
     </div>
 
 
-    <div class="top-heading text-center pt-3" data-aos="slide-right">
+    <div class="top-heading text-center pt-4 pb-3" data-aos="slide-right">
         <h2><u><b>Freatured</b>Products</u></h2>
     </div>
+
     <div class="content container mt-4 mx-6 mb-9 " data-aos="zoom-in">
 
         <div class="col col-sm-12">
-            <div class=" row justify-content-around align-items-end">
+            <div class=" row justify-content-around align-items-center">
 
-        <div id="pView"></div>
+                <div id="pView"></div>
 
             </div>
         </div>
@@ -562,17 +569,18 @@
     <!-- Footer -->
 
     <script>
+
         function MainData() {
             var http = new XMLHttpRequest();
             http.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    console.log(JSON.parse(this.response));
+                    // console.log(JSON.parse(this.response));
                     var data = JSON.parse(this.response);
-                    console.log(this.response);
+                    // console.log(this.response);
                     let tableTag = '';
                     data.forEach(function (value) {
-                        tableTag += `          <div class=" card container-cards" style="display: inline-block;max-width: 18rem;border-radius: 10px">
-                    <img src="../${value.image}" height=200px class="card-img-top" alt="..."
+                        tableTag += `          <div class=" card container-cards" style="display: inline-block;max-width: 21rem;border-radius: 10px">
+                    <img src="../${value.image}" height=200px width="300px"  alt="..."
                         style="border-top-right-radius: 10px;border-top-left-radius: 10px;">
                     <div class="card-body">
                         <h5 class="card-title">${value.name}</h5>
@@ -601,33 +609,18 @@
                                         style="fill:#decccc;"></path>
                                 </svg></span><span class="text-warning me-1"> 4.0</span><span class="fs-6 text-muted">
                                 (${value.p_id})</span></div>
+                         <div class="lh-1 mt-3 mb-4"><span class="text-dark">Product Status: ${value.status}</span>
+                        </div>
                         <div class="lh-1 mt-3 mb-4"><span class="text-dark fw-bold">Max Bid: &#8377; ${value.price}</span>
                         </div>
                         <div class="card-footer pt-0 pb-0 pr-0 pl-0 mt-1 ml-2">
                             <div class="align-items-center g-0 row">
                             </div>
                             <div class="col ms-2 col justify-content-center pr-2 pl-2 mt-2">
-                                <div id="countdown1" class="countdown1">
-                                    <div class="countdown-number1">
-                                        <span class="days countdown-time"></span>
-                                        <span class="countdown-text1">DAYS</span>
-                                    </div>
-                                    <div class="countdown-number1">
-                                        <span class="hours countdown-time"></span>
-                                        <span class="countdown-text1">HRS</span>
-                                    </div>
-                                    <div class="countdown-number1">
-                                        <span class="minutes countdown-time"></span>
-                                        <span class="countdown-text1">MIN</span>
-                                    </div>
-                                    <div class="countdown-number1">
-                                        <span class="seconds countdown-time"></span>
-                                        <span class="countdown-text1">SEC</span>
-                                    </div>
-    </div>
-    <span><a href="" class="btn btn-light ml-1 mb-3 mt-0"
-             style="background-color:rgb(196, 65, 65);color:white;">Bid Now</a></span>
-</div></div></div></div>`
+
+                            <span><a href="" class="btn btn-light ml-1 mb-3 mt-0 pt-2.5 pb-2.5"
+                                        style="background-color:rgb(196, 65, 65);color:white;font-size: 1rem">Bid Now</a></span>
+                            </div></div></div></div>`
                     });
                     document.getElementById("pView").innerHTML = tableTag;
                 }
@@ -694,7 +687,6 @@
             dot1[counter1 - 1].className += " active";
         }
     </script>
-
 
 
 </div>

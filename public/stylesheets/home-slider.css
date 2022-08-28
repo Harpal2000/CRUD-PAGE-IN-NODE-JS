@@ -12,7 +12,7 @@
 }
 
 .myslide1,.myslide2 {
-  height: 39rem;
+  height: 34rem;
   display: none;
   overflow: hidden;
 }
@@ -368,8 +368,9 @@
 }
 
 .card{
-  margin-right: 1rem;
+  margin-right: 4rem;
   margin-bottom: 3rem;
+  margin-left: 3rem;
 }
 
 
