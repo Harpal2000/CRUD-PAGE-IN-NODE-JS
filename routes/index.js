@@ -1,7 +1,7 @@
-var express = require('express');
+const express = require('express');
 const conn = require("../connection");
 const session = require('express-session')
-var router = express.Router();
+const router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

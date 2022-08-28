@@ -135,6 +135,20 @@ router.get('/photoview', function (req, res) {
 
     })
 });
+router.get('/mainView', function (req, res) {
+    var Query = `select * from user_products where status='active' or status='closed' `;
+    console.log(Query);
+    conn.query(Query, function (err, rows) {
+        if (err) throw err;
+        if (rows.length > 0) {
+            console.log(rows);
+            res.send(rows);
+        } else {
+            res.send('No Product')
+        }
+
+    })
+});
 
 
 router.get('/Bidder', function (req, res) {
