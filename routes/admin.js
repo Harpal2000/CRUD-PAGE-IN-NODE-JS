@@ -163,6 +163,28 @@ router.post("/updateStatus", (req, res) => {
   })
 });
 
+router.post("/lockWinner", (req, res) => {
+  let p_id = req.body.p_id;
+  let winner_email = req.body.winner_email;
+  let winner_pid = req.body.winner_pid;
+  let product_amount = req.body.product_amount;
+
+  let InsertQ = "insert into `winners` (`winner_email`,`winner_pid`,`product_amount`) values ('"+winner_email+"','"+winner_pid+"','"+product_amount+"')";
+  console.log(InsertQ)
+  conn.query(InsertQ,function (err){
+    if (err) {
+      res.send("Error");
+    }else{
+      let Query = `update user_products set status="Closed" where p_id="${p_id}"`;
+      conn.query(Query, (error) => {
+        if (error) throw error;
+        res.send("Winner Locked.");
+      })
+    }
+  });
+});
+
+
 
 
 router.get('/winners', (req, res) => {
@@ -174,19 +196,18 @@ router.get('/winners', (req, res) => {
 });
 
 router.get('/bidClosed', function (req, res) {
-  let Query = `select  MAX(amount) as maxAmount ,u_email,p_id,curr_date from bid `;
+
+  let Query = `select * from bid inner join user_products on bid.p_id = user_products.p_id`;
   conn.query(Query, function (err, rows) {
     if (err) throw err;
     if (rows.length > 0) {
       res.send(rows);
     } else {
-      res.send('No Winner Found')
+      res.send('No Winner Data Found')
     }
 
   })
 });
-
-
 
 
 module.exports = router;

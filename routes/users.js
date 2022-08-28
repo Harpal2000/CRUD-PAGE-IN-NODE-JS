@@ -154,7 +154,7 @@ router.get('/Bidder', function (req, res) {
 
 router.get('/BidLeader', function (req, res) {
     let p_id = req.query.pid;
-    let Query = `select  MAX(amount) as maxAmount ,u_email from bid inner join user_products on bid.p_id = user_products.p_id where bid.p_id=${p_id}`;
+    let Query = `select  MAX(amount) as maxAmount ,u_email from bid where bid.p_id=${p_id}`;
     // console.log(Query);
     conn.query(Query, function (err, rows) {
         if (err) throw err;
@@ -241,6 +241,8 @@ router.post('/insertBid', (req, res) => {
         });
     }
 })
+
+
 
 //user profile portal
 

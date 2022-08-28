@@ -13,117 +13,11 @@
             background-color: #2c3034;
         }
 
-        *, *:before, *:after {
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Nunito', sans-serif;
-            /*color: #384047;*/
-        }
-
-        form {
-            max-width: 200px;
-            margin: 10px auto;
-            padding: 10px 20px;
-            background: #f4f7f8;
-            border-radius: 8px;
-
-        }
-
-        form > h1 {
-            margin: 0 0 30px 0;
-            text-align: center;
-            font-size: 1.8rem;
-        }
-
-        input[type="text"] {
-            /*background: rgba(255, 255, 255, 0.1);*/
-            border: none;
-            font-size: 14px;
-            height: auto;
-            margin: 0;
-            outline: 0;
-            padding: 12px;
-            max-width: 100%;
-            background-color: #e8eeef;
-            color: #8a97a0;
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
-            margin-bottom: 30px;
-
-        }
-
-
-        fieldset {
-            margin-bottom: 20px;
-            border: none;
-        }
-
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        label.light {
-            font-weight: 300;
-            display: inline;
-        }
-
-
-        @media screen and (min-width: 480px) {
-
-            form {
-                max-width: 350px;
-            }
-
-        }
-
-        .coming-soon > h2 {
-            font-size: 1rem;
-            font-weight: bold;
-            padding: 3rem;
-        }
-
-        .coming-soon {
-            /*min-height: 100vh;*/
-            display: flex;
-            /*align-items: center;*/
-            flex-direction: column;
-            /*justify-content: start;*/
-            /*background-image: url("./images/example1.jpg");*/
-            /*background-size: 100%;*/
-        }
-
-        .countdown {
-            display: flex;
-            justify-content: space-around;
-            /*text-align: center;*/
-            /*margin-bottom: 40%;*/
-        }
-
-        .day,
-        .hour,
-        .minute,
-        .second {
-            font-size: 1rem;
-        }
-
-        #tt {
-            font-size: 1rem;
-        }
-
-        .waiting {
-            height: 50vh;
-        }
-
     </style>
 
     <script>
 
-        function BidWinners(){
+        function BidWinners() {
             let http = new XMLHttpRequest();
             http.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -136,7 +30,7 @@
                                  <th>Bidder E-Mail</th>
                                  <th>&#8377; Bid Amount</th>
                                  <th>Product Id</th>
-                                 <th>Biding Date</th>
+                                 <th>Bid Ending Date</th>
                                  <th>Action</th>
                                   </tr></thead>`;
 
@@ -145,15 +39,16 @@
                         tableTag += `<tr>`;
                         tableTag += `<td>${index + 1}</td>`;
                         tableTag += `<td>${value.u_email}</td>`;
-                        tableTag += `<td>${value.maxAmount}</td>`;
+                        tableTag += `<td>${value.amount}</td>`;
                         tableTag += `<td>${value.p_id}</td>`;
-                        tableTag += `<td>${value.curr_date}</td>`;
+                        tableTag += `<td>${value.end_date}</td>`;
                         tableTag += `<td>`;
                         tableTag += `<button type="button"
-                                        class="btn btn-primary btn-sm" onclick="updatePen('${value.p_id}')"  data-bs-toggle="modal" data-bs-target="#winModal">
-                                        <i class="fa-solid fa-file-lock"></i> LOCK</button>`;
+                                        class="btn btn-primary btn-sm" onclick="updateProductStatus('${value.p_id}','${value.u_email}')"  data-bs-toggle="modal" data-bs-target="#winModal">
+                                        <i class="fa-solid fa-key-skeleton-left-right"></i> LOCK</button>`;
                         tableTag += `</td>`;
                         tableTag += `</tr>`;
+
 
                     });
                     tableTag += `</tbody></table>`;
@@ -166,6 +61,37 @@
         }
 
 
+        function updateProductStatus(p_id,u_email) {
+            document.getElementById("p_id").value = p_id;
+            document.getElementById("winner_email").value = u_email;
+            document.getElementById("winner_pid").value = p_id;
+        }
+
+        function UpdateStatus() {
+            $('#winnerForm').validate();
+            if ($('#winnerForm').valid()) {
+                let formcontrols = document.getElementById("winnerForm").elements;
+                let formdata = new FormData();
+                for (let i = 0; i < formcontrols.length; i++) {
+                    if (formcontrols[i].type !== "button") {
+                        formdata.append(formcontrols[i].name, formcontrols[i].value);
+                    }
+                }
+
+                let httpreq = new XMLHttpRequest();
+                httpreq.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        alert(this.response);
+                        document.getElementById("winnerForm").reset();
+                        getUserData();
+                    }
+                }
+                httpreq.open('post', "/admin/lockWinner", true);
+                httpreq.send(formdata);
+            }
+        }
+
+
         function onloadData() {
             BidWinners()
         }
@@ -174,12 +100,62 @@
 </head>
 
 <body onload="onloadData()" id="admin_body">
-<%- include('userheader') %>
+<%- include('headerfilesadmin') %>
 <div class="container-fluid">
     <div id="error"></div>
     <div class="row">
         <div class="col-xxl-10 offset-1">
-            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom ">Daily Auctions</h1>
+            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom ">Bid Winners</h1>
+
+            <div class="modal fade" id="winModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Update Products Status</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+
+
+                            <form id="winnerForm">
+                                <div class="form-group mb-3">
+                                    <input type="hidden" name="winner_email" id="winner_email"
+                                           class="form-control" data-rule-required="true"
+                                           data-msg-required="*Starting date Required"/>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <input type="hidden" name="winner_pid" id="winner_pid" class="form-control"
+                                           data-rule-required="true"
+                                           placeholder="Enter Winner Product Id"
+                                           data-msg-required="*Ending Date Required"/>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input type="text" name="product_amount" id="product_amount" class="form-control"
+                                           data-rule-required="true"
+                                           placeholder="Enter Product Amount"
+                                           data-msg-required="*Ending Date Required"/>
+                                </div>
+                                    <div class="form-group mb-3">
+                                        <input type="hidden" name="p_id" id="p_id" class="form-control"/>
+                                    </div>
+
+                                    <div class="form-group mt-2 mb-3">
+                                        <input type="button" id="btnncat" onclick="UpdateStatus()" value="SUBMIT"
+                                               class="btn btn-primary"/>
+                                    </div>
+                            </form>
+
+
+
+                            <div id="response"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div id="winnerView" class="justify-content-around"></div>
 
@@ -193,7 +169,7 @@
     </div>
 </div>
 
-</div>
+
 
 
 </body>
