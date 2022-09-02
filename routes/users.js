@@ -3,6 +3,47 @@ const conn = require("../connection");
 var router = express.Router();
 const session = require('express-session')
 
+router.get('/save-payment', function (req, res) {
+    let {winner_id} = req.query;
+    let paymentSQL = `UPDATE winners SET payment_status="Paid" WHERE winner_id=${winner_id}`;
+    conn.query(paymentSQL, (e) => {
+        if (e) {
+            return res.send("error");
+        }
+        res.send("success");
+    });
+});
+
+router.get("/my-bids-status", (req, res) => {
+    if (session.username !== undefined) {
+        let userSession = session.username;
+        let winners = `SELECT winners.*, user_products.name, user_products.price, user_products.image, user_products.start_date, user_products.end_date, usersignup.fullname, usersignup.phone_no, usersignup.photo FROM winners 
+                   INNER JOIN user_products ON winners.winner_pid=user_products.p_id
+                   INNER JOIN usersignup ON winners.winner_email=usersignup.email WHERE winner_email="${userSession}"`;
+        conn.query(winners, (e, data) => {
+            if (e) {
+                return res.send("error");
+            }
+            res.send(data);
+        });
+    } else {
+        res.redirect('/user_login');
+    }
+});
+
+router.get('/my-bids', function (req, res) {
+    if (session.username !== undefined) {
+        // console.log("*************");
+        // console.log(session.username);
+        // console.log("*************");
+        res.render('user-bids', {username: session.username});
+    } else {
+        res.redirect('/user_login');
+    }
+});
+
+/* ------------------------------------ */
+/* ------------------------------------ */
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -32,13 +73,14 @@ router.post('/insert-user-product', (req, res) => {
     let status = req.body.status;
 
 
-    console.log(image);
+    // console.log(image);
     if (price > 100000000) {
         res.send("enter less value");
     } else {
         image.mv(realpath, function (err) {
             if (err) throw err;
-        })
+        });
+
         let CheckUser = `SELECT * FROM user_products WHERE p_id="${p_id}"`;
         conn.query(CheckUser, (err, data) => {
             if (err) throw err;
@@ -69,7 +111,8 @@ router.get('/userhome', function (req, res) {
         res.render('userhome', {username: session.username})
     else
         res.redirect('/user_login')
-})
+});
+
 router.get('/logout', function (req, res) {
     session.username = undefined;
     res.send('logout')
@@ -135,35 +178,6 @@ router.get('/photoview', function (req, res) {
 
     })
 });
-router.get('/mainView', function (req, res) {
-    var Query = `select * from user_products where status='active' or status='closed' `;
-    // console.log(Query);
-    conn.query(Query, function (err, rows) {
-        if (err) throw err;
-        if (rows.length > 0) {
-            // console.log(rows);
-            res.send(rows);
-        } else {
-            res.send('No Product')
-        }
-
-    })
-});
-
-router.get('/WinnerView', function (req, res) {
-    let Query = `select * from winners inner join user_products on user_products.p_id=winners.winner_pid`;
-    // console.log(Query);
-    conn.query(Query, function (err, rows) {
-        if (err) throw err;
-        if (rows.length > 0) {
-            // console.log(rows);
-            res.send(rows);
-        } else {
-            res.send('No Winners')
-        }
-
-    })
-});
 
 
 router.get('/Bidder', function (req, res) {
@@ -214,6 +228,7 @@ router.get('/getEndDate', function (req, res) {
     })
 });
 
+
 router.post('/insertBid', (req, res) => {
     let amount = req.body.amount;
     let p_id = req.body.p_id;
@@ -233,7 +248,7 @@ router.post('/insertBid', (req, res) => {
         let CheckPrice = `select price,end_date from user_products where p_id="${p_id}"`;
         conn.query(CheckPrice, function (err, rows) {
             if (err) {
-               return res.send("Error");
+                res.send("Error");
             } else {
                 if (amount < rows[0].price) {
                     return res.send("lowAmount");
@@ -268,7 +283,6 @@ router.post('/insertBid', (req, res) => {
         });
     }
 })
-
 
 
 //user profile portal
@@ -311,10 +325,6 @@ router.post("/updateProfile", (req, res) => {
         res.send("Data Updated.");
     })
 });
-
-
-
-
 
 
 module.exports = router;
