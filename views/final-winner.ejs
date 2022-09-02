@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bid Winners</title>
+    <%- include('headerfiles') %>
+</head>
+<body style="background: #2C3034">
+
+<%- include('headerfilesadmin') %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">Bid Winners</h1>
+            <hr>
+            <% if(err) { %>
+                <div class="text-center alert-danger p-5">
+                    <h4 class="">Internal Server Error.</h4>
+                    <h6 class="">No Data Found.</h6>
+                </div>
+            <% } else { %>
+
+                <% if(data.length === 0) { %>
+                    <div class="text-center alert-danger p-5">
+                        <h6 class="">No Data Found.</h6>
+                    </div>
+                <% } else { %>
+                    <table class="table table-borderless table-dark text-center text-white">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>Base Amount</th>
+                            <th>Highest Bidding Amount</th>
+                            <th>Winner Details</th>
+                            <th>Starting/Ending Date</th>
+                            <th>Payment Status</th>
+                        </tr>
+                        </thead>
+                        <tbody id="biddingData">
+
+                        <% data.forEach((item, index) =>{ %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td class="text-start">
+                                    <img src="../<%= item.image %>" style="height: 60px; width: 60px" alt="Product">
+                                    <br>
+                                    <h6><%= item.name %></h6>
+                                </td>
+                                <td>&#x20b9;<%= item.price %></td>
+                                <td>&#x20b9;<%= item.product_amount %></td>
+                                <td class="text-start">
+                                    <p>Name - <%= item.fullname %></p>
+                                    <p>Email - <%= item.winner_email %></p>
+                                    <p>Phone No. - <%= item.phone_no %></p>
+                                </td>
+
+                                <td><%= item.start_date %> | <%= item.start_date %></td>
+                                <td>
+                                    <% if(item.payment_status === "Pending") { %>
+                                        <span class="text-danger"><%= item.payment_status %></span>
+                                    <% } else { %>
+                                        <span class="text-success"><%= item.payment_status %></span>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% }); %>
+
+                        </tbody>
+                    </table>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
