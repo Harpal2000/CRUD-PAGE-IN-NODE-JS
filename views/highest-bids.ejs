@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Highest Bids</title>
+    <%- include('headerfiles') %>
+</head>
+<body onload="getBiddingData()" style="background: #2C3034">
+
+<%- include('headerfilesadmin') %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">Highest Bids</h1>
+            <hr>
+            <table class="table table-borderless table-dark text-center text-white">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Highest Bidding Amount</th>
+                    <th>Email</th>
+                    <th>Ending Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody id="biddingData"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    const getBiddingData = () => {
+        let http = new XMLHttpRequest();
+        http.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let {dataArray} = JSON.parse(this.response);
+                let html = ``;
+                let counter = 0;
+                dataArray.forEach(value => {
+                    counter++;
+                    value.forEach((data) => {
+                        let {p_id, amount, end_date, image, name, u_email} = data;
+                        html += `<tr>`;
+                        html += `<td>${counter}</td>`;
+
+                        html += `<td class="text-start">`;
+                        html += `<img src="../${image}" alt="Product Photo" style="width: 60px;height: 60px" class="img-thumbnail">`;
+                        html += `<h6>${name}</h6>`;
+                        html += `</td>`;
+
+                        html += `<td>&#x20b9; ${amount}</td>`;
+                        html += `<td>${u_email}</td>`;
+                        html += `<td>${end_date}</td>`;
+                        html += `<td>`;
+                        html += '<button id="winnerBTN" onclick=\'AnnounceWinner(' + JSON.stringify(data) + ', this)\' type="button" class="btn btn-success">Announce Winner</button>';
+                        html += `</td>`;
+                        html += `</tr>`;
+                    });
+                });
+
+                document.getElementById("biddingData").innerHTML = html;
+            }
+        }
+        http.open("GET", "/admin/fetch-highest-bidding", true);
+        http.send();
+    }
+
+    const AnnounceWinner = (data, button) => {
+        // console.log(data);
+        if (confirm("Are you sure?")) {
+            let {p_id, u_email, amount} = data;
+            let formData = new FormData();
+            formData.append("p_id", p_id);
+            formData.append("email", u_email);
+            formData.append("amount", amount);
+
+            let http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    button.disabled = false;
+                    button.innerHTML = `Announce Winner`;
+                    // console.log(this.response);
+                    if (this.response === "error") {
+                        alert("Internal Server Error");
+                    } else {
+                        getBiddingData();
+                        alert("Bid Closed");
+                    }
+                } else {
+                    button.disabled = true;
+                    button.innerHTML = `Sending Email... <span class="spinner-grow spinner-grow-sm"></span>`;
+                }
+            }
+            http.open("POST", `/admin/announce-winner`, true);
+            http.send(formData);
+        }
+    }
+</script>
+
+</body>
+</html>
