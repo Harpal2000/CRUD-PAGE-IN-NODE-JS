@@ -1,4 +1,4 @@
-var express = require('express');
+const express = require('express');
 const conn = require("../connection");
 var router = express.Router();
 const session = require('express-session')
@@ -179,8 +179,33 @@ router.get('/photoview', function (req, res) {
     })
 });
 
+router.get('/mainView', function (req, res) {
+    let Query = `select * from user_products where status='active' or status='closed' LIMIT 6`;
+    conn.query(Query, function (err, rows) {
+        if (err) throw err;
+        if (rows.length > 0) {
+            res.send(rows);
+        } else {
+            res.send('No Data Found')
+        }
+    })
+});
 
-router.get('/Bidder', function (req, res) {
+router.get('/WinnerView', function (req, res) {
+    let Query = `select * from winners where payment_status='pending' LIMIT 4`;
+    conn.query(Query, function (err, rows) {
+        if (err) throw err;
+        if (rows.length > 0) {
+            res.send(rows);
+        } else {
+            res.send('No Data Found')
+        }
+    })
+});
+
+
+
+router.get('/Bidder',  (req, res) =>{
     let p_id = req.query.pid;
     let Query = `select * from bid inner join user_products on user_products.p_id = bid.p_id where bid.p_id="${p_id}"`;
     // console.log(Query);
@@ -195,23 +220,23 @@ router.get('/Bidder', function (req, res) {
     })
 });
 
-router.get('/BidLeader', function (req, res) {
-    let p_id = req.query.pid;
-    let Query = `select  MAX(amount) as maxAmount ,u_email from bid where bid.p_id=${p_id}`;
-    // console.log(Query);
-    conn.query(Query, function (err, rows) {
-        if (err) throw err;
-        if (rows.length > 0) {
-            // console.log(rows);
-            res.send(rows);
-        } else {
-            res.send('No Product Found')
-        }
+// router.get('/BidLeader', function (req, res) {
+//     let p_id = req.query.pid;
+//     let Query = `select  MAX(amount) as maxAmount ,u_email from bid where bid.p_id=${p_id}`;
+//     // console.log(Query);
+//     conn.query(Query, function (err, rows) {
+//         if (err) throw err;
+//         if (rows.length > 0) {
+//             // console.log(rows);
+//             res.send(rows);
+//         } else {
+//             res.send('No Product Found')
+//         }
+//
+//     })
+// });
 
-    })
-});
-
-router.get('/getEndDate', function (req, res) {
+router.get('/getEndDate', (req, res) =>{
     // console.log(req.query);
     let p_id = req.query.pid;
     let Query = `select end_date from user_products where p_id=${p_id}`;
@@ -229,7 +254,7 @@ router.get('/getEndDate', function (req, res) {
 });
 
 
-router.post('/insertBid', (req, res) => {
+router.post('/insertBid', function (req, res) {
     let amount = req.body.amount;
     let p_id = req.body.p_id;
     let u_email = req.body.u_email;

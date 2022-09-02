@@ -476,36 +476,36 @@ footer .social-media{
 }
 
 
-.countdown-number1 {
-  padding: 0px;
-  border-radius: 3px;
-  background: #f6f6f6;
-  display: inline-block;
-}
+/*.countdown-number1 {*/
+/*  padding: 0px;*/
+/*  border-radius: 3px;*/
+/*  background: #f6f6f6;*/
+/*  display: inline-block;*/
+/*}*/
 
-.countdown-number2 {
-  padding: 0px;
-  border-radius: 3px;
-  background: #f6f6f6;
-  display: inline-block;
-}
+/*.countdown-number2 {*/
+/*  padding: 0px;*/
+/*  border-radius: 3px;*/
+/*  background: #f6f6f6;*/
+/*  display: inline-block;*/
+/*}*/
 
-.countdown-time {
-  padding: 3px 0px 3px 0px;
-  border-radius: 3px;
-  background: #f6f6f6;
-  display: inline-block;
-  font-weight: bold;
-}
+/*.countdown-time {*/
+/*  padding: 3px 0px 3px 0px;*/
+/*  border-radius: 3px;*/
+/*  background: #f6f6f6;*/
+/*  display: inline-block;*/
+/*  font-weight: bold;*/
+/*}*/
 
-.countdown-text1 {
-  display: block;
-  padding-top: 2px;
-  font-size: 7px;
-  color: #090b0b;
-  font-weight: bold;
-  padding-right: 6px;
-}
+/*.countdown-text1 {*/
+/*  display: block;*/
+/*  padding-top: 2px;*/
+/*  font-size: 7px;*/
+/*  color: #090b0b;*/
+/*  font-weight: bold;*/
+/*  padding-right: 6px;*/
+/*}*/
 .btn-home{
   display: inline-block;
   font-weight: 400;

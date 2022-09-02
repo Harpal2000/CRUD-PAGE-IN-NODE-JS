@@ -278,86 +278,86 @@
 /* /6 */
 
 
-.coming-soon h2 {
-  font-size: 5rem;
-  font-weight: 200px;
-  padding: 1rem;
-}
+/*.coming-soon h2 {*/
+/*  font-size: 5rem;*/
+/*  font-weight: 200px;*/
+/*  padding: 1rem;*/
+/*}*/
 
-.timer-clock {
-  margin-top: 1px;
-}
-.coming-soon {
-  max-height: 69vh;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  background-size: 100%;
- 
-}
+/*.timer-clock {*/
+/*  margin-top: 1px;*/
+/*}*/
+/*.coming-soon {*/
+/*  max-height: 69vh;*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  flex-direction: column;*/
+/*  justify-content: center;*/
+/*  background-size: 100%;*/
+/* */
+/*}*/
 
-.countdown {
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-  margin-bottom: 0%;
-}
+/*.countdown {*/
+/*  display: flex;*/
+/*  justify-content: space-around;*/
+/*  text-align: center;*/
+/*  margin-bottom: 0%;*/
+/*}*/
 
-.day,
-.hour,
-.minute,
-.second {
-  font-size: 3rem;
-}
+/*.day,*/
+/*.hour,*/
+/*.minute,*/
+/*.second {*/
+/*  font-size: 3rem;*/
+/*}*/
 
-.waiting {
-  height: 50vh;
-}
-@media all and (max-width: 1000px){
-  .coming-soon h2 {
-    font-size: 4rem;
-    font-weight: 200px;
-    padding: 1rem;
-  }
-}
+/*.waiting {*/
+/*  height: 50vh;*/
+/*}*/
+/*@media all and (max-width: 1000px){*/
+/*  .coming-soon h2 {*/
+/*    font-size: 4rem;*/
+/*    font-weight: 200px;*/
+/*    padding: 1rem;*/
+/*  }*/
+/*}*/
 
-@media all and (max-width: 900px){
-  .coming-soon h2 {
-    font-size: 4rem;
-    font-weight: 200px;
-    padding: 1rem;
-  }
-}
+/*@media all and (max-width: 900px){*/
+/*  .coming-soon h2 {*/
+/*    font-size: 4rem;*/
+/*    font-weight: 200px;*/
+/*    padding: 1rem;*/
+/*  }*/
+/*}*/
 
-@media all and (max-width: 800px){
-  .coming-soon h2 {
-    font-size: 3.5rem;
-    font-weight: 200px;
-    padding: 1rem;
-  }
-}
-@media all and (max-width: 700px){
-  .coming-soon h2 {
-    font-size: 3rem;
-    font-weight: 200px;
-    padding: 1rem;
-  }
-}
-@media all and (max-width: 600px){
-  .coming-soon h2 {
-    font-size: 2.5rem;
-    font-weight: 200px;
-    padding: 1rem;
-  }
-}
-@media all and (max-width: 500px){
-  .coming-soon h2 {
-    font-size: 2rem;
-    font-weight: 200px;
-    padding: 1rem;
-  }
-}
+/*@media all and (max-width: 800px){*/
+/*  .coming-soon h2 {*/
+/*    font-size: 3.5rem;*/
+/*    font-weight: 200px;*/
+/*    padding: 1rem;*/
+/*  }*/
+/*}*/
+/*@media all and (max-width: 700px){*/
+/*  .coming-soon h2 {*/
+/*    font-size: 3rem;*/
+/*    font-weight: 200px;*/
+/*    padding: 1rem;*/
+/*  }*/
+/*}*/
+/*@media all and (max-width: 600px){*/
+/*  .coming-soon h2 {*/
+/*    font-size: 2.5rem;*/
+/*    font-weight: 200px;*/
+/*    padding: 1rem;*/
+/*  }*/
+/*}*/
+/*@media all and (max-width: 500px){*/
+/*  .coming-soon h2 {*/
+/*    font-size: 2rem;*/
+/*    font-weight: 200px;*/
+/*    padding: 1rem;*/
+/*  }*/
+/*}*/
 
 .card{
   margin-right: 4rem;
