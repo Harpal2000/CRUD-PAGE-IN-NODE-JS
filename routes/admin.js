@@ -140,7 +140,7 @@ router.get('/pending',(req, res)=>{
 })
 
 router.get('/pending-data',(req, res)=>{
-  let Query = `select * from  user_products `;
+  let Query = `select * from  user_products where status='pending' `;
   // console.log(Query);
   conn.query(Query, function (err,rows) {
     if (err) throw err;

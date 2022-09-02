@@ -1,41 +1,86 @@
-<div id="countdown1" class="countdown1">
-    <div class="countdown-number1">
-        <span class="days countdown-time"></span>
-        <span class="countdown-text1">DAYS</span>
-    </div>
-    <div class="countdown-number1">
-        <span class="hours countdown-time "></span>
-        <span class="countdown-text1">HRS</span>
-    </div>
-    <div class="countdown-number1">
-        <span class="minutes countdown-time"></span>
-        <span class="countdown-text1">MIN</span>
-    </div>
-    <div class="countdown-number1">
-        <span class="seconds countdown-time"></span>
-        <span class="countdown-text1">SEC</span>
-    </div>
-</div>
-
 <section class="coming-soon">
     <div>
+        <h2> Bid End In</h2>
         <div class="countdown countdown1">
             <div class="container-day countdown-number1">
-                <h3 class="day countdown-time">Time</h3>
+                <h3 class="day countdown-time">Time :</h3>
                 <h3 id="tt" class="countdown-text1">Day</h3>
             </div>
             <div class="container-hour countdown-number1">
-                <h3 class="hour countdown-time">Time</h3>
+                <h3 class="hour countdown-time">Time :</h3>
                 <h3 id="tt" class="countdown-text1">Hrs</h3>
             </div>
             <div class="container-minute countdown-number1">
-                <h3 class="minute countdown-time">Time</h3>
+                <h3 class="minute countdown-time">Time :</h3>
                 <h3 id="tt" class="countdown-text1">Min</h3>
             </div>
             <div class="container-second countdown-number1">
-                <h3 class="second countdown-time">Time</h3>
+                <h3 class="second countdown-time">Time :</h3>
                 <h3 id="tt" class="countdown-text1">Sec</h3>
             </div>
         </div>
     </div>
 </section>
+
+
+<div class="row g-2">
+    <div class="col-md-3">
+        <img src="../${value.image}" class="rounded-start" alt="..." height="340px" width="300px"/>
+    </div>
+    <div class="col-md-5">
+        <div class="card-body">
+            <h5 class="card-title fw-bold">${value.name}</h5>
+            <p class="card-text">${value.description}.</p>
+            <h6 class="card-text">Initial Bid: (${value.price})</h6>
+            <h6 class="card-text">Product Status: (${value.status})</h6>
+            <p class="card-text "><small class="text-muted">Last updated 3 mins ago</small></p>
+            <section class="coming-soon">
+                <div>
+
+
+
+
+                    <form>
+                        <h1 class="display-8">Place Bid Here: </h1>
+
+                        <fieldset>
+                            <div class="form-group mb-3">
+
+                                <input type="text" name="amount" id="amount"
+                                       class="form-control" data-rule-required="true"
+                                       placeholder=" Bid Amount"
+                                       data-msg-required="*Amount Required"/>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <input type="hidden" name="p_id" id="p_id" class="form-control"
+                                       data-rule-required="true" value="${value.p_id}"
+                                       placeholder="Enter Product Id"
+                                       data-msg-required="*Required">
+
+                                <input type="button" id="btnncat" onclick="InsertBid()" value="PLACE BID"
+                                       class="btn btn-primary "/>
+                            </div>
+                        </fieldset>
+
+                    </form>
+
+
+
+                    <table class="table table-light table-hover">
+                        <thead><tr>
+                            <th>Bidder E-mail</th>
+                            <th>Bid Amount</th>
+                        </tr></thead> `;
+                        tableTag += `<tbody>`;
+                        data.forEach(function (value) {
+                        tableTag += `
+                        <tr>
+                            <td>${value.u_email}</td>
+                            <td>${value.amount}</td>
+                        </tr>`
+
+                        });
+                        tableTag += `</tbody>`;
+                        tableTag += `</table>`;
+                    tableTag += ` </div></div>`;

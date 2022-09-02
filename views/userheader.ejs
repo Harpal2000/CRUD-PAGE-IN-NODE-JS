@@ -3,7 +3,7 @@
 <script src="/js/jquery.validate.min.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.js"></script>
-<link rel="stylesheet" href="/stylesheets/home-style.css">
+<!--<link rel="stylesheet" href="/stylesheets/home-style.css">-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
@@ -14,24 +14,57 @@
       crossorigin="anonymous" referrerpolic
       +y="no-referrer"/>
 
-<nav class="n1 navbar-expand-lg">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand mx-4" href="#">
+        <img src="/images/logo2.png" width="90px" height="30px" alt="" style="border-radius: 15%;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <ul class="mb-0 nav-content">
-        <li class="logo"><img src="/images/logo1.png" height="30px" style="padding-bottom:8px"></li>
-
-        <li class="items"><a href="/users/userhome">Home</a></li>
-        <li class="items"><a href="auctions.html">Auctions</a></li>
-        <li class="items"><a href="/users/add-bid">Daily Auctions</a></li>
-        <li class="items"><a href="winners.html">Winners</a></li>
-        <li class="items"><a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" tooltip-bs-bg="white"
-                             title="Hurry !! 50% off on all Auctions !! Coupon Code `DRM50B` Use it before expired !!">Announcements</a>
-        </li>
-        <li class="items"><a href="offers">offers</a></li>
-        <li class="items"><a href="/users/profile"><img src="/images/login1.png"></a></li>
-        <li class="btn"><a href="#"><i class="fas fa-bars"></i></a></li>
-    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mx-5">
+            <li class="nav-item active">
+                <a class="nav-link" href="/users/userhome">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/users/userhome">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Auctions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/users/add-bid">Daily Auctions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="winners.html">Winners</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Annoucements</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Offers</a>
+            </li>
+            <!--            user login icon-->
+            <li class="nav-item">
+                <a href="/users/profile" class="nav-link">
+                    <lord-icon src="https://cdn.lordicon.com/elkhjhci.json" trigger="hover"
+                               style="width:30px;height:30px">
+                    </lord-icon>
+                </a>
+            </li>
+            <!--add to cart icon-->
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <lord-icon src="https://cdn.lordicon.com/gtcqrwnh.json" trigger="hover"
+                               style="width:30px;height:30px">
+                    </lord-icon>
+                </a>
+            </li>
+        </ul>
+    </div>
 </nav>
-
 <script>
 
     $(document).ready(function () {

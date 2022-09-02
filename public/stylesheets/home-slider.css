@@ -286,14 +286,6 @@
 
 .timer-clock {
   margin-top: 1px;
-  /* background-size: 100%;
-  background-image: url("../images/timer-bg.jpg");
- 
-  -webkit-filter: blur(0.3px) brightness(0.8);
-  -moz-filter: blur(0.3px) brightness(0.8);
-  -ms-filter: blur(0.3px) brightness(0.8);
-  -o-filter: blur(0.3px) brightness(0.8);
-  filter: blur(0.3px) brightness(0.8); */
 }
 .coming-soon {
   max-height: 69vh;

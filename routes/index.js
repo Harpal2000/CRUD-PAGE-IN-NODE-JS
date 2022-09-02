@@ -62,7 +62,7 @@ router.post('/insertuser', (req, res) => {
                 // console.log(Query);
                 conn.query(Query, function (err) {
                     if (err) throw err;
-                    res.send("Data Inserted");
+                    res.send("Data Inserted ");
                 });
             }
         });

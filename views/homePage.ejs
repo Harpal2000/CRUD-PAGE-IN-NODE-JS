@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Home</title>
     <link rel="stylesheet" href="/stylesheets/home-slider.css">
     <link rel="stylesheet" href="/stylesheets/home.css">
 
@@ -33,9 +33,12 @@
     <script>
         function HData() {
             MainData()
-            getDate()
+            winnerView()
         }
     </script>
+    <style>
+        .btn:focus,.btn:active{outline: none !important; box-shadow: none !important;}
+    </style>
 
 </head>
 
@@ -47,14 +50,14 @@
 
     </div>
 
+<!-- top main slider-->
     <div style="background-color:  #1f2833;">
         <div class="container-fluid  mb-1 " style="padding:0 0 0 0">
             <div class="slider2">
                 <!-- fade css -->
                 <div class="myslide2 fade2">
                     <div class="txt">
-                        <h1><a class="btn1 btn-dark b-home" href="" style="padding: 12px 8px 12px 8px;background-color: #bc6539d3;
-                     border-radius: 7px; color: white">Start Bidding Now</a></h1>
+                        <button type="button" class="btn-home btn-lg mb-2">Start Bidding Now</button>
                         <p class="display-4 lead">Bid to Win<br><span class="text-primary font-weight-bolds">
                                 Highest & Unique</span> Bid to Unpack Your Dreams</p>
                     </div>
@@ -63,8 +66,7 @@
 
                 <div class="myslide2 fade2">
                     <div class="txt">
-                        <h1><a class="btn btn-dark b-home" href="" style="padding: 12px 8px 12px 8px;background-color: #bc6539d3;
-                     border-radius: 7px;">Start Bidding Now</a></h1>
+                        <button type="button" class="btn-home btn-lg mb-2">Start Bidding Now</button>
                         <p class="display-4 lead">Bid to Win<br><span class="text-primary font-weight-bolds">
                                 Highest & Unique</span> Bid to Unpack Your Dreams</p>
                     </div>
@@ -73,8 +75,7 @@
 
                 <div class="myslide2 fade2">
                     <div class="txt">
-                        <h1><a class="btn btn-dark b-home" href="" style="padding: 12px 8px 12px 8px;background-color: #bc6539d3;
-                     border-radius: 7px;">Start Bidding Now</a></h1>
+                        <button type="button" class="btn-home btn-lg mb-2">Start Bidding Now</button>
                         <p class="display-4 lead">Bid to Win<br><span class="text-primary font-weight-bolds">
                                 Highest & Unique</span> Bid to Unpack Your Dreams</p>
                     </div>
@@ -83,8 +84,7 @@
 
                 <div class="myslide2 fade2">
                     <div class="txt">
-                        <h1><a class="btn btn-dark b-home" href="" style="padding: 12px 8px 12px 8px;background-color: #bc6539d3;
-                     border-radius: 7px;">Start Bidding Now</a></h1>
+                        <button type="button" class="btn-home btn-lg mb-2">Start Bidding Now</button>
                         <p class="display-4 lead">Bid to Win<br><span class="text-primary font-weight-bolds">
                                 Highest & Unique</span> Bid to Unpack Your Dreams</p>
                     </div>
@@ -108,8 +108,9 @@
 
         </div>
     </div>
+    <!-- top main slider end-->
 
-
+<!--    after slider content display-->
     <div class="top-tag  pt-3 roundend" data-aos="zoom-in">
         <div class="container">
             <div class="row benifit-row ">
@@ -150,39 +151,38 @@
                 </div>
                 <div class="col benifit-col">
                     <div class="benefit-item d-flex flex-row align-item-center">
-                        <div class="benifit-icon">
-                            <i class="fa-solid fa-gears"></i>
-                        </div>
-                        <div class="benifit-content mx-2">
-                            <h6><b> Settings</b></h6>
-                            <p>Suffered alteration </p>
-                        </div>
+                        <a href="/users/user-products" class="btn ml-20 user-product-btn" style=" background-color: brown;
+                 color: white;margin: 0.1rem 0 0 1rem;padding: 0.5rem 0 0.5rem 0;font-size: 1rem;" type="button">Add
+                            Your
+                            Product</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+<!--    ofter slider content end -->
 
-
-    <div class="top-heading text-center pt-4 pb-3" data-aos="slide-right">
-        <h2><u><b>Freatured</b>Products</u></h2>
+<!--    main containers-->
+    <div class="top-heading text-center pt-4 pb-3 ms-10">
+        <h1>Featured Products</h1>
     </div>
 
     <div class="content container mt-4 mx-6 mb-9 " data-aos="zoom-in">
-
         <div class="col col-sm-12">
             <div class=" row justify-content-around align-items-center">
+
 
                 <div id="pView"></div>
 
             </div>
         </div>
     </div>
+<!--    main containers end -->
 
+<!--Winners Cards-->
     <div class="new-arrivals pt-4">
-        <div class="head text-center" data-aos="slide-right">
-            <h1><u> <b>Newly</b>Added </u>
-            </h1>
+        <div class="head text-center">
+            <h1>Newly Winners</h1>
 
         </div>
         <div class="container table-container">
@@ -200,144 +200,17 @@
         </div>
     </div>
 
-
     <div class="content container mt-4 mx-auto  mb-9 align-item-center justify-content-center new-container"
          data-aos="fade-right">
-
-
         <div class=" d-flex row justify-content-around align-items-end justify-content-lg-around justify-content-xl-center justify-content-md-center new-container-row">
+                        <div class ="d-flex" id="wView"></div>
 
-            <div class="col-8 col-lg-6 col-md-6 col-sm-12 col-xl-3 arrivals-card mb-2 mt-2">
-                <div class=" page-wrapper" style="padding: 0;width: 160px;">
-                    <div class="page-inner">
-                        <!-- <div class="row"> -->
-                        <div class="el-wrapper mx-auto px-auto">
-                            <div class="box-up">
-                                <img class="img" src="/assests/images/rolex.avif" alt="">
-                                <div class="img-info">
-                                    <div class="info-inner">
-                                        <span class="p-name">ROLEX DAY-DATE</span>
-                                        <span class="p-company">THE REALIZATION OF AN IDEAL</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="box-down">
-                                <div class="h-bg">
-                                    <div class="h-bg-inner"></div>
-                                </div>
-
-                                <a class="cart" href="#">
-                                    <span class="price">$120</span>
-                                    <span class="add-to-cart">
-                                            <span class="txt">Add in cart</span>
-                                        </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-8 col-lg-6 col-md-6 col-sm-12 arrivals-card col-xl-3 mb-2">
-                <div class=" page-wrapper" style="padding: 0;width: 160px;">
-                    <div class="page-inner">
-                        <!-- <div class="row"> -->
-                        <div class="el-wrapper mx-auto px-auto">
-                            <div class="box-up">
-                                <img class="img" src="/assests/images/rolex.avif" alt="">
-                                <div class="img-info">
-                                    <div class="info-inner">
-                                        <span class="p-name">ROLEX DAY-DATE</span>
-                                        <span class="p-company">THE REALIZATION OF AN IDEAL</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="box-down">
-                                <div class="h-bg">
-                                    <div class="h-bg-inner"></div>
-                                </div>
-
-                                <a class="cart" href="#">
-                                    <span class="price">$120</span>
-                                    <span class="add-to-cart">
-                                            <span class="txt">Add in cart</span>
-                                        </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-8 col-lg-6 col-md-6 col-sm-12 arrivals-card col-xl-3 mb-2">
-                <div class=" page-wrapper" style="padding: 0;width: 160px;">
-                    <div class="page-inner">
-                        <!-- <div class="row"> -->
-                        <div class="el-wrapper mx-auto px-auto">
-                            <div class="box-up">
-                                <img class="img" src="/assests/images/rolex.avif" alt="">
-                                <div class="img-info">
-                                    <div class="info-inner">
-                                        <span class="p-name">ROLEX DAY-DATE</span>
-                                        <span class="p-company">THE REALIZATION OF AN IDEAL</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="box-down">
-                                <div class="h-bg">
-                                    <div class="h-bg-inner"></div>
-                                </div>
-
-                                <a class="cart" href="#">
-                                    <span class="price">$120</span>
-                                    <span class="add-to-cart">
-                                            <span class="txt">Add in cart</span>
-                                        </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-8 col-lg-6 col-md-6 col-sm-12 arrivals-card  col-xl-3 mb-2">
-                <div class=" page-wrapper" style="padding: 0;width: 160px;">
-                    <div class="page-inner">
-                        <!-- <div class="row"> -->
-                        <div class="el-wrapper mx-auto px-auto">
-                            <div class="box-up">
-                                <img class="img" src="/assests/images/rolex.avif" alt="">
-                                <div class="img-info">
-                                    <div class="info-inner">
-                                        <span class="p-name">ROLEX DAY-DATE</span>
-                                        <span class="p-company">THE REALIZATION OF AN IDEAL</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="box-down">
-                                <div class="h-bg">
-                                    <div class="h-bg-inner"></div>
-                                </div>
-
-                                <a class="cart" href="#">
-                                    <span class="price">$120</span>
-                                    <span class="add-to-cart">
-                                            <span class="txt">Add in cart</span>
-                                        </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-
+    <!--Winners Cards End-->
     <div class="content mt-5 " data-aos="flip-right">
 
-        <img src="/assests/images/cruise.jpg" alt="" width="100%" height="440px" style="position: relative;">
+        <img src="/images/cruise.jpg" alt="" width="100%" height="440px" style="position: relative;">
         <div class="bottom-left  photo-text"
              style=" position: absolute;bottom: 15%;left: 16px; color:white; padding-left:20px ">
 
@@ -579,53 +452,76 @@
                     // console.log(this.response);
                     let tableTag = '';
                     data.forEach(function (value) {
-                        tableTag += `          <div class=" card container-cards" style="display: inline-block;max-width: 21rem;border-radius: 10px">
+                        tableTag += `          <div class=" card container-cards" style="display: inline-block;max-width: 21rem;border-radius: 0.4rem;background-color: rgb(185 185 185 / 15%);">
                     <img src="../${value.image}" height=200px width="300px"  alt="..."
-                        style="border-top-right-radius: 10px;border-top-left-radius: 10px;">
-                    <div class="card-body">
+                        style="border-top-right-radius: 0.4rem;border-top-left-radius: 0.4rem;">
+                    <div class="card-body" >
                         <h5 class="card-title">${value.name}</h5>
-                        <div class="lh-1 d-flex align-items-center "><span class="text-warning me-1 mb-1">
-                                <svg viewBox="0 0 24 24" role="presentation" style="width: 0.875rem; height: 0.875rem;">
-                                    <path style="fill: currentcolor;"></path>
-                                </svg><svg viewBox="0 0 24 24" role="presentation"
-                                    style="width: 0.875rem; height: 0.875rem;">
-                                    <path
-                                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                                        style="fill: currentcolor;"></path>
-                                </svg><svg viewBox="0 0 24 24" role="presentation"
-                                    style="width: 0.875rem; height: 0.875rem;">
-                                    <path
-                                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                                        style="fill: currentcolor;"></path>
-                                </svg><svg viewBox="0 0 24 24" role="presentation"
-                                    style="width: 0.875rem; height: 0.875rem;">
-                                    <path
-                                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                                        style="fill: currentcolor;"></path>
-                                </svg><svg viewBox="0 0 24 24" role="presentation"
-                                    style="width: 0.875rem; height: 0.875rem;">
-                                    <path
-                                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                                        style="fill:#decccc;"></path>
-                                </svg></span><span class="text-warning me-1"> 4.0</span><span class="fs-6 text-muted">
-                                (${value.p_id})</span></div>
-                         <div class="lh-1 mt-3 mb-4"><span class="text-dark">Product Status: ${value.status}</span>
+                           <div class="lh-1 mt-3 mb-4"><span class="text-dark fw-bold">Max Bid: &#8377; ${value.price}</span>
                         </div>
-                        <div class="lh-1 mt-3 mb-4"><span class="text-dark fw-bold">Max Bid: &#8377; ${value.price}</span>
+                          <div class="lh-1 mt-3 mb-4"><span class="text-dark">Product Status: ${value.status}</span>
                         </div>
-                        <div class="card-footer pt-0 pb-0 pr-0 pl-0 mt-1 ml-2">
+                        <div class="pt-0 pb-0 ps-0 pe-0 mt-1 ml-2">
                             <div class="align-items-center g-0 row">
                             </div>
-                            <div class="col ms-2 col justify-content-center pr-2 pl-2 mt-2">
+                            <div class="col col justify-content-center pr-2 pl-2 ">
 
-                            <span><a href="" class="btn btn-light ml-1 mb-3 mt-0 pt-2.5 pb-2.5"
-                                        style="background-color:rgb(196, 65, 65);color:white;font-size: 1rem">Bid Now</a></span>
+                            <span><a href="" class="btn btn-light mt-0 pt-2.8 pb-2.8"
+                                        style="background-color:rgb(400, 70, 65);color:white;font-size: 1rem;border-radius: 3rem;width: 10rem">Bid Now</a><span class="text-warning me-1 mb-1">
+                                </svg></span><span class="text-warning" style="font-size: 1.3rem"> 4.0</span><span class="fs-6 text-muted">
+                                (${value.p_id})</span>
+                            </span>
                             </div></div></div></div>`
                     });
                     document.getElementById("pView").innerHTML = tableTag;
                 }
             }
             http.open("get", "/users/mainView", true);
+            http.send();
+        }
+
+        function winnerView() {
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    // console.log(JSON.parse(this.response));
+                    let data = JSON.parse(this.response);
+                    // console.log(this.response);
+                    let tableTag = '';
+                    data.forEach(function (value) {
+                        tableTag += `  <div class="col-8 col-lg-6 col-md-6 col-sm-12 col-xl-3 arrivals-card mb-2 mt-2">
+                <div class=" page-wrapper" style="padding: 0;width: 160px;">
+                    <div class="page-inner">
+    <div class="el-wrapper mx-auto px-auto">
+                            <div class="box-up">
+                                <img class="img" src="../${value.image}" height=295px width="270px" alt="">
+                                <div class="img-info">
+                                    <div class="info-inner">
+                                        <span class="p-name" style="color: black;background-color: white">${value.name}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-down">
+                                <div class="h-bg">
+                                    <div class="h-bg-inner"></div>
+                                </div>
+
+                                <a class="cart" href="#">
+                                    <span class="price">${value.product_amount}</span>
+                                    <span class="add-to-cart">
+                                            <span class="txt">Add in cart</span>
+                                        </span>
+                                </a>
+                            </div>
+                        </div>  </div>
+                </div>
+            </div>`
+                    });
+                    document.getElementById("wView").innerHTML = tableTag;
+                }
+            }
+            http.open("get", "/users/WinnerView", true);
             http.send();
         }
 

@@ -150,6 +150,21 @@ router.get('/mainView', function (req, res) {
     })
 });
 
+router.get('/WinnerView', function (req, res) {
+    let Query = `select * from winners inner join user_products on user_products.p_id=winners.winner_pid`;
+    // console.log(Query);
+    conn.query(Query, function (err, rows) {
+        if (err) throw err;
+        if (rows.length > 0) {
+            // console.log(rows);
+            res.send(rows);
+        } else {
+            res.send('No Winners')
+        }
+
+    })
+});
+
 
 router.get('/Bidder', function (req, res) {
     let p_id = req.query.pid;

@@ -387,22 +387,6 @@ footer .social-media{
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .content a {
   font-size: 10px;
   margin: 0px;
@@ -522,4 +506,20 @@ footer .social-media{
   font-weight: bold;
   padding-right: 6px;
 }
-
+.btn-home{
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  font-size: 1rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  padding: 12px 8px 12px 8px;background-color: #bc6539d3;
+  border-radius: 7px; color: white;
+  border-color:  #bc6539d3;
+}

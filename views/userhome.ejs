@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
     <link rel="stylesheet" href="/stylesheets/home-slider.css">
     <link rel="stylesheet" href="/stylesheets/home.css">
 
@@ -35,9 +35,9 @@
 </head>
 <body onload="UserData()">
 <%- include('userheader') %>
-<div class="container">
-    <!--    <h2>Welcome, <%= username %></h2>-->
-</div>
+
+<div class="content head-content" data-aos="zoom">
+    <div class="head-image" style="position: relative;"></div>
 
 <div style="background-color:  #1f2833;">
 
@@ -46,8 +46,7 @@
             <!-- fade css -->
             <div class="myslide1 fade1">
                 <div class="txt">
-                    <h1><a class="btn btn-dark b-home" href="" style="padding: 12px 8px 12px 8px;background-color: #bc6539d3;
-                     border-radius: 7px;">Start Bidding Now</a></h1>
+                    <button type="button" class="btn-home btn-lg mb-2">Start Bidding Now</button>
                     <p class="display-4 lead">Bid to Win<br><span class="text-primary font-weight-bolds">
                                 Highest & Unique</span> Bid to Unpack Your Dreams</p>
                 </div>
@@ -56,8 +55,7 @@
 
             <div class="myslide1 fade1">
                 <div class="txt">
-                    <h1><a class="btn btn-dark b-home" href="" style="padding: 12px 8px 12px 8px;background-color: #bc6539d3;
-                     border-radius: 7px;">Start Bidding Now</a></h1>
+                    <button type="button" class="btn-home btn-lg mb-2">Start Bidding Now</button>
                     <p class="display-4 lead">Bid to Win<br><span class="text-primary font-weight-bolds">
                                 Highest & Unique</span> Bid to Unpack Your Dreams</p>
                 </div>
@@ -66,8 +64,7 @@
 
             <div class="myslide1 fade1">
                 <div class="txt">
-                    <h1><a class="btn btn-dark b-home" href="" style="padding: 12px 8px 12px 8px;background-color: #bc6539d3;
-                     border-radius: 7px;">Start Bidding Now</a></h1>
+                    <button type="button" class="btn-home btn-lg mb-2">Start Bidding Now</button>
                     <p class="display-4 lead">Bid to Win<br><span class="text-primary font-weight-bolds">
                                 Highest & Unique</span> Bid to Unpack Your Dreams</p>
                 </div>
@@ -76,8 +73,7 @@
 
             <div class="myslide1 fade1">
                 <div class="txt">
-                    <h1><a class="btn btn-dark b-home" href="" style="padding: 12px 8px 12px 8px;background-color: #bc6539d3;
-                     border-radius: 7px;">Start Bidding Now</a></h1>
+                    <button type="button" class="btn-home btn-lg mb-2">Start Bidding Now</button>
                     <p class="display-4 lead">Bid to Win<br><span class="text-primary font-weight-bolds">
                                 Highest & Unique</span> Bid to Unpack Your Dreams</p>
                 </div>
@@ -96,108 +92,461 @@
 
     </div>
 </div>
-<!-- spin slide -->
-<div class=" py-2 shadow-sm " style="background-color: #c5c6c7">
-    <div class="container">
-        <div class="align-item-center g-0 row">
-            <div class="mb-lg-0 mb-4 col-xl-4 col-lg-4 col-md-6" id="quick-box">
-                <div class="d-flex justify-content-center ">
-                        <span class="rounded-circle text-center fs-4">
-                            <i class="fas fa-cog fa-spin"></i>
-                        </span>
-                    <div class="ms-3">
-                        <h4 class="mb-0 fw-semi-bold">
-                            2000+ Bids Placed
-                        </h4>
+
+
+    <div class="top-tag  pt-3 roundend" data-aos="zoom-in">
+        <div class="container">
+            <div class="row benifit-row ">
+                <div class="col benifit-col">
+                    <div class="benefit-item d-flex flex-row align-item-center">
+                        <div class="benifit-icon">
+                            <i class="fa-solid fa-gears"> </i>
+                        </div>
+                        <div class="benifit-content mx-2">
+                            <h6><b>Settings</b></h6>
+                            <p>Suffered alteration </p>
+                        </div>
+
+
                     </div>
                 </div>
-            </div>
-
-            <div class="mb-lg-0 mb-4 col-xl-4 col-lg-4 col-md-6">
-                <div class="d-flex justify-content-center">
-                        <span class="rounded-circle text-center fs-4">
-                            <i class="fas fa-cog fa-spin"></i>
-                        </span>
-                    <div class="ms-3">
-                        <h4 class="mb-0 fw-semi-bold">
-                            5,460+ Demmands
-                        </h4>
+                <div class="col benifit-col">
+                    <div class="benefit-item d-flex flex-row align-item-center">
+                        <div class="benifit-icon">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <div class="benifit-content mx-2">
+                            <h6><b> Settings</b></h6>
+                            <p>Suffered alteration </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="mb-lg-0 mb-4 col-xl-4 col-lg-4 col-md-6">
-                <div class="d-flex justify-content-center">
-                        <span class="rounded-circle text-center fs-4">
-                            <i class="fas fa-cog fa-spin"></i>
-                        </span>
-                    <div class="ms-3">
-                        <h4 class="mb-0 fw-semi-bold">
-                            5+ Auctions Daily
-                        </h4>
+                <div class="col benifit-col">
+                    <div class="benefit-item d-flex flex-row align-item-center">
+                        <div class="benifit-icon">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <div class="benifit-content mx-2">
+                            <h6><b>Settings</b></h6>
+                            <p>Suffered alteration </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col benifit-col">
+                    <div class="benefit-item d-flex flex-row align-item-center">
+                        <a href="/users/user-products" class="btn ml-20 user-product-btn" style=" background-color: brown;
+            color: white;margin: 0.1rem 0 0 1rem;padding: 0.5rem 0 0.5rem 0;font-size: 1rem;" role="button">Add
+                            Your
+                            Product</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Auction Timer -->
-<div class="container-fluid timer-img ">
-    <a href="/users/user-products" class="btn ml-20 user-product-btn" style=" background-color: brown;
-            color: white;
-            margin: 2rem 0 0 1rem;" role="button">Add
-        Your
-        Product</a>
-    <div class="container ">
-        <h1 class="countdown-title-main fw-normal">Next Auction Start's In</h1>
 
 
-        <div id="countdown-main" class="countdown-main">
-
-            <div class="countdown-number-main">
-                <span class="days-main countdown-time-main"></span>
-                <span class="countdown-text-main">DAYS</span>
-            </div>
-            <div class="countdown-number-main">
-                <span class="hours-main countdown-time-main"></span>
-                <span class="countdown-text-main">HOURS</span>
-            </div>
-            <div class="countdown-number-main">
-                <span class="minutes-main countdown-time-main"></span>
-                <span class="countdown-text-main">MINUTES</span>
-            </div>
-            <div class="countdown-number-main">
-                <span class="seconds-main countdown-time-main"></span>
-                <span class="countdown-text-main">SECONDS</span>
-            </div>
-            <script src="/javascripts/clock.js"></script>
-
-        </div>
-
-
-        <div class="how-to-play-img ">
-                    <span class="lft">
-                        <h1>Just 3 Steps to Win</h1> <a href="howtoplay.aspx"><img src="/images/how-to-play.jpg"></a>
-                    </span>
-        </div>
-
+    <div class="top-heading text-center pt-4 pb-3" data-aos="slide-right">
+        <h2><u><b>Freatured</b>Products</u></h2>
     </div>
-</div>
+
+    <div class="content container mt-4 mx-6 mb-9 " data-aos="zoom-in">
+
+        <div class="col col-sm-12">
+            <div class=" row justify-content-around align-items-center">
+
+                <div id="photoView"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="new-arrivals pt-4">
+        <div class="head text-center" data-aos="slide-right">
+            <h1><u> <b>Newly</b>Added </u>
+            </h1>
+
+        </div>
+        <div class="container table-container">
+            <table class="table table-bordered text-center mt-3">
+                <thead>
+                <tr>
+                    <!-- <th scope="col">#</th> -->
+                    <th scope="col" class="bg-primary text-light">First</th>
+                    <th scope="col">Painting</th>
+                    <th scope="col">Vehicle</th>
+                    <th scope="col">Accessories</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
 
 
-<div class=" pt-4 pb-3 mt-5 container-cards1">
-    <div class="container-fluid">
-        <div class="row-cols-12">
-            <div class="col-xxl-10 offset-1">
-                <h1 class="text-center mt-3 mb-5 display-5 text-dark border-bottom ">Daily Auctions</h1>
+    <div class="content container mt-4 mx-auto  mb-9 align-item-center justify-content-center new-container"
+         data-aos="fade-right">
 
-                <div id="photoView" class="justify-content-around">
+
+        <div class=" d-flex row justify-content-around align-items-end justify-content-lg-around justify-content-xl-center justify-content-md-center new-container-row">
+
+            <div class="col-8 col-lg-6 col-md-6 col-sm-12 col-xl-3 arrivals-card mb-2 mt-2">
+                <div class=" page-wrapper" style="padding: 0;width: 160px;">
+                    <div class="page-inner">
+                        <!-- <div class="row"> -->
+                        <div class="el-wrapper mx-auto px-auto">
+                            <div class="box-up">
+                                <img class="img" src="/assests/images/rolex.avif" alt="">
+                                <div class="img-info">
+                                    <div class="info-inner">
+                                        <span class="p-name">ROLEX DAY-DATE</span>
+                                        <span class="p-company">THE REALIZATION OF AN IDEAL</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-down">
+                                <div class="h-bg">
+                                    <div class="h-bg-inner"></div>
+                                </div>
+
+                                <a class="cart" href="#">
+                                    <span class="price">$120</span>
+                                    <span class="add-to-cart">
+                                            <span class="txt">Add in cart</span>
+                                        </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 col-lg-6 col-md-6 col-sm-12 arrivals-card col-xl-3 mb-2">
+                <div class=" page-wrapper" style="padding: 0;width: 160px;">
+                    <div class="page-inner">
+                        <!-- <div class="row"> -->
+                        <div class="el-wrapper mx-auto px-auto">
+                            <div class="box-up">
+                                <img class="img" src="/assests/images/rolex.avif" alt="">
+                                <div class="img-info">
+                                    <div class="info-inner">
+                                        <span class="p-name">ROLEX DAY-DATE</span>
+                                        <span class="p-company">THE REALIZATION OF AN IDEAL</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-down">
+                                <div class="h-bg">
+                                    <div class="h-bg-inner"></div>
+                                </div>
+
+                                <a class="cart" href="#">
+                                    <span class="price">$120</span>
+                                    <span class="add-to-cart">
+                                            <span class="txt">Add in cart</span>
+                                        </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 col-lg-6 col-md-6 col-sm-12 arrivals-card col-xl-3 mb-2">
+                <div class=" page-wrapper" style="padding: 0;width: 160px;">
+                    <div class="page-inner">
+                        <!-- <div class="row"> -->
+                        <div class="el-wrapper mx-auto px-auto">
+                            <div class="box-up">
+                                <img class="img" src="/assests/images/rolex.avif" alt="">
+                                <div class="img-info">
+                                    <div class="info-inner">
+                                        <span class="p-name">ROLEX DAY-DATE</span>
+                                        <span class="p-company">THE REALIZATION OF AN IDEAL</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-down">
+                                <div class="h-bg">
+                                    <div class="h-bg-inner"></div>
+                                </div>
+
+                                <a class="cart" href="#">
+                                    <span class="price">$120</span>
+                                    <span class="add-to-cart">
+                                            <span class="txt">Add in cart</span>
+                                        </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-8 col-lg-6 col-md-6 col-sm-12 arrivals-card  col-xl-3 mb-2">
+                <div class=" page-wrapper" style="padding: 0;width: 160px;">
+                    <div class="page-inner">
+                        <!-- <div class="row"> -->
+                        <div class="el-wrapper mx-auto px-auto">
+                            <div class="box-up">
+                                <img class="img" src="/assests/images/rolex.avif" alt="">
+                                <div class="img-info">
+                                    <div class="info-inner">
+                                        <span class="p-name">ROLEX DAY-DATE</span>
+                                        <span class="p-company">THE REALIZATION OF AN IDEAL</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="box-down">
+                                <div class="h-bg">
+                                    <div class="h-bg-inner"></div>
+                                </div>
+
+                                <a class="cart" href="#">
+                                    <span class="price">$120</span>
+                                    <span class="add-to-cart">
+                                            <span class="txt">Add in cart</span>
+                                        </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="content mt-5 " data-aos="flip-right">
+
+        <img src="/assests/images/cruise.jpg" alt="" width="100%" height="440px" style="position: relative;">
+        <div class="bottom-left  photo-text"
+             style=" position: absolute;bottom: 15%;left: 16px; color:white; padding-left:20px ">
+
+            <h2 class="responsive-font-example">Limited Time Offer Ends In</h2>
+            <div class="timer" style="font-weight:400;font-size:38px">
+                11:20:38
+            </div>
+            <button type="button" class="btn btn-primary my-4 ">Grab Now</button>
+        </div>
+    </div>
+
+    <div class="benifits mt-5  py-3 roundend">
+        <div class="container ">
+            <div class="row benifit-row ">
+                <div class="col-lg-3 benifit-col">
+                    <div class="benefit-item d-flex flex-row align-item-center">
+                        <div class="benifit-icon">
+                            <lord-icon src="https://cdn.lordicon.com/iejknaed.json" trigger="hover"
+                                       colors="outline:#121331,primary:#3a3347,secondary:#e83a30,tertiary:#ebe6ef,quaternary:#646e78"
+                                       style="width:60px;height:60px">
+                            </lord-icon>
+                        </div>
+                        <div class="benifit-content">
+                            <h6>Free Shipping</h6>
+                            <p>Suffered alteration in Some Stores</p>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-lg-3 benifit-col">
+                    <div class="benefit-item d-flex flex-row align-item-center">
+                        <div class="benifit-icon">
+                            <lord-icon
+                                    src="https://cdn.lordicon.com/qnlcdeqi.json"
+                                    trigger="hover"
+                                    colors="primary:#ffffff,secondary:#f4a09c,tertiary:#e8b730"
+                                    style="width:65px;height:65px">
+                            </lord-icon>
+                        </div>
+                        <div class="benifit-content">
+                            <h6>Extra Savings</h6>
+                            <p>The Internet Tend To Repeat</p>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-lg-3 benifit-col">
+                    <div class="benefit-item d-flex flex-row align-item-center">
+                        <div class="benifit-icon">
+                            <lord-icon
+                                    src="https://cdn.lordicon.com/mgmiqlge.json"
+                                    trigger="hover"
+                                    colors="primary:#3a3347,secondary:#f24c00,tertiary:#242424,quaternary:#ebe6ef"
+                                    style="width:65px;height:65px">
+                            </lord-icon>
+
+                        </div>
+                        <div class="benifit-content">
+                            <h6>24X7 Sersvice</h6>
+                            <p>Best User Experience During Office Hours</p>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-lg-3 benifit-col">
+                    <div class="benefit-item d-flex flex-row align-item-center">
+                        <div class="benifit-icon">
+                            <lord-icon src="https://cdn.lordicon.com/yhtqafjk.json" trigger="hover"
+                                       colors="primary:#121331,secondary:#e83a30,tertiary:#ebe6ef"
+                                       style="width:65px;height:65px">
+                            </lord-icon>
+                        </div>
+                        <div class="benifit-content">
+                            <h6>Excange Offers</h6>
+                            <p>Alterations On Specific Items </p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="newsletter mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h5><b>Newsletter</b></h5>
+                    <p>Subscribe to our newsletter and get flat 20% off on your first purchase</p>
+                </div>
+
+                <div class="col-lg-4">
+                    <form action="">
+                        <input type="email" class="form-control" id="exampleInputEmail1 pla"
+                               placeholder="example@gmail.com" aria-describedby="emailHelp">
+                    </form>
+                </div>
+                <div class="col button">
+
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <!-- Section: Social media -->
+        <section class=" social-media d-flex justify-content-center justify-content-lg-between p-4 border-bottom ">
+            <!-- Left -->
+            <div class="me-5 d-none d-lg-block px-3">
+                <span>Get connected with us on social networks:</span>
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>Company name
+                        </h6>
+                        <p>
+                            Here you can use rows and columns to organize your footer content. Lorem ipsum
+                            dolor sit amet, consectetur adipisicing elit.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Products
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Angular</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">React</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Vue</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Laravel</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Settings</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Orders</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Help</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            info@example.com
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+                        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2021 Copyright:
+            <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
 
 
 <script>
@@ -212,7 +561,7 @@
                 let tableTag = '';
                 data.forEach(function (value) {
                     tableTag += `          <div class=" card container-cards" style="display: inline-block;max-width: 18rem;border-radius: 10px">
-                    <img src="../${value.image}" height=200px class="card-img-top" alt="..."
+                    <img src="../${value.image}" height=200px width="300px" alt="..."
                         style="border-top-right-radius: 10px;border-top-left-radius: 10px;">
                     <div class="card-body">
                         <h5 class="card-title">${value.name}</h5>
@@ -250,27 +599,7 @@
 
                             <div class="align-items-center g-0 row">
                             </div>
-
-                            <div class="col ms-2 col justify-content-center pr-2 pl-2 mt-2">
-                                <div id="countdown1" class="countdown1">
-                                    <div class="countdown-number1">
-                                        <span class="days countdown-time"></span>
-                                        <span class="countdown-text1">DAYS</span>
-                                    </div>
-                                    <div class="countdown-number1">
-                                        <span class="hours countdown-time"></span>
-                                        <span class="countdown-text1">HRS</span>
-                                    </div>
-                                    <div class="countdown-number1">
-                                        <span class="minutes countdown-time"></span>
-                                        <span class="countdown-text1">MIN</span>
-                                    </div>
-                                    <div class="countdown-number1">
-                                        <span class="seconds countdown-time"></span>
-                                        <span class="countdown-text1">SEC</span>
-                                    </div>
-                                </div>
-                                <span><button onclick="PlaceBid(${value.p_id})" class="btn btn-light ml-1 mb-3 mt-0"
+                                <span><button onclick="PlaceBid(${value.p_id})" class="btn btn-light ml-1 mb-3 mt-1 w-100"
                                      style="background-color:rgb(196, 65, 65);color:white;">Bid Now</button></span>
                                 </div></div></div></div>`
                 });
@@ -351,5 +680,11 @@
     }
 
 </script>
+</div>
 </body>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({offset: 100, duration: 1100});
+
+</script>
 </html>

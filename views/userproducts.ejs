@@ -5,6 +5,7 @@
     <%- include('headerfiles') %>
 
     <style>
+        .btn:focus,.btn:active{outline: none !important; box-shadow: none !important;}
         .error {
             color: red;
         }
@@ -103,9 +104,9 @@
 
 </head>
 
-<body  id="admin_body" onload="catInfo()">
+<body  id="admin_body" onload="catInfo()" style="background-image:url('../images/add-p.jpg');background-size: cover;">
 <%- include('userheader')%>
-<div class="container mt-5">
+<div class="container mt-5" >
 
     <div class="row ">
         <div class="col-lg-7 mx-auto">
@@ -177,7 +178,8 @@
                                     <div class="col-md-12">
 
                                         <input type="button" id="btnncat" onclick="InsertUserProduct()" value="ADD PRODUCT"
-                                               class="btn btn-success btn-send  pt-2 btn-block w-100"/>
+                                               class="btn btn-success btn-send  pt-2 btn-block w-100"
+                                        style=""/>
 
                                     </div>
 
