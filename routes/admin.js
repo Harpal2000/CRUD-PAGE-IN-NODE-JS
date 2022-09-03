@@ -147,21 +147,27 @@ router.get('/deletecat', (req, res) => {
   var cat_id = req.query.cat_id;
   var Query = `delete from categories where cat_id="${cat_id}"`;
   conn.query(Query, function (err) {
-    if (err) throw err;
-    res.send('Row Deleted')
+    if (err){
+      res.send("Error")
+    }else{
+      res.send('Row Deleted')
+    }
   })
 });
 
 
 router.post("/updateCat", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   var cat_name = req.body.cat_name;
   var cat_desc = req.body.cat_desc;
 
   var Query = `update categories set  cat_desc="${cat_desc}" where cat_name="${cat_name}"`;
-  conn.query(Query, (error) => {
-    if (error) throw error;
-    res.send("Data Updated.");
+  conn.query(Query, (err) => {
+    if (err){
+      res.send("Error")
+    }else{
+      res.send("Data Updated");
+    }
   })
 });
 

@@ -2,14 +2,111 @@
 <html>
 <head>
     <title>Categories</title>
-    <%- include('headerfiles') %>
-
+    <link href="/stylesheets/admin-style.css" rel="stylesheet"/>
+    <link href="/css/bootstrap.css" rel="stylesheet"/>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+            integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolic
+          +y="no-referrer"/>
     <style>
         #cat_body {
             background-color: #2c3034;
         }
-    </style>
 
+        .btn:focus, .btn:active {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .btn:hover {
+            color: white
+        }
+        p {
+            color: #b3b3b3;
+            font-weight: 300; }
+
+
+        a {
+            -webkit-transition: .3s all ease;
+            -o-transition: .3s all ease;
+            transition: .3s all ease; }
+        a, a:hover {
+            text-decoration: none !important; }
+
+
+        .modal {
+            border-radius: 0px;
+            overflow: hidden;
+            background-color: transparent; }
+        .modal .logo a img {
+            width: 30px; }
+        .modal .modal-content {
+            background-color: transparent;
+            border: none;
+            border-radius: 0px; }
+        .modal .modal-content .modal-body {
+            border-radius: 0px;
+            border-top: 4px solid #2a2185;
+            overflow: hidden;
+            background-color: #efefef;
+            padding-left: 0px;
+            padding-right: 0px;
+            -webkit-box-shadow: 0 10px 50px -10px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 10px 50px -10px rgba(0, 0, 0, 0.9); }
+        .modal .modal-content .modal-body h2 {
+            font-size: 18px; }
+        .modal .modal-content .modal-body p {
+            color: #777;
+            font-size: 14px; }
+        .modal .modal-content .modal-body h3 {
+            color: #000;
+            font-size: 22px; }
+        .modal .modal-content .modal-body .close-btn {
+            color: #000; }
+        .modal .modal-content .modal-body .promo-img {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%; }
+        .modal .cancel {
+            color: gray;
+            font-size: 14px; }
+        .modal .btnCat {
+            color: #fff;
+            background-color: #2a2185;
+            padding-top: 10px;
+            padding-bottom: 10px; }
+
+        .form-control {
+            border: transparent;
+            -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+            border: none; }
+        .form-control:active, .form-control:focus, .form-control:hover {
+            -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2); }
+
+        .btnCat {
+            border-radius: 4px;
+            border: none; }
+        .btnCat:active, .btnCat:focus {
+            outline: none;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important; }
+
+        .error {
+            color: red;
+        }
+
+    </style>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
 
         function insertCatValues() {
@@ -43,14 +140,16 @@
                     console.log(JSON.parse(this.response));
                     var data = JSON.parse(this.response);
 
-                    var tableTag = `<table class="table table-dark table-hover">`;
-                    tableTag += `<thead><tr>
-                            <th>Sr_No</th>
-                            <th>Category_Name</th>
-                            <th>Category_Description</th>
-                            <th>Delete</th>
-                            <th>Update</th>
-                            </tr></thead>`;
+                    var tableTag = `<table>`;
+                    tableTag += `<thead>
+                             <tr>
+                            <td>Sr_No</td>
+                            <td>Category_Name</td>
+                            <td>Category_Description</td>
+                            <td>Delete</td>
+                            <td>Update</td>
+                            </tr>
+                            </thead>`;
 
 
                     tableTag += `<tbody>`;
@@ -62,8 +161,7 @@
 
                         tableTag += `<td>`;
 
-                        tableTag += `<button onclick="deleteCat('${value.cat_id}')" type="button" class="btn btn-danger btn-sm">
-                         <i class="fa fa-trash-alt"></i> DELETE</button>`;
+                        tableTag += `<button id="delBtn" onclick="deleteCat('${value.cat_id}')" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-alt"></i> DELETE</button>`;
                         tableTag += `</td>`;
                         tableTag += `<td>`;
                         tableTag += `<button onclick="updateCat('${value.cat_name}', '${value.cat_desc}')" type="button"
@@ -84,15 +182,34 @@
         }
 
         function deleteCat(cat_id) {
-            var http = new XMLHttpRequest();
-            http.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    alert(this.response);
-                    getUserData();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#2a2185',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let http = new XMLHttpRequest();
+                    http.onreadystatechange = function () {
+                        if (this.readyState === 4 && this.status === 200) {
+                            if(this.response === 'Row Deleted'){
+                                Swal.fire(
+                                    'Deleted!',
+                                    '1 Category has been deleted.',
+                                    'success'
+                                )
+                                getUserData();
+                            }
+                        }
+                    }
+                    http.open("get", `/admin/deletecat?cat_id=${cat_id}`, true);
+                    http.send();
                 }
-            }
-            http.open("get", `/admin/deletecat?cat_id=${cat_id}`, true);
-            http.send();
+            })
+
         }
 
         function updateCat(cat_name, cat_desc) {
@@ -112,10 +229,11 @@
 
             var http = new XMLHttpRequest();
             http.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    // console.log(this.response);
-                    alert(this.response);
-                    getUserData();
+                if (this.readyState === 4 && this.status === 200) {
+                    if(this.response === 'Data Updated'){
+                        alert("Data Updated")
+                        getUserData();
+                    }
                 }
             }
             http.open("post", "/admin/updateCat", true);
@@ -130,103 +248,260 @@
 
 
 <body onload="getUserData()" id="cat_body">
-<%- include('headerfilesadmin')%>
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">Manage Categories</h1>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-md  modal-dialog-centered" role="document">
+        <div class="modal-content rounded-0">
 
-            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success mb-3">
-                <i class="fa fa-plus"></i> Add New Category
-            </button>
+            <div class="modal-body py-0">
+                <div class="d-flex main-content">
+                    <div class="content-text p-4">
+                        <h3>Add Categories</h3>
+                        <p>All their equipment and instruments are alive. The sky was cloudless and of a deep dark blue.</p>
 
-            <div class="modal fade" id="exampleModal">
-                <div class="modal-dialog">
+                        <form id="catform">
 
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Add Category Title</h5>
-                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
-                                    <span aria-hidden="true"><i class="fa fa-xmark"></i></span>
+                            <div class="form-group mb-3">
+                                <label for="cat_name" class="mb-2">Category Name</label>
+                                <input type="text" class="form-control" name="cat_name" id="cat_name" data-rule-required="true"
+                                       placeholder="Enter Category Name"
+                                       data-msg-required="Enter Category Name">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="cat_desc" class="mb-2">Category Description</label>
+                                <input type="text" class="form-control" name="cat_desc" id="cat_desc" data-rule-required="true"
+                                       placeholder="Enter Category Description"
+                                       data-msg-required="Enter Description">
+                            </div>
+                            <div class="form-group d-flex align-items-center">
+                                <button class="btn btnCat mr-3 px-5" id="btnncat" onclick="insertCatValues()">INSERT
                                 </button>
                             </div>
-
-
-                            <div class="modal-body">
-
-                                <form id="catform">
-                                    <div class="form-group mb-3">
-                                        <!--                                    <label for="">Enter Category Name</label>-->
-                                        <input type="text" name="cat_name" id="cat_name"
-                                               class="form-control" data-rule-required="true"
-                                               placeholder="Enter Category Name"
-                                               data-msg-required="Enter Category Name"/>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <!--                                    <label for="">Enter Category Description</label>-->
-                                        <input type="text" name="cat_desc" id="cat_desc"
-                                               class="form-control" data-rule-required="true"
-                                               placeholder="Enter Category Description"
-                                               data-msg-required="Enter Description"/>
-                                    </div>
-
-                                    <div class="form-group mt-2">
-                                        <input type="button" id="btnncat" onclick="insertCatValues()" value="SUBMIT"
-                                               class="btn btn-primary"/>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-                <div id="tableBody"></div>
-
-
-                <div class="modal fade" id="UpdateCatModal">
-                    <div class="modal-dialog">
-
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Update Category</h5>
-                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
-                            <div class="modal-body">
-
-                                <form id="catform">
-
-                                    <div class="form-group mb-3">
-                                        <!--                                    <label for="">Category Name</label>-->
-                                        <input type="text" readonly name="catnameEdit" id="catnameEdit"
-                                               class="form-control" data-rule-required="true"
-                                               placeholder="Enter Category Name"
-                                               data-msg-required="Enter Category Name"/>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <!--                                    <label for="">Category Description</label>-->
-                                        <input type="text" name="catdescEdit" id="catdescEdit"
-                                               class="form-control" data-rule-required="true"
-                                               placeholder="Enter Category Description"
-                                               data-msg-required="Enter Description"/>
-                                    </div>
-
-                                    <div class="form-group mt-2">
-                                        <input type="button" id="btnncatEdit" onclick="editCatValues()" value="UPDATE"
-                                               class="btn btn-primary"/>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
+</div>
 
+<div class="modal fade" id="UpdateCatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-md  modal-dialog-centered" role="document">
+        <div class="modal-content rounded-0">
+            <div class="modal-body py-0">
+
+
+                <div class="d-flex main-content">
+                    <div class="content-text p-4">
+                        <h3>Update Categories</h3>
+                        <p>All their equipment and instruments are alive. The sky was cloudless and of a deep dark blue.</p>
+
+                        <form id="catFormU">
+
+                            <div class="form-group mb-3">
+                                <label for="name" class="mb-2">Category Name</label>
+                                <input type="text" class="form-control" readonly name="catnameEdit" id="catnameEdit" data-rule-required="true"
+                                       placeholder="Enter Category Name"
+                                       data-msg-required="Enter Category Name">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="catdescEdit" class="mb-2">Category Description</label>
+                                <input type="text" class="form-control" name="catdescEdit" id="catdescEdit" data-rule-required="true"
+                                       placeholder="Enter Category Description"
+                                       data-msg-required="Enter Description">
+                            </div>
+                            <div class="form-group d-flex align-items-center">
+                                <button class="btn btnCat mr-3 px-5" id="btnncat" onclick="editCatValues()">UPDATE
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-admin">
+
+    <div class="navigation">
+        <ul class="ps-0">
+            <li>
+                <a href="#">
+                        <span class="icon">
+                           <i class="fa-solid fa-gavel"></i>
+                        </span>
+                    <span class="title">Bid Fire</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/adminview">
+                <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                <span class="title">Add Admin</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/pending">
+                        <span class="icon">
+                            <ion-icon name="time-outline"></ion-icon>
+                        </span>
+                    <span class="title">Start Auction</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/highest-bids">
+                        <span class="icon">
+                            <ion-icon name="podium-outline"></ion-icon>
+                        </span>
+                    <span class="title">Highest Bids</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/final-bid-winners">
+                        <span class="icon">
+                            <ion-icon name="trophy-outline"></ion-icon>
+                        </span>
+                    <span class="title">Bid Winners</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                    <span class="title">Sign Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ========================= Main ==================== -->
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+
+            <div class="search">
+                <label>
+                    <input type="text" placeholder="Search here">
+                    <ion-icon name="search-outline"></ion-icon>
+                </label>
+            </div>
+
+            <div class="user">
+                <img src="assets/imgs/customer01.jpg" alt="">
+            </div>
+        </div>
+
+        <!-- ======================= Cards ================== -->
+        <div class="cardBox">
+            <div class="card-admin">
+                <div>
+                    <div class="numbers">1,504</div>
+                    <div class="cardName">Daily Views</div>
+                </div>
+
+                <div class="iconBx">
+                    <ion-icon name="eye-outline"></ion-icon>
+                </div>
+            </div>
+
+            <div class="card-admin">
+                <div>
+                    <div class="numbers">80</div>
+                    <div class="cardName">Sales</div>
+                </div>
+
+                <div class="iconBx">
+                    <ion-icon name="cart-outline"></ion-icon>
+                </div>
+            </div>
+
+            <div class="card-admin">
+                <div>
+                    <div class="numbers">284</div>
+                    <div class="cardName">Comments</div>
+                </div>
+
+                <div class="iconBx">
+                    <ion-icon name="chatbubbles-outline"></ion-icon>
+                </div>
+            </div>
+
+            <div class="card-admin">
+                <div>
+                    <div class="numbers">$7,842</div>
+                    <div class="cardName">Earning</div>
+                </div>
+
+                <div class="iconBx">
+                    <ion-icon name="cash-outline"></ion-icon>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================ Order Details List ================= -->
+        <div class="details">
+            <div class="recentOrders">
+                <div class="cardHeader">
+                    <h2>All Categories</h2>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn mb-3">
+                        <i class="fa fa-plus"></i> Add New Category
+                    </button>
+                </div>
+                <div id="tableBody"></div>
+            </div>
+        </div>
+
+        <!-- =========== Scripts =========  -->
+        <script>
+
+            // add hovered class to selected list item
+            let list = document.querySelectorAll(".navigation li");
+
+            function activeLink() {
+                list.forEach((item) => {
+                    item.classList.remove("hovered");
+                });
+                this.classList.add("hovered");
+            }
+
+            list.forEach((item) => item.addEventListener("mouseover", activeLink));
+
+            // Menu Toggle
+            let toggle = document.querySelector(".toggle");
+            let navigation = document.querySelector(".navigation");
+            let main = document.querySelector(".main");
+
+            toggle.onclick = function () {
+                navigation.classList.toggle("active");
+                main.classList.toggle("active");
+            };
+
+
+        </script>
+
+        <!-- ====== ionicons ======= -->
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
+
+</html>

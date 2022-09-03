@@ -22,7 +22,7 @@ body {
   overflow-x: hidden;
 }
 
-.container {
+.container-admin {
   position: relative;
   width: 100%;
 }
@@ -86,6 +86,7 @@ body {
   height: 60px;
   line-height: 75px;
   text-align: center;
+  font-size: 2rem;
 }
 .navigation ul li a .icon ion-icon {
   font-size: 1.75rem;
@@ -94,7 +95,7 @@ body {
 .navigation ul li a .title {
   position: relative;
   display: block;
-  padding: 0 10px;
+  padding: 4px 10px;
   height: 60px;
   line-height: 60px;
   text-align: start;
@@ -187,9 +188,10 @@ body {
 
 .search label ion-icon {
   position: absolute;
-  top: 0;
+  /*top: 0;*/
   left: 10px;
   font-size: 1.2rem;
+  top: 10px;
 }
 
 .user {
@@ -220,7 +222,7 @@ body {
   grid-gap: 30px;
 }
 
-.cardBox .card {
+.cardBox .card-admin {
   position: relative;
   background: var(--white);
   padding: 30px;
@@ -231,30 +233,30 @@ body {
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }
 
-.cardBox .card .numbers {
+.cardBox .card-admin .numbers {
   position: relative;
   font-weight: 500;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   color: var(--blue);
 }
 
-.cardBox .card .cardName {
+.cardBox .card-admin .cardName {
   color: var(--black2);
   font-size: 1.1rem;
   margin-top: 5px;
 }
 
-.cardBox .card .iconBx {
-  font-size: 3.5rem;
+.cardBox .card-admin .iconBx {
+  font-size: 2.5rem;
   color: var(--black2);
 }
 
-.cardBox .card:hover {
+.cardBox .card-admin:hover {
   background: var(--blue);
 }
-.cardBox .card:hover .numbers,
-.cardBox .card:hover .cardName,
-.cardBox .card:hover .iconBx {
+.cardBox .card-admin:hover .numbers,
+.cardBox .card-admin:hover .cardName,
+.cardBox .card-admin:hover .iconBx {
   color: var(--white);
 }
 
@@ -263,7 +265,7 @@ body {
   position: relative;
   width: 100%;
   padding: 20px;
-  display: grid;
+  /*display: grid;*/
   grid-template-columns: 2fr 1fr;
   grid-gap: 30px;
   /* margin-top: 10px; */
