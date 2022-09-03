@@ -222,8 +222,11 @@ router.get('/delete', (req, res) => {
   let username = req.query.username;
   let Query = `delete from admin where username="${username}"`;
   conn.query(Query, function (err) {
-    if (err) throw err;
-    res.send('Row Deleted')
+    if (err) {
+      res.send("Error")
+    }else{
+      res.send('Admin Deleted')
+    }
   })
 });
 

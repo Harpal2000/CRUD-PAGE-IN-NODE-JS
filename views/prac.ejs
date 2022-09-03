@@ -1,18 +1,142 @@
+<div class="container-admin">
 
-<div class="container content">
-    <div class="row align-items-center content">
+    <div class="navigation">
+        <ul class="ps-0">
+            <li>
+                <a href="#">
+                        <span class="icon">
+                           <i class="fa-solid fa-gavel"></i>
+                        </span>
+                    <span class="title">Bid Fire</span>
+                </a>
+            </li>
 
-        <div class="col-12 text-center">
-            <h3 class="mb-4">Modal #7</h3>
-            <button type="button" class="btn btn-secondary px-4 py-3" data-toggle="modal" data-target="#exampleModal">
-                Launch modal
-            </button>
+            <li>
+                <a href="#">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/adminview">
+                <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                    <span class="title">Add Admin</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/pending">
+                        <span class="icon">
+                            <ion-icon name="time-outline"></ion-icon>
+                        </span>
+                    <span class="title">Start Auction</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/highest-bids">
+                        <span class="icon">
+                            <ion-icon name="podium-outline"></ion-icon>
+                        </span>
+                    <span class="title">Highest Bids</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/final-bid-winners">
+                        <span class="icon">
+                            <ion-icon name="trophy-outline"></ion-icon>
+                        </span>
+                    <span class="title">Bid Winners</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                    <span class="title">Sign Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ========================= Main ==================== -->
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+
+            <div class="search">
+                <label>
+                    <input type="text" placeholder="Search here">
+                    <ion-icon name="search-outline"></ion-icon>
+                </label>
+            </div>
+
+            <div class="user">
+                <img src="assets/imgs/customer01.jpg" alt="">
+            </div>
+        </div>
+
+        <!-- ================ Order Details List ================= -->
+        <div class="details">
+            <div class="recentOrders">
+                <div class="cardHeader">
+                    <h2>All Categories</h2>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#AdminModal" class="btn mb-3">
+                        <i class="fa fa-plus"></i>  Add New Admin
+                    </button>
+                </div>
+                <div id="AdminTableBody"></div>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="UpdateCatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- =========== Scripts =========  -->
+<script>
+
+    // add hovered class to selected list item
+    let list = document.querySelectorAll(".navigation li");
+
+    function activeLink() {
+        list.forEach((item) => {
+            item.classList.remove("hovered");
+        });
+        this.classList.add("hovered");
+    }
+
+    list.forEach((item) => item.addEventListener("mouseover", activeLink));
+
+    // Menu Toggle
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
+
+    toggle.onclick = function () {
+        navigation.classList.toggle("active");
+        main.classList.toggle("active");
+    };
+
+
+</script>
+
+<!-- ====== ionicons ======= -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+
+
+<div class="modal fade" id="AdminModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-md  modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
             <div class="modal-body py-0">
@@ -20,26 +144,40 @@
 
                 <div class="d-flex main-content">
                     <div class="content-text p-4">
-                        <h3>Update Categories</h3>
+                        <h3>Add New Admin</h3>
                         <p>All their equipment and instruments are alive. The sky was cloudless and of a deep dark blue.</p>
 
-                        <form id="catFormU">
+                        <form id="adminform">
 
-                            <div class="form-group">
-                                <label for="name">Category Name</label>
-                                <input type="email" class="form-control" readonly name="catnameEdit" id="catnameEdit" data-rule-required="true"
-                                       placeholder="Enter Category Name"
-                                       data-msg-required="Enter Category Name">
+                            <div class="form-group mb-3">
+                                <label for="name" class="mb-2">Enter Username</label>
+                                <input type="text" class="form-control"  name="username" id="username" data-rule-required="true"
+                                       placeholder="Enter Username"
+                                       data-msg-required="*Username Required">
                             </div>
-                            <div class="form-group">
-                                <label for="password">Category Description</label>
-                                <input type="password" name="catdescEdit" id="catdescEdit" data-rule-required="true"
-                                       placeholder="Enter Category Description"
-                                       data-msg-required="Enter Description">
+                            <div class="form-group mb-3">
+                                <label for="catdescEdit" class="mb-2">Enter E-Mail</label>
+                                <input type="email" class="form-control" name="email" id="email" data-rule-required="true"
+                                       placeholder="Enter E-Mail"
+                                       data-msg-required="*Required Email">
                             </div>
-                            <div class="form-group ">
-                                <p class="custom-note"><  <button class="btn btn-default" id="btnncat" onclick="editCatValues()">INSERT
-                                    </button></p>
+                            <div class="form-group mb-3">
+                                <label for="catdescEdit" class="mb-2">Enter Mobile Number</label>
+                                <input type="text" class="form-control" name="pno" id="pno" data-rule-required="true"
+                                       maxlength="10"
+                                       minlength="10"
+                                       placeholder="Enter Mobile Number"
+                                       data-msg-required="*Required MobileNumber">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="catdescEdit" class="mb-2">Enter Password</label>
+                                <input type="password" class="form-control" name="password" id="password" data-rule-required="true"
+                                       placeholder="Enter Password"
+                                       data-msg-required="*Required Password">
+                            </div>
+                            <div class="form-group d-flex align-items-center">
+                                <button class="btn btnCat mr-3 px-5" id="btnncat" onclick="insertAdminValues()">ADD
+                                </button>
                             </div>
                         </form>
                     </div>

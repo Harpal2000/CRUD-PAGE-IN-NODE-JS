@@ -325,72 +325,7 @@
 
 <div class="container-admin">
 
-    <div class="navigation">
-        <ul class="ps-0">
-            <li>
-                <a href="#">
-                        <span class="icon">
-                           <i class="fa-solid fa-gavel"></i>
-                        </span>
-                    <span class="title">Bid Fire</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                        <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
-                    <span class="title">Dashboard</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/admin/adminview">
-                <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                <span class="title">Add Admin</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/admin/pending">
-                        <span class="icon">
-                            <ion-icon name="time-outline"></ion-icon>
-                        </span>
-                    <span class="title">Start Auction</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/admin/highest-bids">
-                        <span class="icon">
-                            <ion-icon name="podium-outline"></ion-icon>
-                        </span>
-                    <span class="title">Highest Bids</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/admin/final-bid-winners">
-                        <span class="icon">
-                            <ion-icon name="trophy-outline"></ion-icon>
-                        </span>
-                    <span class="title">Bid Winners</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
-                    <span class="title">Sign Out</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+    <%- include('headerfilesadmin') %>
 
     <!-- ========================= Main ==================== -->
     <div class="main">
@@ -470,6 +405,8 @@
                 <div id="tableBody"></div>
             </div>
         </div>
+    </div>
+</div>
 
         <!-- =========== Scripts =========  -->
         <script>
