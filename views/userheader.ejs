@@ -13,7 +13,10 @@
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous" referrerpolic
       +y="no-referrer"/>
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand mx-4" href="#">
         <img src="/images/logo2.png" width="90px" height="30px" alt="" style="border-radius: 15%;">
@@ -32,7 +35,7 @@
                 <a class="nav-link" href="/users/userhome">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Auctions</a>
+                <a class="nav-link" href="/users/allProducts">Auctions</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/users/add-bid">Daily Auctions</a>
@@ -41,9 +44,7 @@
                 <a class="nav-link" href="winners.html">Winners</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" data-bs-toggle="tooltip"
-                   data-bs-placement="bottom" tooltip-bs-bg="white"
-                   title="Hurry !! 50% off on all Auctions !! Coupon Code `DRM50B` Use it before expired !!">Annoucements</a>
+                <a class="nav-link" href="#" id="aT" title="Hurry !! 50% off on all Auctions !!: Coupon Code `DRM50B` Use it before expired !!">Annoucements</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Offers</a>
@@ -67,6 +68,21 @@
         </ul>
     </div>
 </nav>
+
+<script>
+    $( "#aT" ).tooltip({
+        show: {
+            effect: "slideDown",
+            delay: 250
+        }
+    } );
+</script>
+<style>
+    label {
+        display: inline-block;
+        width: 5em;
+    }
+</style>
 <script>
 
     $(document).ready(function () {
@@ -80,10 +96,5 @@
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
     });
-
-
-
-
-
 
 </script>

@@ -553,7 +553,7 @@
     function UserData() {
         var http = new XMLHttpRequest();
         http.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState === 4 && this.status === 200) {
                 // console.log(JSON.parse(this.response));
                 var data = JSON.parse(this.response);
                 // console.log(this.response);
@@ -612,22 +612,8 @@
 
 
     function PlaceBid(p_id) {
-        // console.log(p_id);
         localStorage.setItem("pid", p_id);
         window.location.href = "/users/add-bid";
-        // let http=new XMLHttpRequest();
-        // http.onreadystatechange = function (){
-        //     if(this.readyState === 4 && this.status === 200){
-        //         if( this.response){
-        //             // window.location.href=`/users/add-bid`;
-        //             window.location.href="/users/add-bid";
-        //         }else{
-        //             alert("no data found")
-        //         }
-        //     }
-        // }
-        // http.open('get',`/users/BidPlace?p_id=${p_id}`,true);
-        // http.send();
     }
 
 

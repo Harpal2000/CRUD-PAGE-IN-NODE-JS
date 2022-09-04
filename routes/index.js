@@ -46,7 +46,7 @@ router.post('/insertuser', (req, res) => {
 
     // console.log(photo);
 
-    if (password != confirm_password) {
+    if (password !== confirm_password) {
         res.send("notsame");
     } else {
         photo.mv(realpath, function (err) {

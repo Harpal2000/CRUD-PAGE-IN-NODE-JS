@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Categories</title>
+    <%- include('headerfiles') %>
+
+    <style>
+        .error {
+            color: red;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            /*color: #384047;*/
+        }
+
+        .coming-soon > h2 {
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 3rem;
+        }
+
+        .countdown1 {
+            font-family: sans-serif;
+            color: rgb(2, 2, 2);
+            display: inline-block;
+            font-weight: 100;
+            text-align: center;
+            font-size: 13px;
+            /*background: #f6f6f6;*/
+        }
+
+
+        .countdown-number1 {
+            padding: 0px;
+            border-radius: 3px;
+            /*background: #f6f6f6;*/
+            display: inline-block;
+        }
+
+        .countdown-time {
+            padding: 3px 28px 3px 0px;
+            border-radius: 3px;
+            /*background: #f6f6f6;*/
+            display: inline-block;
+            /*font-weight: bold;*/
+        }
+
+        .countdown-text1 {
+            display: block;
+            padding-top: 2px;
+            font-size: 11px;
+            color: #090b0b;
+            font-weight: bold;
+            padding-right: 38px;
+        }
+
+        .table-div {
+            height: 250px;
+            overflow-y: scroll;
+        }
+
+
+    </style>
+    <script>
+
+
+        function productData() {
+
+            let http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    // console.log(JSON.parse(this.response));
+                    let data = JSON.parse(this.response);
+                    // console.log(this.response);
+
+                    let tableTag = ``;
+                    let example = ``;
+                    let bidForm = ``;
+
+                    data.forEach(function (value) {
+                        tableTag += ` <div class="container-sm">
+    <div class="container">
+        <div class="row mt-4 bg-light border-bottom">
+            <div class="col col-12 text-start col-lg-4 col-md-12 col-sm-6 bg-light ps-0">
+                <div class="image">
+                    <img src="../${value.image}" class = "rounded" alt="" width="320px" height="320px">
+                </div>
+            </div>
+            <div class="col col-12 justify-center col-lg-4 col-md-4 col-sm-6 bg-light">
+                <div class="about-product mt-4">
+                    <h3 class="text-center">${value.name}</h3>
+                    <div class="description text-center">
+                        <p>${value.description}</p>
+                    </div>
+                    <div class="mt-2.4 mb-2.4 text-dark text-center rounded px-2" style="background-color: rgba(0, 0, 0, 0.068);font-size: 1.3rem;">
+                        <b>Status</b> : ${value.status}
+                    </div>
+
+                </div>
+
+                <div class="timer text-center mt-4 ">
+                    <section class="coming-soon">
+                        <div>
+                            <h2> Bid End In</h2>
+                            <div class="countdown countdown1">
+                                <div class="container-day countdown-number1">
+                                    <h3 class="day countdown-time">Time :</h3>
+                                    <h3 id="tt" class="countdown-text1">Day</h3>
+                                </div>
+                                <div class="container-hour countdown-number1">
+                                    <h3 class="hour countdown-time">Time :</h3>
+                                    <h3 id="tt" class="countdown-text1">Hrs</h3>
+                                </div>
+                                <div class="container-minute countdown-number1">
+                                    <h3 class="minute countdown-time">Time :</h3>
+                                    <h3 id="tt" class="countdown-text1">Min</h3>
+                                </div>
+                                <div class="container-second countdown-number1">
+                                    <h3 class="second countdown-time">Time :</h3>
+                                    <h3 id="tt" class="countdown-text1">Sec</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+
+            <div class="col col-12 col-lg-4 col-md-6 col-sm-12 bg-light">
+                <div class="col row mt-4 text-center justify-content-center">
+                    <div class="col profile-image">
+                        <img src="../${value.photo}" alt="" width="70px" height="70px" class="rounded-circle">
+
+                    </div>
+                    <div class="align-baseline justify-start mt-4">
+                        <span class="col profile-user-name ">
+                            <h4>${value.fullname}</h4>
+                        </span>
+                    </div>
+                </div>
+                <div class="max-bid text-dark p-1 rounded mt-4">
+                    <h5 class="text-center">Max Bid:  ${value.price}</h5>
+                    <!-- <h6 class="text-start"></h6> -->
+                </div>
+
+                <div class="button  text-center mt-3">
+
+                    <button type="button" onclick="PlaceBid(${value.p_id})" class=" rounded btn text-light" style="background-color:#2a2185">Place Your Bid</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>`
+
+                    });
+                    document.getElementById("photoView").innerHTML = tableTag;
+                    document.getElementById("pv").innerHTML = example;
+                    document.getElementById("bf").innerHTML = bidForm;
+                }
+            }
+            http.open("get", "/users/productData", true);
+            http.send();
+        }
+
+
+        function PlaceBid(p_id) {
+            localStorage.setItem("pid", p_id);
+            window.location.href = "/users/add-bid";
+        }
+
+
+
+        function getDate() {
+            let pid = localStorage.getItem("pid");
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    let eDate = JSON.parse(this.response)
+                    localStorage.setItem("endDate", eDate[0].end_date);
+                }
+            }
+            http.open("get", "/users/getEndDate?pid=" + pid, true);
+            http.send();
+        }
+
+        function countdown() {
+            let eDate = localStorage.getItem("endDate");
+            let end_date = `${eDate[6]}${eDate[7]}${eDate[8]}${eDate[9]}-${eDate[0]}${eDate[1]}-${eDate[3]}${eDate[4]}`
+            console.log(end_date)
+
+            // const countDate = new Date("2022-08-30").getTime();
+            const countDate = new Date(end_date).getTime();
+            const now = new Date().getTime();
+            const remainingTime = countDate - now;
+
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            const textDay = Math.floor(remainingTime / day);
+            const textHour = Math.floor((remainingTime % day) / hour);
+            const textMinute = Math.floor((remainingTime % hour) / minute);
+            const textSecond = Math.floor((remainingTime % minute) / second);
+
+            document.querySelector(".day").innerHTML = ("0" + textDay + " :");
+            document.querySelector(".hour").innerHTML = ("0" + textHour + " :").slice(-4);
+            document.querySelector(".minute").innerHTML = ("0" + textMinute + " :").slice(-4);
+            document.querySelector(".second").innerHTML = ("0" + textSecond).slice(-2);
+        }
+
+        setInterval(countdown, 500);
+
+
+        function UserData() {
+            let pid = localStorage.getItem("pid");
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    // console.log(JSON.parse(this.response));
+                    let data = JSON.parse(this.response);
+                    // console.log(this.response);
+
+                    let tableTag = `<table class="table table-hover" style="background-color: rgba(0, 0, 0, 0.068);">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">#</th>
+                                         <th scope="col">Bidder E-mail</th>
+                                        <th scope="col">Bid Amount</th>
+                                      </tr>
+                                    </thead>`
+                    tableTag += `<tbody>`;
+                    data.forEach(function (value, index) {
+                        tableTag += ` <tr>
+                                         <th scope="row">${index + 1}</th>
+                                       <td>${value.u_email}</td>
+                                       <td>${value.amount}</td>
+                                       `;
+                    });
+                    tableTag += `</tbody>
+                                   </table>`
+                    document.getElementById("bidderView").innerHTML = tableTag;
+
+                }
+            }
+            http.open("get", "/users/Bidder?pid=" + pid, true);
+            http.send();
+        }
+
+
+        function onloadData() {
+            UserData()
+            productData()
+            getDate()
+
+        }
+
+    </script>
+</head>
+
+<body onload="onloadData()">
+<%- include('userheader') %>
+
+<div class="container">
+    <div class="container mt-5 mb-5">
+        <div class="heading text-start ">
+            <h2>AuctionProducts</h2>
+            <p>Choose your product, select the number of bids you want to make and play on...</p>
+        </div>
+
+    </div>
+</div>
+
+        <div id="photoView"></div>
+
+
+</body>
+</html>

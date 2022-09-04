@@ -113,6 +113,14 @@ router.get('/userhome', function (req, res) {
         res.redirect('/user_login')
 });
 
+router.get('/allProducts', function (req, res) {
+    if (session.username !== undefined)
+        res.render('allAuctions')
+    else
+        res.redirect('/user_login')
+});
+
+
 router.get('/logout', function (req, res) {
     session.username = undefined;
     res.send('logout')
@@ -120,8 +128,6 @@ router.get('/logout', function (req, res) {
 
 
 //Add Bid code
-
-
 router.get('/BidPlace', function (req, res) {
     let p_id = req.query.p_id;
     let Query = `select p_id from user_products where p_id = "${p_id}"`;
@@ -140,20 +146,29 @@ router.get('/BidPlace', function (req, res) {
 
 router.get('/Bidingview', function (req, res) {
     let p_id = req.query.pid;
-    // console.log(p_id);
     var Query = `select * from user_products where p_id = ${p_id}`;
-    // console.log(Query);
     conn.query(Query, function (err, rows) {
         if (err) throw err;
         if (rows.length > 0) {
-            // console.log(rows);
             res.send(rows);
         } else {
             res.send('No Product Found')
         }
-
     })
 });
+
+router.get('/productData', function (req, res) {
+    let Query = `select * from user_products inner join usersignup on usersignup.email = user_products.user_email`;
+    conn.query(Query, function (err, rows) {
+        if (err) throw err;
+        if (rows.length > 0) {
+            res.send(rows);
+        } else {
+            res.send('No Product Found')
+        }
+    })
+});
+
 
 
 router.get('/add-bid', (req, res) => {
