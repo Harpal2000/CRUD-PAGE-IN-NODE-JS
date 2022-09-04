@@ -1,72 +1,5 @@
 <div class="container-admin">
 
-    <div class="navigation">
-        <ul class="ps-0">
-            <li>
-                <a href="#">
-                        <span class="icon">
-                           <i class="fa-solid fa-gavel"></i>
-                        </span>
-                    <span class="title">Bid Fire</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                        <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
-                    <span class="title">Dashboard</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/admin/adminview">
-                <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                    <span class="title">Add Admin</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/admin/pending">
-                        <span class="icon">
-                            <ion-icon name="time-outline"></ion-icon>
-                        </span>
-                    <span class="title">Start Auction</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/admin/highest-bids">
-                        <span class="icon">
-                            <ion-icon name="podium-outline"></ion-icon>
-                        </span>
-                    <span class="title">Highest Bids</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/admin/final-bid-winners">
-                        <span class="icon">
-                            <ion-icon name="trophy-outline"></ion-icon>
-                        </span>
-                    <span class="title">Bid Winners</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
-                    <span class="title">Sign Out</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-
     <!-- ========================= Main ==================== -->
     <div class="main">
         <div class="topbar">
@@ -90,12 +23,9 @@
         <div class="details">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>All Categories</h2>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#AdminModal" class="btn mb-3">
-                        <i class="fa fa-plus"></i>  Add New Admin
-                    </button>
+                    <h2>Pending Product Details</h2>
                 </div>
-                <div id="AdminTableBody"></div>
+                <div id="productTableBody"></div>
             </div>
         </div>
     </div>
@@ -136,7 +66,7 @@
 
 
 
-<div class="modal fade" id="AdminModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="ProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-md  modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
             <div class="modal-body py-0">
@@ -147,36 +77,25 @@
                         <h3>Add New Admin</h3>
                         <p>All their equipment and instruments are alive. The sky was cloudless and of a deep dark blue.</p>
 
-                        <form id="adminform">
-
+                        <form id="productForm">
                             <div class="form-group mb-3">
-                                <label for="name" class="mb-2">Enter Username</label>
-                                <input type="text" class="form-control"  name="username" id="username" data-rule-required="true"
-                                       placeholder="Enter Username"
-                                       data-msg-required="*Username Required">
+                                <label for="catdescEdit" class="mb-2">Auction Starting date</label>
+                                <input type="email" class="form-control" name="start_date" id="start_date" data-rule-required="true"
+                                       placeholder="Auction Starting date"
+                                       data-msg-required="*Starting date Required">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="catdescEdit" class="mb-2">Enter E-Mail</label>
-                                <input type="email" class="form-control" name="email" id="email" data-rule-required="true"
-                                       placeholder="Enter E-Mail"
-                                       data-msg-required="*Required Email">
+                                <label for="catdescEdit" class="mb-2">Auction Ending Date</label>
+                                <input type="text" class="form-control" name="end_date" id="end_date" data-rule-required="true"
+                                       placeholder="Auction Ending Date"
+                                       data-msg-required="*Ending Date Required">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="catdescEdit" class="mb-2">Enter Mobile Number</label>
-                                <input type="text" class="form-control" name="pno" id="pno" data-rule-required="true"
-                                       maxlength="10"
-                                       minlength="10"
-                                       placeholder="Enter Mobile Number"
-                                       data-msg-required="*Required MobileNumber">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="catdescEdit" class="mb-2">Enter Password</label>
-                                <input type="password" class="form-control" name="password" id="password" data-rule-required="true"
-                                       placeholder="Enter Password"
-                                       data-msg-required="*Required Password">
+                                <label for="p_id" class="mb-2">Product Id</label>
+                                <input type="hidden" class="form-control" name="p_id" id="p_id" data-rule-required="true">
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <button class="btn btnCat mr-3 px-5" id="btnncat" onclick="insertAdminValues()">ADD
+                                <button class="btn btnCat mr-3 px-5" id="btnncat" onclick="UpdateProductStatus()">START
                                 </button>
                             </div>
                         </form>

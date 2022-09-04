@@ -9,8 +9,8 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'vmm.testing.email@gmail.com',
-    pass: 'yyknsomncwkpdkjg'
+    user: '0987hsds@gmail.com',
+    pass: 'rpxnfnweaqwxmxhg'
   }
 });
 
@@ -266,15 +266,18 @@ router.post("/updateStatus", (req, res) => {
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
-      return res.send("error");
+      return res.send("error in pending email");
     }
-    console.log('Email Sent: ' + info.response);
-
+    // console.log('Email Sent: ' + info.response)
+    // console.log(p_id)
     let Query = `update user_products set  start_date="${start_date}",end_date="${end_date}", status="Active" where p_id="${p_id}"`;
     // console.log(Query)
     conn.query(Query, (error) => {
-      if (error) throw error;
-      res.send("Status Updated.");
+      if (error){
+        res.send("Error")
+      }{
+        res.send("Status Updated.");
+      }
     });
   });
 });
