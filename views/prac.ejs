@@ -1,5 +1,7 @@
 <div class="container-admin">
 
+    <%- include('headerfilesadmin') %>
+
     <!-- ========================= Main ==================== -->
     <div class="main">
         <div class="topbar">
@@ -25,7 +27,19 @@
                 <div class="cardHeader">
                     <h2>Pending Product Details</h2>
                 </div>
-                <div id="productTableBody"></div>
+                <table class="table table-borderless table-dark text-center text-white">
+                    <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Product</td>
+                        <td>Highest Bidding Amount</td>
+                        <td>Email</td>
+                        <td>Ending Date</td>
+                        <td>Action</td>
+                    </tr>
+                    </thead>
+                    <tbody id="biddingData"></tbody>
+                </table>
             </div>
         </div>
     </div>

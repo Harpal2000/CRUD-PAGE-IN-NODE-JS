@@ -6,30 +6,75 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Highest Bids</title>
-    <%- include('headerfiles') %>
+    <link href="/stylesheets/admin-style.css" rel="stylesheet"/>
+    <link href="/css/bootstrap.css" rel="stylesheet"/>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+            integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolic
+          +y="no-referrer"/>
+    <style>
+
+        .btn:focus, .btn:active {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+    </style>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body onload="getBiddingData()" style="background: #2C3034">
-
+<body onload="getBiddingData()" >
 <%- include('headerfilesadmin') %>
+<<div class="container-admin">
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">Highest Bids</h1>
-            <hr>
-            <table class="table table-borderless table-dark text-center text-white">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Product</th>
-                    <th>Highest Bidding Amount</th>
-                    <th>Email</th>
-                    <th>Ending Date</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody id="biddingData"></tbody>
-            </table>
+
+
+    <!-- ========================= Main ==================== -->
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+
+            <div class="search">
+                <label>
+                    <input type="text" placeholder="Search here">
+                    <ion-icon name="search-outline"></ion-icon>
+                </label>
+            </div>
+
+            <div class="user">
+                <img src="assets/imgs/customer01.jpg" alt="">
+            </div>
+        </div>
+
+        <!-- ================ Order Details List ================= -->
+        <div class="details">
+            <div class="recentOrders">
+                <div class="cardHeader">
+                    <h2>Highest Bidder Details</h2>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Sr No.</td>
+                        <td>Product</td>
+                        <td>Highest Bidding Amount</td>
+                        <td>Email</td>
+                        <td>Ending Date</td>
+                        <td>Action</td>
+                    </tr>
+                    </thead>
+                    <tbody id="biddingData"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -73,35 +118,87 @@
 
     const AnnounceWinner = (data, button) => {
         // console.log(data);
-        if (confirm("Are you sure?")) {
-            let {p_id, u_email, amount} = data;
-            let formData = new FormData();
-            formData.append("p_id", p_id);
-            formData.append("email", u_email);
-            formData.append("amount", amount);
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger me-2'
+            },
+            buttonsStyling: false
+        })
 
-            let http = new XMLHttpRequest();
-            http.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    button.disabled = false;
-                    button.innerHTML = `Announce Winner`;
-                    // console.log(this.response);
-                    if (this.response === "error") {
-                        alert("Internal Server Error");
-                    } else {
-                        getBiddingData();
-                        alert("Bid Closed");
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, announce!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let {p_id, u_email, amount} = data;
+                let formData = new FormData();
+                formData.append("p_id", p_id);
+                formData.append("email", u_email);
+                formData.append("amount", amount);
+
+                let http = new XMLHttpRequest();
+                http.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        button.disabled = false;
+                        button.innerHTML = `Announce Winner`;
+                            if (this.response === "success") {
+                                getBiddingData();
+                                swalWithBootstrapButtons.fire(
+                                    'Announced!',
+                                    'Winner has been Announced.',
+                                    'success'
+                                )
+                            } else{
+                               alert("Internal Server Error");
+                            }
+                        } else {
+                        button.disabled = true;
+                        button.innerHTML = `Sending Email... <span class="spinner-grow spinner-grow-sm"></span>`;
                     }
-                } else {
-                    button.disabled = true;
-                    button.innerHTML = `Sending Email... <span class="spinner-grow spinner-grow-sm"></span>`;
                 }
+                http.open("POST", `/admin/announce-winner`, true);
+                http.send(formData);
             }
-            http.open("POST", `/admin/announce-winner`, true);
-            http.send(formData);
-        }
+            else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your Winner Announce Process Is Canceled :)',
+                    'error'
+                )
+            }
+        });
     }
-</script>
 
+
+    // add hovered class to selected list item
+    let list = document.querySelectorAll(".navigation li");
+
+    function activeLink() {
+        list.forEach((item) => {
+            item.classList.remove("hovered");
+        });
+        this.classList.add("hovered");
+    }
+
+    list.forEach((item) => item.addEventListener("mouseover", activeLink));
+
+    // Menu Toggle
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
+
+    toggle.onclick = function () {
+        navigation.classList.toggle("active");
+        main.classList.toggle("active");
+    };
+</script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
