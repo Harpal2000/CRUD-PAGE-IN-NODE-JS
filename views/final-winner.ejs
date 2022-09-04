@@ -6,77 +6,147 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bid Winners</title>
-    <%- include('headerfiles') %>
+    <link href="/stylesheets/admin-style.css" rel="stylesheet"/>
+    <link href="/css/bootstrap.css" rel="stylesheet"/>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+            integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolic
+          +y="no-referrer"/>
+    <style>
+
+        td{
+            padding: 10px !important;
+        }
+
+    </style>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body style="background: #2C3034">
 
 <%- include('headerfilesadmin') %>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="text-center mt-3 mb-5 display-5 text-light border-bottom">Bid Winners</h1>
-            <hr>
-            <% if(err) { %>
-                <div class="text-center alert-danger p-5">
-                    <h4 class="">Internal Server Error.</h4>
-                    <h6 class="">No Data Found.</h6>
-                </div>
-            <% } else { %>
+<div class="container-admin">
+    <!-- ========================= Main ==================== -->
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
 
-                <% if(data.length === 0) { %>
+            <div class="search">
+                <label>
+                    <input type="text" placeholder="Search here">
+                    <ion-icon name="search-outline"></ion-icon>
+                </label>
+            </div>
+
+            <div class="user">
+                <img src="/images/admin.jpeg" alt="">
+            </div>
+        </div>
+
+        <!-- ================ Order Details List ================= -->
+        <div class="details">
+            <div class="recentOrders" style="min-height: 21rem;">
+                <div class="cardHeader">
+                    <h2>Bid Winners Details</h2>
+                </div>
+<!--                <hr>-->
+                <% if(err) { %>
                     <div class="text-center alert-danger p-5">
+                        <h4 class="">Internal Server Error.</h4>
                         <h6 class="">No Data Found.</h6>
                     </div>
                 <% } else { %>
-                    <table class="table table-borderless table-dark text-center text-white">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Product</th>
-                            <th>Base Amount</th>
-                            <th>Highest Bidding Amount</th>
-                            <th>Winner Details</th>
-                            <th>Starting/Ending Date</th>
-                            <th>Payment Status</th>
-                        </tr>
-                        </thead>
-                        <tbody id="biddingData">
 
-                        <% data.forEach((item, index) =>{ %>
+                    <% if(data.length === 0) { %>
+                        <div class="text-center alert-danger p-5">
+                            <h6 class="">No Data Found.</h6>
+                        </div>
+                    <% } else { %>
+                        <table>
+                            <thead>
                             <tr>
-                                <td><%= index + 1 %></td>
-                                <td class="text-start">
-                                    <img src="../<%= item.image %>" style="height: 60px; width: 60px" alt="Product">
-                                    <br>
-                                    <h6><%= item.name %></h6>
-                                </td>
-                                <td>&#x20b9;<%= item.price %></td>
-                                <td>&#x20b9;<%= item.product_amount %></td>
-                                <td class="text-start">
-                                    <p>Name - <%= item.fullname %></p>
-                                    <p>Email - <%= item.winner_email %></p>
-                                    <p>Phone No. - <%= item.phone_no %></p>
-                                </td>
-
-                                <td><%= item.start_date %> | <%= item.start_date %></td>
-                                <td>
-                                    <% if(item.payment_status === "Pending") { %>
-                                        <span class="text-danger"><%= item.payment_status %></span>
-                                    <% } else { %>
-                                        <span class="text-success"><%= item.payment_status %></span>
-                                    <% } %>
-                                </td>
+                                <td>#</td>
+                                <td>Product</td>
+                                <td>Base Amount</td>
+                                <td>Highest Bidding Amount</td>
+                                <td>Winner Details</td>
+                                <td>Starting/Ending Date</td>
+                                <td>Payment Status</td>
                             </tr>
-                        <% }); %>
+                            </thead>
+                            <tbody id="biddingData">
 
-                        </tbody>
-                    </table>
+                            <% data.forEach((item, index) =>{ %>
+                                <tr>
+                                    <td><%= index + 1 %></td>
+                                    <td class="text-start">
+                                        <img src="../<%= item.image %>" style="height: 60px; width: 60px" alt="Product">
+                                        <br>
+                                        <h6><%= item.name %></h6>
+                                    </td>
+                                    <td>&#x20b9;<%= item.price %></td>
+                                    <td>&#x20b9;<%= item.product_amount %></td>
+                                    <td class="text-start">
+                                        <p>Name - <%= item.fullname %></p>
+                                        <p>Email - <%= item.winner_email %></p>
+                                        <p>Phone No. - <%= item.phone_no %></p>
+                                    </td>
+
+                                    <td><%= item.start_date %> | <%= item.start_date %></td>
+                                    <td>
+                                        <% if(item.payment_status === "Pending") { %>
+                                            <span class="status return"><%= item.payment_status %></span>
+                                        <% } else { %>
+                                            <span class="status delivered"><%= item.payment_status %></span>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% }); %>
+
+                            </tbody>
+                        </table>
+                    <% } %>
                 <% } %>
-            <% } %>
+            </div>
         </div>
     </div>
 </div>
 
+<script>
+    let list = document.querySelectorAll(".navigation li");
+
+    function activeLink() {
+        list.forEach((item) => {
+            item.classList.remove("hovered");
+        });
+        this.classList.add("hovered");
+    }
+
+    list.forEach((item) => item.addEventListener("mouseover", activeLink));
+
+    // Menu Toggle
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
+
+    toggle.onclick = function () {
+        navigation.classList.toggle("active");
+        main.classList.toggle("active");
+    };
+</script>
+<!-- ====== ionicons ======= -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

@@ -1,7 +1,6 @@
+
+<%- include('headerfilesadmin') %>
 <div class="container-admin">
-
-    <%- include('headerfilesadmin') %>
-
     <!-- ========================= Main ==================== -->
     <div class="main">
         <div class="topbar">
@@ -30,15 +29,17 @@
                 <table class="table table-borderless table-dark text-center text-white">
                     <thead>
                     <tr>
-                        <td>#</td>
-                        <td>Product</td>
-                        <td>Highest Bidding Amount</td>
-                        <td>Email</td>
-                        <td>Ending Date</td>
-                        <td>Action</td>
+                        <th>#</th>
+                        <th>Product</th>
+                        <th>Base Amount</th>
+                        <th>Highest Bidding Amount</th>
+                        <th>Starting/Ending Date</th>
+                        <th>Payment Status</th>
+                        <th style="display: none" id="payTH">Pay Amount</th>
                     </tr>
                     </thead>
-                    <tbody id="biddingData"></tbody>
+
+                    <tbody id="bidsData"></tbody>
                 </table>
             </div>
         </div>

@@ -347,7 +347,7 @@ body {
   font-weight: 500;
 }
 .status.return {
-  padding: 2px 4px;
+  padding: 10px 31px;
   background: #f00;
   color: var(--white);
   border-radius: 4px;
