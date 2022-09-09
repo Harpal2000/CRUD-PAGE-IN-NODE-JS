@@ -34,12 +34,28 @@ router.get("/final-bid-winners", (req, res) => {
 
 router.post("/announce-winner", (req, res) => {
   let {p_id, email, amount} = req.body;
+  const output =`
+<div class="container" style="color: white">
+  <h2><b>Hi! ${email} We are happy to announce you as winner</b></h2>
+  <h3>Your Winning Product Amount : ${amount}</h3>
+  <h3>Book your product by just follow below three steps:-</h3>
+    <ul>
+        <li>Go to your ( CART ) Page</li>
+        <li>Click on BUY NOW button</li>
+        <li>Make payment and get your product</li>
+    </ul>
+ </div>
+  <h3 style="color: red"><b>NOTE:-</b></h3>
+  <h3 style="color: red">Please Buy your Product with in week after week Bid will be cancelled</h3>
+  <h4 style="justify-content: center;align-items: center">********</4>`
+  ;
 
   const mailOptions = {
-    // from: 'youremail@gmail.com',
+    from: 'BidFir@gmail.com',
     to: email,
-    subject: 'Sending Email using Node.js',
-    text: 'That was easy!'
+    subject: 'Winner Declared',
+    text: `Hello !`,
+    html: output
   };
 
   transporter.sendMail(mailOptions, function (error, info) {

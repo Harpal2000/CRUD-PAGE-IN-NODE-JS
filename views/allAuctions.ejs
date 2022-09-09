@@ -14,9 +14,15 @@
             /*color: #384047;*/
         }
 
-        .coming-soon > h2 {
+        .coming-soon1 > h2{
             font-size: 1rem;
-            font-weight: bold;
+            /*font-weight: bold;*/
+            padding: 3rem;
+        }
+
+        .coming-soon{
+            font-size: 1.5rem;
+            /*font-weight: bold;*/
             padding: 3rem;
         }
 
@@ -39,7 +45,7 @@
         }
 
         .countdown-time {
-            padding: 3px 28px 3px 0px;
+            padding: 3px 5px 3px 0px;
             border-radius: 3px;
             /*background: #f6f6f6;*/
             display: inline-block;
@@ -52,7 +58,7 @@
             font-size: 11px;
             color: #090b0b;
             font-weight: bold;
-            padding-right: 38px;
+            padding-right: 10px;
         }
 
         .table-div {
@@ -82,27 +88,25 @@
                         tableTag += ` <div class="container-sm">
     <div class="container">
         <div class="row mt-4 bg-light border-bottom">
-            <div class="col col-12 text-start col-lg-4 col-md-12 col-sm-6 bg-light ps-0">
-                <div class="image">
-                    <img src="../${value.image}" class = "rounded" alt="" width="320px" height="320px">
-                </div>
+            <div class="col col-12 col-lg-4 col-md-12 col-sm-6  text-start" style="padding-top:2.2rem">
+                    <img src="../${value.image}" class = "rounded" alt="" width="200px" height="200px">
             </div>
             <div class="col col-12 justify-center col-lg-4 col-md-4 col-sm-6 bg-light">
                 <div class="about-product mt-4">
-                    <h3 class="text-center">${value.name}</h3>
-                    <div class="description text-center">
+                    <h3 class="fw-bold">${value.name}</h3>
+                    <div class="description ">
                         <p>${value.description}</p>
                     </div>
-                    <div class="mt-2.4 mb-2.4 text-dark text-center rounded px-2" style="background-color: rgba(0, 0, 0, 0.068);font-size: 1.3rem;">
-                        <b>Status</b> : ${value.status}
-                    </div>
+<!--                    <div class="mt-2.4 mb-2.4 text-dark rounded px-2" style="background-color: rgba(0, 0, 0, 0.068);font-size: 1.3rem;">-->
+<!--                        <b>Status</b> : ${value.status}-->
+<!--                     </div>-->
 
                 </div>
 
-                <div class="timer text-center mt-4 ">
-                    <section class="coming-soon">
+                <div class="timer mt-4 ">
+                    <section class="coming-soon1">
                         <div>
-                            <h2> Bid End In</h2>
+                            <h2 "> Bid End In</h2>
                             <div class="countdown countdown1">
                                 <div class="container-day countdown-number1">
                                     <h3 class="day countdown-time">Time :</h3>
@@ -127,24 +131,26 @@
             </div>
 
 
-            <div class="col col-12 col-lg-4 col-md-6 col-sm-12 bg-light">
-                <div class="col row mt-4 text-center justify-content-center">
-                    <div class="col profile-image">
-                        <img src="../${value.photo}" alt="" width="70px" height="70px" class="rounded-circle">
+            <div class="col col-12 col-lg-4 col-md-6 col-sm-12 ">
+                <div class="col row mt-4  justify-content-center">
+                      <div class="row">
+                    <div class="col-3 profile-image">
+                        <img src="../${value.photo}" alt="" width="70px" height="70px" class="rounded-circle mx-0 px-0">
 
                     </div>
-                    <div class="align-baseline justify-start mt-4">
+                    <div class="col align-baseline justify-start mt-4">
                         <span class="col profile-user-name ">
                             <h4>${value.fullname}</h4>
                         </span>
                     </div>
+</div>
                 </div>
-                <div class="max-bid text-dark p-1 rounded mt-4">
-                    <h5 class="text-center">Max Bid:  ${value.price}</h5>
+                <div class="max-bid text-dark mt-1 pt-5 px-1 rounded mt-4">
+                    <h5 class="">Max Bid:  ${value.price}</h5>
                     <!-- <h6 class="text-start"></h6> -->
                 </div>
 
-                <div class="button  text-center mt-3">
+                <div class="button  mb-3">
 
                     <button type="button" onclick="PlaceBid(${value.p_id})" class=" rounded btn text-light" style="background-color:#2a2185">Place Your Bid</button>
                 </div>
@@ -204,9 +210,9 @@
             const textMinute = Math.floor((remainingTime % hour) / minute);
             const textSecond = Math.floor((remainingTime % minute) / second);
 
-            document.querySelector(".day").innerHTML = ("0" + textDay + " :");
-            document.querySelector(".hour").innerHTML = ("0" + textHour + " :").slice(-4);
-            document.querySelector(".minute").innerHTML = ("0" + textMinute + " :").slice(-4);
+            document.querySelector(".day").innerHTML = ("0" + textDay + ":");
+            document.querySelector(".hour").innerHTML = ("0" + textHour + ":").slice(-3);
+            document.querySelector(".minute").innerHTML = ("0" + textMinute + ":").slice(-3);
             document.querySelector(".second").innerHTML = ("0" + textSecond).slice(-2);
         }
 

@@ -497,13 +497,13 @@
                         tableTag += `          <div class=" card container-cards" style="display: inline-block;max-width: 21rem;border-radius: 0.4rem;background-color: rgb(185 185 185 / 15%);">
                     <img src="../${value.image}" height=200px width="300px"  alt="..."
                         style="border-top-right-radius: 0.4rem;border-top-left-radius: 0.4rem;">
-                    <div class="card-body" >
-                        <h5 class="card-title">${value.name}</h5>
-                        <div class="lh-1 mt-2 mb-2.9"><span class="mt-2.4 mb-2.4 text-dark rounded px-2" style="background-color: rgba(0, 0, 0, 0.068);">Product Status: ${value.status}</span>
+                    <div class="card-body pt-4 pb-4 ps-2 pe-2" >
+                        <h5 class="card-title mb-3">${value.name}</h5>
+                        <div class="lh-1 mt-2 mb-3 "><span class="mt-2.4 mb-2.4 text-dark rounded ps-0 pt-0.7 pb-0.7 pe-0.7">Product Status<span style="color: #1e78ff">#${value.status}</span> </span>
                         </div>
                          <div class="lh-1 mt-2 mb-3"><span class="text-dark">Bid End's On: ${value.end_date}</span>
                         </div>
-                           <div class="lh-1 mt-2 mb-3"><span class="text-dark fw-bold">Max Bid: &#8377; ${value.price}</span>
+                           <div class="lh-1 mt-2 mb-3"><span class="text-dark fw-bold">Max Bid: &#8377;${value.price}</span>
                         </div>
 
                         <div class="pt-0 pb-0 ps-0 pe-0 mt-1 ml-2">
@@ -512,7 +512,7 @@
                             <div class="col col justify-content-center pr-2 pl-2 ">
 
                             <span><a href="" class="btn btn-light mt-0 pt-2.8 pb-2.8"
-                                        style="background-color:rgb(400, 70, 65);color:white;font-size: 1rem;border-radius: 3rem;width: 10rem">Bid Now</a><span class="text-warning me-3 mb-1">
+                                        style="background-color:#2a2185;color:white;font-size: 1rem;border-radius: 3rem;width: 10rem">Bid Now</a><span class="text-warning me-3 mb-1">
                                 </svg></span><span class="text-dark" style="font-size: 1.3rem"> 4.0</span><span class="fs-6 text-muted">
                                 (<i class="fa-solid fa-eye"></i> ${value.p_id})</span>
                             </span>

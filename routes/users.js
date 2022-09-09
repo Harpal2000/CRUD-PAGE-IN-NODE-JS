@@ -57,6 +57,10 @@ router.get('/user-products', function (req, res, next) {
         res.redirect('/user_login')
 });
 
+router.get('/offers', function (req, res) {
+    res.render('offers');
+});
+
 router.post('/insert-user-product', (req, res) => {
     // console.log(req.body);
     let p_id = req.body.p_id;
