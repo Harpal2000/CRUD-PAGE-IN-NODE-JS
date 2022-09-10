@@ -14,6 +14,10 @@
             /*color: #384047;*/
         }
 
+       /*ribbion */
+
+
+
         .coming-soon1 > h2{
             font-size: 1rem;
             /*font-weight: bold;*/
@@ -32,7 +36,7 @@
             display: inline-block;
             font-weight: 100;
             text-align: center;
-            font-size: 13px;
+            font-size: 1px;
             /*background: #f6f6f6;*/
         }
 
@@ -47,6 +51,7 @@
         .countdown-time {
             padding: 3px 5px 3px 0px;
             border-radius: 3px;
+            font-size: 1rem;
             /*background: #f6f6f6;*/
             display: inline-block;
             /*font-weight: bold;*/
@@ -66,6 +71,59 @@
             overflow-y: scroll;
         }
 
+        .side-corner-tag{
+            position: relative;
+            color: white;
+            display: inline-block;
+            padding: 5px;
+            overflow: hidden;
+            font-weight: 700;
+        }
+
+        .side-corner-tag > p{
+            display: inline;
+        }
+
+        .side-corner-tag > p > span{
+            position: absolute;
+            display: inline-block;
+            right: -25px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2) , inset 0px 5px 30px rgba(255,255,255,0.2) ;
+            text-align: center;
+            text-transform: uppercase;
+            top: 16px;
+            background-color: #2a2185;
+            width: 100px;
+            padding: 3px -1px;
+            -webkit-transform: rotate(45deg);
+            -moz-transform:rotate(45deg);
+            -o-transform:rotate(45deg);
+            -ms-transform: rotate(45deg);
+        }
+
+        .side-corner-tag p:before {
+            content: "";
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: -17px;
+            right: 69px;
+            z-index: -1;
+            border: 17px solid;
+            border-color: transparent transparent #662121 transparent;
+        }
+
+        .side-corner-tag p:after {
+            content: "";
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: 74px;
+            z-index: -1;
+            right: -10px;
+            border: 17px solid;
+            border-color: #662121 transparent transparent transparent;
+        }
 
     </style>
     <script>
@@ -86,55 +144,54 @@
 
                     data.forEach(function (value) {
                         tableTag += ` <div class="container-sm">
-    <div class="container">
-        <div class="row mt-4 bg-light border-bottom">
-            <div class="col col-12 col-lg-4 col-md-12 col-sm-6  text-start" style="padding-top:2.2rem">
-                    <img src="../${value.image}" class = "rounded" alt="" width="200px" height="200px">
-            </div>
-            <div class="col col-12 justify-center col-lg-4 col-md-4 col-sm-6 bg-light">
-                <div class="about-product mt-4">
-                    <h3 class="fw-bold">${value.name}</h3>
-                    <div class="description ">
-                        <p>${value.description}</p>
-                    </div>
-<!--                    <div class="mt-2.4 mb-2.4 text-dark rounded px-2" style="background-color: rgba(0, 0, 0, 0.068);font-size: 1.3rem;">-->
-<!--                        <b>Status</b> : ${value.status}-->
-<!--                     </div>-->
-
-                </div>
-
-                <div class="timer mt-4 ">
-                    <section class="coming-soon1">
-                        <div>
-                            <h2 "> Bid End In</h2>
-                            <div class="countdown countdown1">
-                                <div class="container-day countdown-number1">
-                                    <h3 class="day countdown-time">Time :</h3>
-                                    <h3 id="tt" class="countdown-text1">Day</h3>
+                            <div class="container w-75">
+                                <div class="row mt-4 bg-light border-bottom">
+                                     <div class="col col-12 col-lg-4 col-md-12 col-sm-6  text-center" style="padding-top:0.9rem">
+                                        <div class="photo">
+                                            <div class="side-corner-tag">
+                                               <img src="../${value.image}" class = "rounded" alt="" width="230px" height="230px">
+                                                <p><span>${value.status}</span></p>
+                                            </div>
+                                        </div>
+                                     </div>
+                                     <div class="col col-12 justify-center col-lg-4 col-md-4 col-sm-6 bg-light">
+                                        <div class="about-product mt-4">
+                                            <h3 class="fw-bold">${value.name}</h3>
+                                                <div class="description ">
+                                                    <p>${value.description}</p>
+                                                </div>
+                                        </div>
+                                   <div class="timer mt-4 ">
+                                     <section class="coming-soon1">
+                                        <div>
+                                        <div class="countdown countdown1">
+                                            <div class="container-day countdown-number1">
+                                                <h3 class="day countdown-time">Time :</h3>
+                                                <h3 id="tt" class="countdown-text1">Day</h3>
+                                            </div>
+                                            <div class="container-hour countdown-number1">
+                                                <h3 class="hour countdown-time">Time :</h3>
+                                                <h3 id="tt" class="countdown-text1">Hrs</h3>
+                                            </div>
+                                            <div class="container-minute countdown-number1">
+                                                <h3 class="minute countdown-time">Time :</h3>
+                                                <h3 id="tt" class="countdown-text1">Min</h3>
+                                            </div>
+                                            <div class="container-second countdown-number1">
+                                                <h3 class="second countdown-time">Time :</h3>
+                                                <h3 id="tt" class="countdown-text1">Sec</h3>
+                                            </div>
+                                        </div>
+                                     </div>
+                                     </section>
+                                   </div>
                                 </div>
-                                <div class="container-hour countdown-number1">
-                                    <h3 class="hour countdown-time">Time :</h3>
-                                    <h3 id="tt" class="countdown-text1">Hrs</h3>
-                                </div>
-                                <div class="container-minute countdown-number1">
-                                    <h3 class="minute countdown-time">Time :</h3>
-                                    <h3 id="tt" class="countdown-text1">Min</h3>
-                                </div>
-                                <div class="container-second countdown-number1">
-                                    <h3 class="second countdown-time">Time :</h3>
-                                    <h3 id="tt" class="countdown-text1">Sec</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
 
 
             <div class="col col-12 col-lg-4 col-md-6 col-sm-12 ">
                 <div class="col row mt-4  justify-content-center">
                       <div class="row">
-                    <div class="col-3 profile-image">
+                    <div class="col-3 profile-image px-0 mx-0">
                         <img src="../${value.photo}" alt="" width="70px" height="70px" class="rounded-circle mx-0 px-0">
 
                     </div>
@@ -145,7 +202,7 @@
                     </div>
 </div>
                 </div>
-                <div class="max-bid text-dark mt-1 pt-5 px-1 rounded mt-4">
+                <div class="max-bid text-dark mt-1 pt-4 px-1 rounded mt-4">
                     <h5 class="">Max Bid:  ${value.price}</h5>
                     <!-- <h6 class="text-start"></h6> -->
                 </div>
@@ -278,8 +335,9 @@
     </div>
 </div>
 
-        <div id="photoView"></div>
-
+<!--<div class="container">-->
+    <div id="photoView"></div>
+<!--</div>-->
 
 </body>
 </html>
