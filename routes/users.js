@@ -256,18 +256,39 @@ router.get('/Bidder',  (req, res) =>{
 // });
 
 router.get('/getEndDate', (req, res) =>{
-    // console.log(req.query);
     let p_id = req.query.pid;
+
+    let cDate = new Date();
+    let dayD = cDate.getDate();
+    let monD = cDate.getMonth() + 1;
+    let yearD = cDate.getFullYear();
+    let td_date = monD + "/" + dayD + "/" + yearD;
+
     let Query = `select end_date from user_products where p_id=${p_id}`;
     // console.log(Query);
     conn.query(Query, function (err, rows) {
         if (err) throw err;
-
         if (rows.length > 0) {
-            console.log(rows);
-            res.send(rows);
+
+            let currDate = new Date(`${td_date}`);
+            currDate = currDate.getTime();
+
+            let endD = new Date(`${rows[0].end_date}`);
+            endD = endD.getTime();
+            let diffD = currDate - endD;
+            // console.log(diffD);
+            if (diffD >= 0) {
+                let Update = `update user_products set status="closed" where p_id = ${p_id}`;
+                conn.query(Update, function (err) {
+                    if (err) {
+                        return res.send("Error");
+                    }
+                });
+            }else{
+                res.send(rows);
+            }
         } else {
-            res.send('No Date Found')
+            res.send('No Date Found');
         }
     })
 });

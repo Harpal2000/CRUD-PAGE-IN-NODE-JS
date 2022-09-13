@@ -36,7 +36,7 @@ function initializeClock(id, endtime) {
   }
 
   updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
+  let timeinterval = setInterval(updateClock, 1000);
 }
 
 var deadline = new Date(Date.parse(new Date()) + 10000 * 10000);

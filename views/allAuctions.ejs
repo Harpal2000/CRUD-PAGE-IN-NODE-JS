@@ -128,21 +128,25 @@
     </style>
     <script>
 
+        let id_Arr = [];
+        let id_Obj = {}
 
         function productData() {
 
             let http = new XMLHttpRequest();
             http.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
-                    // console.log(JSON.parse(this.response));
                     let data = JSON.parse(this.response);
-                    // console.log(this.response);
-
                     let tableTag = ``;
                     let example = ``;
                     let bidForm = ``;
 
                     data.forEach(function (value) {
+                        id_Obj['p_id'] = value.p_id;
+                        id_Obj['end_date'] = value.end_date;
+
+                        id_Arr.push({...id_Obj});
+
                         tableTag += ` <div class="container-sm">
                             <div class="container w-75">
                                 <div class="row mt-4 bg-light border-bottom">
@@ -166,19 +170,19 @@
                                         <div>
                                         <div class="countdown countdown1">
                                             <div class="container-day countdown-number1">
-                                                <h3 class="day countdown-time">Time :</h3>
+                                                <h3 class="day countdown-time" id="day${value.p_id}">Time :</h3>
                                                 <h3 id="tt" class="countdown-text1">Day</h3>
                                             </div>
                                             <div class="container-hour countdown-number1">
-                                                <h3 class="hour countdown-time">Time :</h3>
+                                                <h3 class="hour countdown-time" id="hour${value.p_id}">Time :</h3>
                                                 <h3 id="tt" class="countdown-text1">Hrs</h3>
                                             </div>
                                             <div class="container-minute countdown-number1">
-                                                <h3 class="minute countdown-time">Time :</h3>
+                                                <h3 class="minute countdown-time" id="minute${value.p_id}">Time :</h3>
                                                 <h3 id="tt" class="countdown-text1">Min</h3>
                                             </div>
                                             <div class="container-second countdown-number1">
-                                                <h3 class="second countdown-time">Time :</h3>
+                                                <h3 class="second countdown-time" id="second${value.p_id}">Time :</h3>
                                                 <h3 id="tt" class="countdown-text1">Sec</h3>
                                             </div>
                                         </div>
@@ -200,15 +204,13 @@
                             <h4>${value.fullname}</h4>
                         </span>
                     </div>
-</div>
+                </div>
                 </div>
                 <div class="max-bid text-dark mt-1 pt-4 px-1 rounded mt-4">
                     <h5 class="">Max Bid:  ${value.price}</h5>
-                    <!-- <h6 class="text-start"></h6> -->
                 </div>
 
                 <div class="button  mb-3">
-
                     <button type="button" onclick="PlaceBid(${value.p_id})" class=" rounded btn text-light" style="background-color:#2a2185">Place Your Bid</button>
                 </div>
             </div>
@@ -220,6 +222,9 @@
                     document.getElementById("photoView").innerHTML = tableTag;
                     document.getElementById("pv").innerHTML = example;
                     document.getElementById("bf").innerHTML = bidForm;
+
+                    countdown(id_Arr);
+                    getDate(id_Arr);
                 }
             }
             http.open("get", "/users/productData", true);
@@ -234,46 +239,66 @@
 
 
 
-        function getDate() {
-            let pid = localStorage.getItem("pid");
-            var http = new XMLHttpRequest();
-            http.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    let eDate = JSON.parse(this.response)
-                    localStorage.setItem("endDate", eDate[0].end_date);
+        function getDate(array) {
+            array.map((value) => {
+                let {p_id} = value;
+                // let pid = localStorage.getItem("pid");
+                let http = new XMLHttpRequest();
+                http.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        let eDate = JSON.parse(this.response)
+                        localStorage.setItem("endDate", eDate[0].end_date);
+                    }
                 }
-            }
-            http.open("get", "/users/getEndDate?pid=" + pid, true);
-            http.send();
+                http.open("get", "/users/getEndDate?pid=" + p_id, true);
+                http.send();
+            });
+        }
+        $(document).ready(() => {
+            setInterval(() => {
+                getDate(id_Arr);
+                countdown(id_Arr);
+            }, 100);
+        });
+
+
+        function countdown(array) {
+            array.map((value) => {
+                let {p_id, end_date} = value;
+                if (end_date !== null) {
+                    let eDate = end_date;
+                    let endDate = `${eDate[6]}${eDate[7]}${eDate[8]}${eDate[9]}-${eDate[0]}${eDate[1]}-${eDate[3]}${eDate[4]}`
+                    const countDate = new Date(endDate).getTime();
+                    const now = new Date().getTime();
+                    let remainingTime = countDate - now;
+                    console.log("=========",remainingTime)
+                    if (remainingTime.total <= 0) {
+                        clearInterval();
+                        var deadline = new Date(Date.parse(new Date().getTime()) + 6 * 1000);
+                        countdown('countdown-main', deadline);
+                    }
+
+                    const second = 1000;
+                    const minute = second * 60;
+                    const hour = minute * 60;
+                    const day = hour * 24;
+
+                    const textDay = Math.floor(remainingTime / day);
+                    const textHour = Math.floor((remainingTime % day) / hour);
+                    const textMinute = Math.floor((remainingTime % hour) / minute);
+                    const textSecond = Math.floor((remainingTime % minute) / second);
+
+                    document.getElementById(`day${p_id}`).innerHTML = (textDay + ":");
+                    document.getElementById(`hour${p_id}`).innerHTML = ("0" + textHour + ":").slice(-3);
+                    document.getElementById(`minute${p_id}`).innerHTML = ("0" + textMinute + ":").slice(-3);
+                    document.getElementById(`second${p_id}`).innerHTML = ("0" + textSecond).slice(-2);
+                }
+            });
         }
 
-        function countdown() {
-            let eDate = localStorage.getItem("endDate");
-            let end_date = `${eDate[6]}${eDate[7]}${eDate[8]}${eDate[9]}-${eDate[0]}${eDate[1]}-${eDate[3]}${eDate[4]}`
-            console.log(end_date)
 
-            // const countDate = new Date("2022-08-30").getTime();
-            const countDate = new Date(end_date).getTime();
-            const now = new Date().getTime();
-            const remainingTime = countDate - now;
+            // let eDate = localStorage.getItem("endDate");
 
-            const second = 1000;
-            const minute = second * 60;
-            const hour = minute * 60;
-            const day = hour * 24;
-
-            const textDay = Math.floor(remainingTime / day);
-            const textHour = Math.floor((remainingTime % day) / hour);
-            const textMinute = Math.floor((remainingTime % hour) / minute);
-            const textSecond = Math.floor((remainingTime % minute) / second);
-
-            document.querySelector(".day").innerHTML = ("0" + textDay + ":");
-            document.querySelector(".hour").innerHTML = ("0" + textHour + ":").slice(-3);
-            document.querySelector(".minute").innerHTML = ("0" + textMinute + ":").slice(-3);
-            document.querySelector(".second").innerHTML = ("0" + textSecond).slice(-2);
-        }
-
-        setInterval(countdown, 500);
 
 
         function UserData() {
@@ -318,6 +343,7 @@
             getDate()
 
         }
+
 
     </script>
 </head>
