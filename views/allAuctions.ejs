@@ -271,12 +271,12 @@
                     const countDate = new Date(endDate).getTime();
                     const now = new Date().getTime();
                     let remainingTime = countDate - now;
-                    console.log("=========",remainingTime)
-                    if (remainingTime.total <= 0) {
-                        clearInterval();
-                        var deadline = new Date(Date.parse(new Date().getTime()) + 6 * 1000);
-                        countdown('countdown-main', deadline);
-                    }
+                    // console.log("=========",remainingTime)
+                    // if (remainingTime.total <= 0) {
+                    //     clearInterval();
+                    //     var deadline = new Date(Date.parse(new Date().getTime()) + 6 * 1000);
+                    //     countdown('countdown-main', deadline);
+                    // }
 
                     const second = 1000;
                     const minute = second * 60;
