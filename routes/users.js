@@ -61,6 +61,11 @@ router.get('/offers', function (req, res) {
     res.render('offers');
 });
 
+router.get('/win', function (req, res) {
+    res.render('winpage');
+});
+
+
 router.post('/insert-user-product', (req, res) => {
     // console.log(req.body);
     let p_id = req.body.p_id;
@@ -173,6 +178,18 @@ router.get('/productData', function (req, res) {
     })
 });
 
+router.get('/winData', function (req, res) {
+    let Query = `select * from winners inner join user_products on winners.winner_pid = user_products.p_id inner join usersignup on usersignup.email= user_products.user_email`;
+    conn.query(Query, function (err, rows) {
+        if (err) throw err;
+        if (rows.length > 0) {
+            res.send(rows);
+        } else {
+            res.send('No Product Found')
+        }
+    })
+});
+
 
 
 router.get('/add-bid', (req, res) => {
@@ -211,7 +228,7 @@ router.get('/mainView', function (req, res) {
 });
 
 router.get('/WinnerView', function (req, res) {
-    let Query = `select * from winners where payment_status='pending' LIMIT 4`;
+    let Query = `select * from winners inner join user_products on winners.winner_pid = user_products.p_id where winners.payment_status='pending' LIMIT 4`;
     conn.query(Query, function (err, rows) {
         if (err) throw err;
         if (rows.length > 0) {

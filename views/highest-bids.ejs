@@ -90,7 +90,7 @@
                 dataArray.forEach(value => {
                     counter++;
                     value.forEach((data) => {
-                        let {p_id, amount, end_date, image, name, u_email} = data;
+                        let {p_id, maxAmount, end_date, image, name, u_email} = data;
                         html += `<tr>`;
                         html += `<td>${counter}</td>`;
 
@@ -99,7 +99,7 @@
                         html += `<h6>${name}</h6>`;
                         html += `</td>`;
 
-                        html += `<td>&#x20b9; ${amount}</td>`;
+                        html += `<td>&#x20b9; ${maxAmount}</td>`;
                         html += `<td>${u_email}</td>`;
                         html += `<td>${end_date}</td>`;
                         html += `<td>`;

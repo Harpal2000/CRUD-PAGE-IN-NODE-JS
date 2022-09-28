@@ -4,59 +4,133 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 <!--<link rel="stylesheet" href="/stylesheets/home-style.css">-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
-        integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
-      crossorigin="anonymous" referrerpolic
-      +y="no-referrer"/>
-<script src="https://kit.fontawesome.com/f39241e0dc.js" crossorigin="anonymous"></script>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand mx-4 pt-0" href="#">
-        <img src="/images/logo2.png" width="90px" height="30px" alt="" style="border-radius: 15%;">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+<link href="/stylesheets/style.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mx-5">
-            <li class="nav-item active">
-                <a class="nav-link" href="/users/userhome">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/users/userhome">Contact</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/users/allProducts">Auctions</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/users/add-bid">Daily Auctions</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="winners.html">Winners</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Annoucements</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/users/offers">Offers</a>
-            </li>
-            <!--            user login icon-->
-            <li class="nav-item">
-                <a href="/user_login" class="nav-link pt-0 pb-0">
-                    <button type="button" class="btn btn-outline-secondary">LogIn/Register <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!--<link rel="stylesheet" href="/style.css">-->
+<link rel="stylesheet" href="/stylesheets/nav_style.css">
+
+<script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+
+
+<!-- nav-above  -->
+
+<div class="nav-above" style="background-color:#2a2185 ;">
+    <div class="row py-4 mx-3">
+        <div class="col-1 col-xl-1 col-lg-1 col-sm-1 d-flex align-items-center">
+            <div class="logo">
+                <a href="">
+                    <img src="/images/logo1.png" alt="" width="45px" height="45px" class="rounded">
                 </a>
-            </li>
+            </div>
+            <div class="c_name ms-2 text-light mt-2">
+                <h4><span style="color:#e7f8ff ;">Bid</span><span style="color: orange ;">worx</span></h4>
+            </div>
+        </div>
+        <div class=" col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9   d-flex mt-1">
 
-        </ul>
+            <div class="inpt w-100" style="margin-left:80px ;">
+                <input type="text" placeholder="Search here..." class="py-2 ps-3 w-100 rounded"
+                       style="outline: none; height: 45px;">
+            </div>
+
+            <div>
+                <button class="btn search-btn d-flex text-center  align-middle pt-2" type="submit"
+                        style="background:orange ;margin-left: px;height: 45px;">
+                    <i class="fa-solid fa-magnifying-glass pt-1" style="color:black;padding-right: 5px;"></i>
+                    <span class="search-text">Search </span></button>
+
+            </div>
+
+        </div>
+        <div class="col-1 col-lg-1 col-md-1 text-end register mt-1">
+            <a href="/user_login">
+                <button class="btn mt-1 btn1" type="submit" style="background-color: orange;">Register</button>
+            </a>
+        </div>
+        <div class="col-1 col-lg-1 col-md-1 text-start  signin mt-1">
+            <a href="/user_login">
+                <button class="btn btn-primary mt-1 btn1" type="submit">SignIn</button>
+            </a>
+        </div>
     </div>
-</nav>
+</div>
 
+<!-- navbar  -->
+
+<div class="navB " style="background-color:#212529;">
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mx-5">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/users/userhome">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/userhome">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/allProducts">Auctions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/add-bid">Daily Auctions</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Car</a>
+                        <a class="dropdown-item" href="#">Bike</a>
+                        <a class="dropdown-item" href="#">Accessories</a>
+                        <a class="dropdown-item" href="#">Property</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/win">Winners</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="aTT" title="Hurry !! 50% off on all Auctions !!: Coupon Code `DRM50B` Use it before expired !!">Annoucements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/offers">Offers</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</div>
+<script>
+    $( "#aTT" ).tooltip({
+        show: {
+            effect: "slideDown",
+            delay: 250
+        }
+    } );
+</script>
+<!--<style>-->
+<!--    label {-->
+<!--        display: inline-block;-->
+<!--        width: 5em;-->
+<!--    }-->
+<!--</style>-->
 <script>
     $(document).ready(function () {
         $('.btn').click(function () {

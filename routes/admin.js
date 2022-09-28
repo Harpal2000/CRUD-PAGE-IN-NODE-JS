@@ -94,7 +94,7 @@ router.get("/fetch-highest-bidding", (req, res) => {
     let counter = 0;
     data.forEach(value => {
       let {p_id} = value;
-      let highestPrice = `SELECT bid.*, MAX(bid.amount), DATE_FORMAT(user_products.end_date, "%W %M %e %Y %r") as end_date, 
+      let highestPrice = `SELECT bid.*, MAX(bid.amount) as maxAmount, DATE_FORMAT(user_products.end_date, "%W %M %e %Y %r") as end_date, 
                                 user_products.name, user_products.image, user_products.end_date FROM bid
                                 INNER JOIN user_products ON bid.p_id=user_products.p_id
                                 WHERE user_products.p_id=${p_id} ORDER BY bid.bid_id  DESC`;
