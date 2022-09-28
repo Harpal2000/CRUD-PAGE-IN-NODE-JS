@@ -108,7 +108,7 @@
 
             </div>
         </div>
-        <button type="button" class="btn btn-warning my-4  me-1" style="float: right">View More</button>
+        <button type="button" class="btn  my-4  me-1" style="float: right;background-color:#2a2185;color:white;">View More</button>
     </div>
 <!--    main containers end -->
 
@@ -139,14 +139,14 @@
 
             <div class="more-btn text-end me-1  my-2">
 
-                <button class="btn btn-warning" type="submit">View More</button>
+                <button class="btn" type="submit" style="background-color:#2a2185;color:white;">View More</button>
 
             </div>
 
         </div>
         <div class="benifits py-4 mt-3">
             <div class="container ">
-                <div class="row benifit-row ">
+                <div class="row benifit-row " style="background-color: aliceblue;padding: 1rem 0 0 0;border-radius: 0.3rem;">
                     <div class="col-lg-3 benifit-col">
                         <div class="benefit-item d-flex flex-row align-item-center">
                             <div class="benifit-icon">
@@ -210,9 +210,10 @@
                 </div>
             </div>
         </div>
+</div>
 
         <!-- Newsletter  -->
-<div class="newsletter mt-5">
+<div class="newsletter mt-5 mb-4">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -234,128 +235,9 @@
     </div>
 </div>
     <!--Winners Cards End-->
+<!--    footer-->
+    <%- include('home-footer') %>
 
-    <!-- Footer -->
-    <footer class="text-center text-lg-start bg-light text-muted">
-        <!-- Section: Social media -->
-        <section class=" social-media d-flex justify-content-center justify-content-lg-between p-4 border-bottom ">
-            <!-- Left -->
-            <div class="me-5 d-none d-lg-block px-3">
-                <span>Get connected with us on social networks:</span>
-            </div>
-            <!-- Left -->
-
-            <!-- Right -->
-            <div>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
-            <!-- Right -->
-        </section>
-        <!-- Section: Social media -->
-
-        <!-- Section: Links  -->
-        <section class="">
-            <div class="container text-center text-md-start mt-5">
-                <!-- Grid row -->
-                <div class="row mt-3">
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <!-- Content -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>Company name
-                        </h6>
-                        <p>
-                            Here you can use rows and columns to organize your footer content. Lorem ipsum
-                            dolor sit amet, consectetur adipisicing elit.
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Products
-                        </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Angular</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">React</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Vue</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Laravel</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
-                        </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Pricing</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Settings</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Orders</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Help</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
-                        <p>
-                            <i class="fas fa-envelope me-3"></i>
-                            info@example.com
-                        </p>
-                        <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
-                    </div>
-                    <!-- Grid column -->
-                </div>
-                <!-- Grid row -->
-            </div>
-        </section>
-        <!-- Section: Links  -->
-
-        <!-- Copyright -->
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            © 2021 Copyright:
-            <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
     <!-- Footer -->
 
     <script>
@@ -375,11 +257,11 @@
                         style="border-top-right-radius: 0.4rem;border-top-left-radius: 0.4rem;">
                     <div class="card-body pt-4 pb-4 ps-2 pe-2" >
                         <h5 class="card-title mb-3">${value.name}</h5>
-                        <div class="lh-1 mt-2 mb-3 "><span class="mt-2.4 mb-2.4 text-dark rounded ps-0 pt-0.7 pb-0.7 pe-0.7">Product Status<span style="color: #1e78ff">#${value.status}</span> </span>
+                        <div class="lh-1 mt-2 mb-3 "><span class="mt-2.4 mb-2.4 text-dark rounded ps-0 pt-0.7 pb-0.7 pe-0.7">Product Status<span class="fw-bold" style="color: #1e78ff"> #${value.status}</span> </span>
                         </div>
                          <div class="lh-1 mt-2 mb-3"><span class="text-dark">Bid End's On: ${value.end_date}</span>
                         </div>
-                           <div class="lh-1 mt-2 mb-3"><span class="text-dark fw-bold">Max Bid: &#8377;${value.price}</span>
+                           <div class="lh-1 mt-2 mb-3"><span class="text-dark">Max Bid: <span class="fw-bold" style="font-size: 22px;color: #279301;">&#8377;${value.price}</span></span>
                         </div>
 
                         <div class="pt-0 pb-0 ps-0 pe-0 mt-1 ml-2">
@@ -388,7 +270,7 @@
                             <div class="col col justify-content-center pr-2 pl-2 ">
 
                             <span><a href="" class="btn btn-light mt-0 pt-2.8 pb-2.8"
-                                        style="background-color:#2a2185;color:white;font-size: 1rem;border-radius: 3rem;width: 10rem">Bid Now</a><span class="text-warning me-3 mb-1">
+                                        style="background-color:#2a2185;color:white;font-size: 1rem;border-radius: 3rem;width: 11.5rem">Bid Now</a><span class="text-warning me-3 mb-1">
                                 </svg></span><span class="text-dark" style="font-size: 1.3rem"> 4.0</span><span class="fs-6 text-muted">
                                 (<i class="fa-solid fa-eye"></i> ${value.p_id})</span>
                             </span>
