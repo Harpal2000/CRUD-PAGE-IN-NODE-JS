@@ -16,7 +16,7 @@
 
         .coming-soon > h2 {
             font-size: 1rem;
-            font-weight: bold;
+            /*font-weight: bold;*/
             padding: 3rem;
         }
 
@@ -39,7 +39,7 @@
         }
 
         .countdown-time {
-            padding: 3px 28px 3px 0px;
+            padding: 3px 6px 3px 0px;
             border-radius: 3px;
             /*background: #f6f6f6;*/
             display: inline-block;
@@ -52,7 +52,7 @@
             font-size: 11px;
             color: #090b0b;
             font-weight: bold;
-            padding-right: 38px;
+            padding-right: 20px;
         }
         .table-div  {
             height: 250px;
@@ -68,32 +68,33 @@
 
             let pid = localStorage.getItem("pid");
 
-            var http = new XMLHttpRequest();
+            let http = new XMLHttpRequest();
             http.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     // console.log(JSON.parse(this.response));
-                    var data = JSON.parse(this.response);
+                    let data = JSON.parse(this.response);
                     // console.log(this.response);
 
                     let tableTag = ``;
                     let example = ``;
                     let bidForm = ``;
+                    let name = ``;
 
                     data.forEach(function (value) {
+                        name+= ` <h2 class="text-center" style="font-size: 4rem;color: #194681">${value.name}</h2>`
                         tableTag += `
-                              <h4 class="text-start">${value.name}</h4>
                               ${value.description}
-                              <div class="initial-bid mt-2 mb-2 text-dark rounded px-2" style="background-color: rgba(0, 0, 0, 0.068);">
-                                <b>Initial Bid : </b>${value.price}
+                              <div class="initial-bid mt-3 mb-3 text-dark rounded">
+                                <b>Initial Bid : </b><span class="fw-bold" style="font-size: 26px;color: #279301;">${value.price}</span>
                               </div>
-                              <div class="update">
+                              <div class="update mb-3">
                                 Last Update 3 mins ago
                               </div>
                             <div class="timer bod">
-                               <span class="border">
+<!--                               <span class="border">-->
                                  <section class="coming-soon">
                                     <div>
-                                        <h2> Bid End In</h2>
+                                        <h3 class="fw-normal">The Next Winner In</h3>
                                         <div class="countdown countdown1">
                                             <div class="container-day countdown-number1">
                                                 <h3 class="day countdown-time">Time :</h3>
@@ -114,8 +115,7 @@
                                         </div>
                                     </div>
                                 </section>
-
-                                </span>
+<!--                                </span>-->
                               </div>
                             </div>`
                         example+=`<img src="../${value.image}" class="rounded" alt="..." height="300px" width="300px"/>`
@@ -125,7 +125,7 @@
                             <input type="text" class="w-75 px-2 pt-4 pb-4" placeholder="Enter Bid Amount Here" name="amount" id="amount"
                                 style="border: 0; height: 36px; padding-bottom: 6px; margin-right: 10px; border-radius: 5px;" >
                             <input type="hidden" name="p_id" id="p_id" class="w-75" value="${value.p_id}">
-                            <button type="submit" class="btn btn-secondary btn-lg" onclick="InsertBid()">Lock Now</button>
+                            <button type="submit" class="btn btn-lg text-light" onclick="InsertBid()" style="background-color: #279301;margin-bottom: 7px;padding: 0.5rem 3rem">Lock Now</button>
                         </div>
                         <div class="col">
                         </div>
@@ -133,6 +133,7 @@
                 </form>`
 
                     });
+                    document.getElementById("nm").innerHTML = name;
                     document.getElementById("photoView").innerHTML = tableTag;
                     document.getElementById("pv").innerHTML = example;
                     document.getElementById("bf").innerHTML = bidForm;
@@ -148,7 +149,7 @@
             // console.log("PID  - ",pid);
             var http = new XMLHttpRequest();
             http.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
+                if (this.readyState === 4 && this.status === 200) {
                     // console.log(JSON.parse(this.response));
                     let eDate = JSON.parse(this.response)
                     // console.log("-------------")
@@ -202,7 +203,7 @@
             let httpreq = new XMLHttpRequest();
             httpreq.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
-                    // alert(this.response);
+                    alert(this.response);
                     console.log(this.response)
                     // document.getElementById("bidForm").reset();
                 }
@@ -217,7 +218,7 @@
             let pid = localStorage.getItem("pid");
             var http = new XMLHttpRequest();
             http.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
+                if (this.readyState === 4 && this.status === 200) {
                     // console.log(JSON.parse(this.response));
                     let data = JSON.parse(this.response);
                     // console.log(this.response);
@@ -263,7 +264,7 @@
 <%- include('userheader') %>
 
 <div class="heading mt-4 mb-4">
-    <h2 class="text-center">Daily Auctions</h2>
+    <div id="nm"></div>
 </div>
 
 <div class="container">
@@ -278,16 +279,16 @@
                 </div>
             </div>
           <div class="col-lg-4 ">
-                <h3 class="text-center">Top Bidders</h3>
+<!--                <h3 class="text-center" style="font-size: 2rem;color: #279301;">Top Bidders Leaderboard</h3>-->
                 <div class="table-div">
                 <div id="bidderView"></div>
                 </div>
           </div>
     </div>
-    <div class="row mt-5 pt-3 pb-5 rounded" style="background-color: rgba(0, 0, 0, 0.068);">
+    <div class="row mt-2 pt-2 pb-2 rounded" style="background-color:aliceblue">
         <div class="col">
             <div>
-                <h4 class="text-center text-dark mb-3"><b>Lock Your Bid</b></h4>
+<!--                <h4 class="text-center text-dark mb-3" style="font-size: 26px;color: #279301;">Lock Your Bid</h4>-->
             </div>
             <div class="bidder-add text-center">
                 <div id="bf"></div>

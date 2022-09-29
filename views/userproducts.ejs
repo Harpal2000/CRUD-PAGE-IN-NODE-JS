@@ -5,7 +5,11 @@
     <%- include('headerfiles') %>
 
     <style>
-        .btn:focus,.btn:active{outline: none !important; box-shadow: none !important;}
+        .btn:focus, .btn:active {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
         .error {
             color: red;
         }
@@ -13,6 +17,7 @@
         #admin_body {
             background-color: #2c3034;
         }
+
         body {
             font-family: 'Lato', sans-serif;
         }
@@ -32,7 +37,8 @@
             width: 80%;
             margin-left: 3px;
         }
-        .card{
+
+        .card {
             margin-left: 10px;
             margin-right: 10px;
         }
@@ -41,8 +47,8 @@
 
     <script>
         function InsertUserProduct() {
-            $('#userproductform').validate();
-            if ($('#userproductform').valid()) {
+            // $('#userproductform').validate();
+            // if ($('#userproductform').valid()) {
                 let formcontrols = document.getElementById("userproductform").elements;
                 let formdata = new FormData();
                 for (let i = 0; i < formcontrols.length; i++) {
@@ -72,41 +78,41 @@
 
                 httpreq.open('post', "/users/insert-user-product", true);
                 httpreq.send(formdata);
-            }
+
         }
 
         function catInfo() {
-                let http = new XMLHttpRequest();
-                http.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        console.log(JSON.parse(this.response));
-                        let data = JSON.parse(this.response);
+            let http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    console.log(JSON.parse(this.response));
+                    let data = JSON.parse(this.response);
 
-                        let tableTag =`<select name="category" id="category" class="form-control"
+                    let tableTag = `<select name="category" id="category" class="form-control"
                                 data-rule-required="true" >`;
 
-                        tableTag+= `<option selected disabled>---Select Category---</option>`;
-                        data.forEach(function (value) {
-                           tableTag+= ` <option value="${value.cat_id}" >${value.cat_name}</option>`;
-                        });
-                        tableTag+=`</select>`
+                    tableTag += `<option selected disabled>---Select Category---</option>`;
+                    data.forEach(function (value) {
+                        tableTag += ` <option value="${value.cat_id}" >${value.cat_name}</option>`;
+                    });
+                    tableTag += `</select>`
 
 
-                        document.getElementById("getId").innerHTML = tableTag;
-                    }
+                    document.getElementById("getId").innerHTML = tableTag;
                 }
-                http.open("get", "/users/get-catName-data", true);
-                http.send();
             }
+            http.open("get", "/users/get-catName-data", true);
+            http.send();
+        }
 
     </script>
 
 
 </head>
 
-<body  id="admin_body" onload="catInfo()" style="background-image:url('../images/add-p.jpg');background-size: cover;">
-<%- include('userheader')%>
-<div class="container mt-5" >
+<body id="admin_body" onload="catInfo()" style="background-image:url('../images/add-p.jpg');background-size: cover;">
+<%- include('userheader') %>
+<div class="container mt-5">
 
     <div class="row ">
         <div class="col-lg-7 mx-auto">
@@ -132,7 +138,7 @@
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-group">
-                                                <div id="getId"></div>
+                                            <div id="getId"></div>
 
                                         </div>
                                     </div>
@@ -163,12 +169,13 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-4">
                                         <div class="form-group">
-<!--                                            <label for="form_message" class="w-0">Enter Product Description *</label>-->
-                                            <label for="description" style="width:13rem">Enter Product Description *</label>
+                                            <!--                                            <label for="form_message" class="w-0">Enter Product Description *</label>-->
+                                            <label for="description" style="width:13rem">Enter Product Description
+                                                *</label>
                                             <textarea type="text" name="description" id="description"
-                                               class="form-control" data-rule-required="true"
-                                                  placeholder="Enter description"
-                                                    data-msg-required="*Description Required">
+                                                      class="form-control" data-rule-required="true"
+                                                      placeholder="Enter description"
+                                                      data-msg-required="*Description Required">
                                             </textarea>
 
                                         </div>
@@ -178,9 +185,10 @@
 
                                     <div class="col-md-12">
 
-                                        <input type="button" id="btnncat" onclick="InsertUserProduct()" value="ADD PRODUCT"
+                                        <input type="button" id="btnncat" onclick="InsertUserProduct()"
+                                               value="ADD PRODUCT"
                                                class="btn btn-success btn-send  pt-2 btn-block w-100"
-                                        style=""/>
+                                               style=""/>
 
                                     </div>
 
