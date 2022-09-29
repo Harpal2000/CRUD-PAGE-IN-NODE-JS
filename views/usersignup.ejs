@@ -2,80 +2,44 @@
 <html>
 <head>
     <title>Signup</title>
-    <link rel="stylesheet" href="/stylesheets/login.css">
+    <!--    <link rel="stylesheet" href="/stylesheets/login.css">-->
     <%- include('headerfiles') %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <style>
-        .error {
-            color: red;
-        }
-
-        #admin_body {
-            background-color: #2c3034;
-        }
-
-        body {
-            color: #000;
-            overflow-x: hidden;
-            height: 100%;
-            /*background-image: url("https://i.imgur.com/GMmCQHC.png");*/
-            background-repeat: no-repeat;
-            background-size: 100% 100%
-        }
-
-        .card {
-            padding: 30px 40px;
-            margin-top: 60px;
-            margin-bottom: 60px;
-            border: none !important;
-            box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2)
-        }
-
-        .blue-text {
-            color: #00BCD4
-        }
-
-        .form-control-label {
-            margin-bottom: 0
-        }
-
-        input, textarea, button {
-            padding: 8px 15px;
-            border-radius: 5px !important;
-            margin: 5px 0px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            font-size: 18px !important;
-            font-weight: 300
-        }
-
-        input:focus, textarea:focus {
-            -moz-box-shadow: none !important;
-            -webkit-box-shadow: none !important;
+        .btn:focus, .btn:active {
+            outline: none !important;
             box-shadow: none !important;
-            border: 1px solid #00BCD4;
-            outline-width: 0;
-            font-weight: 400
         }
 
-        .btn-block {
-            text-transform: uppercase;
-            font-size: 15px !important;
-            font-weight: 400;
-            height: 43px;
-            cursor: pointer
-        }
-
-        .btn-block:hover {
-            color: #fff !important
-        }
-
-        button:focus {
-            -moz-box-shadow: none !important;
-            -webkit-box-shadow: none !important;
+        .form-control:focus, .form-control:active {
+            outline: none !important;
             box-shadow: none !important;
-            outline-width: 0
         }
+
+        .terms a {
+            text-decoration: none;
+            color: #0275d8;
+        }
+
+
+        @media (max-width: 992px) {
+            .photo {
+                display: none;
+            }
+        }
+
+        .form-group input {
+            /* border: none; */
+            /* border-bottom: 1px solid black; */
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.747);
+            color: rgb(29, 28, 28)
+
+        }
+
+
     </style>
 
     <script>
@@ -115,99 +79,108 @@
         }
 
 
-
     </script>
 
 
 </head>
 
-<body  id="admin_body">
+<body class=" bg-light" id="admin_body">
 
-<div class="container-fluid px-1 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-            <div class="form">
-                <div class="modalBody">
-                    <div class="form-title text-center pt-5">
-                        <h4>Register Yourself Here </h4>
-                    </div>
-                    <div class="d-flex flex-column text-center">
-                        <form id="userform">
-                            <div id="fc1">
+<!-- nav-above  -->
 
-                                <input type="text" name="fullname" id="fullname"
-                                       data-rule-required="true"
-                                       placeholder="Enter Username"
-                                       data-msg-required="*E-Mail Required">
+<div class="navb d-flex  py-3" style="background-color:white;border-bottom: 1px solid rgb(187, 186, 186);">
+    <div class="logo ps-5 d-flex">
+        <a href="">
+            <img src="/images/logo1.png" alt="" width="45px" height="45px" class="rounded">
+        </a>
+        <div style="font-size: 30px;" class=" d-flex ms-2">
 
-                            </div>
-                            <div id="fc1">
-
-                                <input type="text" name="fathername" id="fathername"
-                                       data-rule-required="true"
-                                       placeholder="Enter Father Name"
-                                       data-msg-required="*Password Required">
-
-                            </div>
-                            <div id="fc1">
-
-                                <input type="email" name="email" id="email"
-                                       data-rule-required="true"
-                                       placeholder="Enter E-Mail"
-                                       data-msg-required="*Password Required">
-
-                            </div>
-                            <div id="fc1">
-
-                                <input type="text" name="phone_no" id="phone_no"
-                                       data-rule-required="true"
-                                       maxlength="10" minlength="10"
-                                       data-rule-number="true"
-                                       placeholder="Enter Mobile Number"
-                                       data-msg-required="*Password Required">
-
-                            </div>
-                            <div id="fc1">
-
-                                <input type="password" name="password" id="password"
-                                       data-rule-required="true"
-                                       placeholder="Enter Password"
-                                       data-msg-required="*Password Required">
-
-                            </div>
-                            <div id="fc1">
-
-                                <input type="password"  name="confirm_password" id="confirm_password"
-                                       data-rule-required="true"
-                                       data-rule-equalto="#password"
-                                       placeholder="Enter Password"
-                                       data-msg-required="*Enter Password">
-
-                            </div>
-                            <label for="photo" class="text-light justify-content-start">Upload Your Profile Photo</label>
-                            <div id="fc1">
-                                <input type="file"   name="photo" id="photo"
-                                       data-rule-required="true"
-                                       placeholder="Upload Photo"
-                                       data-msg-required="*Password Required">
-
-                            </div>
-
-
-                            <div id="container">
-                                <input type="button" id="btnncat" onclick="UserInsert()" value="REGISTER"
-                                       class="btn-userLogin"/>
-                            </div>
-                            <p class="text">Have an account?
-                                <a href="/user_login">Login Here</a>
-                            </p>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-            <div id="userresponse"></div>
+            <span style="color:rgb(10, 134, 250)">Bid</span><span style="color:orange ;">worx</span>
         </div>
+    </div>
+
+    <div class="right-sec  d-flex" style="float:right;margin-left: 65rem;">
+        <a href="/user_login" class="mt-2 pt-1 me-2" style="text-decoration: none;color:" class="me-3 ">Already a
+            Member?</a>
+        <button class="btn btn-outline-secondary   px-4 my-2 my-sm-0" type="submit">Sign In</button>
+    </div>
+</div>
+
+
+<!-- navbar  -->
+
+<div class="container align-items-center justify-content-center mt-5 rounded w-50"
+     style="margin-top: 600px;border:1px solid rgba(128, 128, 128, 0.486)">
+    <div class="row align-items-center mt-5 p-0 rounded " style="background-color: rgba(255, 255, 255, 0.192);">
+
+
+        <div class="form">
+            <div class="col px-5 pb-5 " style="background: rgba(255, 255, 255, 0.233);">
+                <form id="userform">
+                    <h3 class=" mb-3" style="color: rgb(10, 134, 250);">Create Your Account </h3>
+
+                    <div class="form-group d-flex ">
+                        <input type="text" name="fullname" id="fullname" data-rule-required="true"
+                               placeholder="Enter Username"
+                               data-msg-required="*Full Name Required" class="form-control mb-1 me-3">
+
+                        <input type="text" name="fathername" id="fathername" data-rule-required="true"
+                               placeholder="Enter Father Name"
+                               data-msg-required="*Fathername Required" class="form-control mb-1">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" name="email" id="email" data-rule-required="true" placeholder="Enter E-Mail"
+                               data-msg-required="*E-Mail Required" class="form-control mt-1 mb-1">
+                    </div>
+
+                    <div class="form-group d-flex ">
+                        <input type="password" name="password" id="password" data-rule-required="true"
+                               placeholder="Enter Password"
+                               data-msg-required="*Password Required" class="form-control mt-1 mb-1 me-3">
+
+                        <input type="password" name="confirm_password" id="confirm_password" data-rule-required="true"
+                               data-rule-equalto="#password" placeholder="Enter Password"
+                               data-msg-required="*Enter Password" class="form-control mt-1 mb-1">
+
+                    </div>
+                    <div class="form-group ">
+                        <input type="text" name="phone_no" id="phone_no" data-rule-required="true" maxlength="10"
+                               minlength="10"
+                               data-rule-number="true" placeholder="Enter Mobile Number"
+                               data-msg-required="*Mobile No. Required" class="form-control mt-1 mb-1">
+                    </div>
+                    <div class="form-group ">
+                        <input type="file" class="form-control form-control shadow mt-2"
+                               aria-label="Small file input example" name="photo" id="photo"
+                               required>
+                    </div>
+                    <div class="terms mt-3">
+                        <label class="ll d-flex">
+                            <div class="ez-checkbox sprites me-2"><input id="chkChecked" type="checkbox"
+                                                                         name="chkChecked" class="ez-hide">
+                            </div>
+                            <p>
+                                I accept the <a href="#"> Terms and Conditions </a> and the <a href="#">Privacy
+                                    Policy</a>
+                                of Bidderboy.com
+                            </p>
+
+                        </label>
+                        <div class="pt text-center">
+                            <!--                            <input type="button" id="btnncat" onclick="UserInsert()" value="REGISTER"-->
+                            <!--                                   class="btn btn-primary px-4 shadow text-light w-100 fw-bold"/>-->
+                            <button class="btn btn-primary px-4 shadow text-light w-100 fw-bold" id="btnncat"
+                                    onclick="UserInsert()" style=""
+                                    type="button">Sign Up
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="userresponse"></div>
+
     </div>
 </div>
 
