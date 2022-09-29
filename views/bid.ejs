@@ -55,14 +55,17 @@
             padding-right: 20px;
         }
         .table-div  {
-            height: 250px;
+            height: 300px;
             overflow-y: scroll;
         }
 
 
     </style>
-    <script>
 
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
 
         function BidData() {
 
@@ -125,18 +128,17 @@
                             <input type="text" class="w-75 px-2 pt-4 pb-4" placeholder="Enter Bid Amount Here" name="amount" id="amount"
                                 style="border: 0; height: 36px; padding-bottom: 6px; margin-right: 10px; border-radius: 5px;" >
                             <input type="hidden" name="p_id" id="p_id" class="w-75" value="${value.p_id}">
-                            <button type="submit" class="btn btn-lg text-light" onclick="InsertBid()" style="background-color: #279301;margin-bottom: 7px;padding: 0.5rem 3rem">Lock Now</button>
-                        </div>
-                        <div class="col">
+                            <button class="btn text-light" onclick="InsertBid()" style="background-color: #279301;margin-bottom: 7px;padding: 0.5rem 3rem">Lock Now</button>
                         </div>
                     </div>
                 </form>`
 
                     });
+                    document.getElementById("bf").innerHTML = bidForm;
                     document.getElementById("nm").innerHTML = name;
                     document.getElementById("photoView").innerHTML = tableTag;
                     document.getElementById("pv").innerHTML = example;
-                    document.getElementById("bf").innerHTML = bidForm;
+
                 }
             }
             http.open("get", "/users/Bidingview?pid=" + pid, true);
@@ -203,8 +205,26 @@
             let httpreq = new XMLHttpRequest();
             httpreq.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
-                    alert(this.response);
+                    // alert(this.response);
                     console.log(this.response)
+                    if(this.response === "lowAmount"){
+                            alert("Hey! You enter a low amount ");
+                        } else if(this.response === "BidClosed"){
+                        alert("Hey! Bid is already closed");
+                        Swal.fire(
+                            'Bid Closed?',
+                            'That thing is still around?',
+                            'question'
+                        )
+                    }else{
+                        alert("Bid Inserted Successfully");
+                        Swal.fire(
+                            'Bid Inserted',
+                            'That thing is still around?',
+                            'question'
+                        )
+                    }
+
                     // document.getElementById("bidForm").reset();
                 }
             }
@@ -212,7 +232,6 @@
             httpreq.send(formData);
 
         }
-
 
         function BidderData() {
             let pid = localStorage.getItem("pid");
@@ -260,7 +279,7 @@
     </script>
 </head>
 
-<body onload="onloadData()">
+<body onload="onloadData()" style="background-color: aliceblue;">
 <%- include('userheader') %>
 
 <div class="heading mt-4 mb-4">
@@ -287,9 +306,6 @@
     </div>
     <div class="row mt-2 pt-2 pb-2 rounded" style="background-color:aliceblue">
         <div class="col">
-            <div>
-<!--                <h4 class="text-center text-dark mb-3" style="font-size: 26px;color: #279301;">Lock Your Bid</h4>-->
-            </div>
             <div class="bidder-add text-center">
                 <div id="bf"></div>
             </div>
@@ -297,4 +313,6 @@
     </div>
 </div>
 </body>
+<script src="sweetalert2.all.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>
