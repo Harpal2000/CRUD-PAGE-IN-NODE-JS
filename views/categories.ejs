@@ -136,8 +136,8 @@
         function getUserData() {
             var http = new XMLHttpRequest();
             http.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(JSON.parse(this.response));
+                if (this.readyState === 4 && this.status === 200) {
+                    // console.log(JSON.parse(this.response));
                     var data = JSON.parse(this.response);
 
                     var tableTag = `<table>`;

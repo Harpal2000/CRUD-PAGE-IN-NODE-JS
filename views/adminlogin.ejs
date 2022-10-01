@@ -3,14 +3,28 @@
 <head>
     <title>Admin Login</title>
     <%- include('headerfiles') %>
+<!--    <link href="/stylesheets/admin-style.css" rel="stylesheet"/>-->
     <link href="/stylesheets/admin-style.css" rel="stylesheet"/>
+    <link href="/css/bootstrap.css" rel="stylesheet"/>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+            integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolic
+          +y="no-referrer"/>
 
     <style>
         .error {
             color: red;
         }
         #cat_body {
-            background-color: #2c3034;
+            background-color: aliceblue;
         }
 
         body {
@@ -86,9 +100,9 @@
 
 <body id="cat_body">
 <%- include('headerfilesadmin') %>
-<div class="container mt-5">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-7">
+<div class="container">
+    <div class="row d-flex justify-content-center align-items-center mt-10">
+        <div class="col-md-7 mt-5 mb-0" style="margin: 5rem 0 -2rem 19rem">
             <div class="card px-5 py-5">
                 <form id="adminlogin">
                     <div class="text-center">
@@ -122,4 +136,6 @@
         </div>
     </div>
 </div>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>

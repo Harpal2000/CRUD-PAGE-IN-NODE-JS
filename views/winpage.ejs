@@ -14,62 +14,6 @@
             /*color: #384047;*/
         }
 
-        /*ribbion */
-
-
-
-        .coming-soon1 > h2{
-            font-size: 1rem;
-            /*font-weight: bold;*/
-            padding: 3rem;
-        }
-
-        .coming-soon{
-            font-size: 1.5rem;
-            /*font-weight: bold;*/
-            padding: 3rem;
-        }
-
-        .countdown1 {
-            font-family: sans-serif;
-            color: rgb(2, 2, 2);
-            display: inline-block;
-            font-weight: 100;
-            text-align: center;
-            font-size: 1px;
-            /*background: #f6f6f6;*/
-        }
-
-
-        .countdown-number1 {
-            padding: 0px;
-            border-radius: 3px;
-            /*background: #f6f6f6;*/
-            display: inline-block;
-        }
-
-        .countdown-time {
-            padding: 3px 5px 3px 0px;
-            border-radius: 3px;
-            font-size: 1rem;
-            /*background: #f6f6f6;*/
-            display: inline-block;
-            /*font-weight: bold;*/
-        }
-
-        .countdown-text1 {
-            display: block;
-            padding-top: 2px;
-            font-size: 11px;
-            color: #090b0b;
-            font-weight: bold;
-            padding-right: 10px;
-        }
-
-        .table-div {
-            height: 250px;
-            overflow-y: scroll;
-        }
 
         .side-corner-tag{
             position: relative;
@@ -138,9 +82,9 @@
 
                     data.forEach(function (value) {
                         tableTag += ` <div class="container-sm">
-                            <div class="container w-50">
+                            <div class="container w-50 bg-primary">
                                 <div class="row mt-4 bg-light border-bottom">
-                                     <div class="col col-12 col-lg-6 col-md-12 col-sm-6  text-center" style="padding-top:0.9rem">
+                                     <div class="col-6  text-center" style="padding-top:0.9rem">
                                         <div class="photo">
                                             <div class="side-corner-tag">
                                                <img src="../${value.image}" class = "rounded" alt="" width="230px" height="230px">
@@ -148,7 +92,7 @@
                                             </div>
                                         </div>
                                      </div>
-                                     <div class="col col-12 justify-center col-lg-6 col-md-4 col-sm-6 bg-light">
+                                     <div class="col-6 justify-center  bg-light">
                                         <div class="about-product mt-4">
                                                <div class="row">
                                                    <div class="col-3 profile-image px-0 mx-0">
@@ -207,7 +151,8 @@
 </div>
 
 <!--<div class="container">-->
-<div id="photoView"></div>
+<div id="photoView" class=""></div>
+
 <!--</div>-->
 
 </body>
