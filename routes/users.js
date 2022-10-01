@@ -61,9 +61,6 @@ router.get('/offers', function (req, res) {
     res.render('offers');
 });
 
-router.get('/win', function (req, res) {
-    res.render('winpage');
-});
 
 
 router.post('/insert-user-product', (req, res) => {
@@ -178,16 +175,14 @@ router.get('/productData', function (req, res) {
     })
 });
 
-router.get('/winData', function (req, res) {
+router.get('/win', function (req, res) {
     let Query = `select * from winners inner join user_products on winners.winner_pid = user_products.p_id inner join usersignup on usersignup.email= user_products.user_email`;
-    conn.query(Query, function (err, rows) {
-        if (err) throw err;
-        if (rows.length > 0) {
-            res.send(rows);
-        } else {
-            res.send('No Product Found')
+    conn.query(Query, (e, data) => {
+        if (e) {
+            return res.render("winpage", {err: true, data: null});
         }
-    })
+        res.render("winpage", {err: false, data});
+    });
 });
 
 
