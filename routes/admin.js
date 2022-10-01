@@ -274,12 +274,29 @@ router.post("/updateStatus", (req, res) => {
     let end_date = req.body.end_date;
     let status = req.body.status;
     let user_email = req.body.user_email;
+    let price = req.body.price;
+    const Eoutput = `<div class="container">
+        <div style="color:black;background-color: white">
+                       <h2><b><img src="/images/72.png" alt="">Hi! ${user_email} , your product status has been updated</b></h2>
+                       <h3>Your Product Amount : ${price}</h3>
+                       <h3> Your Product Starting and Ending Date is:-
+                       </h3>
+                       <ul>
+                            <li>Starting Date:- ${start_date}</li>
+                            <li>Ending Date:- ${end_date}</li>
+                            <li>Your Product Status:- Active</li>
+                       </ul>
+                       <h4>Thanks,</h4>
+                       <h3>Team BidWorx</h3>
+        </div>
+    </div>`;
 
     const mailOptions = {
         // from: 'youremail@gmail.com',
         to: user_email,
-        subject: 'Sending Email on Status',
-        text: 'your product status has been updated'
+        subject: 'Status Updated - BidWorx Best Places to Bidding Awards 2022! ',
+        text: 'your product status has been updated',
+        html: Eoutput
     };
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {

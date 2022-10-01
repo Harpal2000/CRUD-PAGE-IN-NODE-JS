@@ -143,7 +143,7 @@
                         tableTag += `<td><img src="../${value.image}" height="100px" width="180px" alt="" class="img-thumbnail"/></td>`;
                         tableTag += `<td>`;
                         tableTag += `<button type="button"
-                                        class="btn-primary btn-sm" style="font-size: 1rem" onclick="updatePen('${value.p_id}','${value.user_email}')"  data-bs-toggle="modal" data-bs-target="#ProductModal">
+                                        class="btn-primary btn-sm" style="font-size: 1rem" onclick="updatePen('${value.p_id}','${value.user_email}','${value.status}','${value.price}')"  data-bs-toggle="modal" data-bs-target="#ProductModal">
                                          START AUCTION</button>`;
                         tableTag += `</td>`;
                         tableTag += `</tr>`;
@@ -158,9 +158,11 @@
             http.send();
         }
 
-        function updatePen(p_id, user_email) {
+        function updatePen(p_id, user_email,status,price) {
             document.getElementById("p_id").value = p_id;
             document.getElementById("user_email").value = user_email;
+            document.getElementById("status").value = status;
+            document.getElementById("price").value = price;
         }
 
         function UpdateProductStatus(){
@@ -168,6 +170,8 @@
             let start_date = document.getElementById("start_date").value;
             let end_date = document.getElementById("end_date").value;
             let user_email = document.getElementById("user_email").value;
+            let status = document.getElementById("status").value;
+            let price = document.getElementById("price").value;
 
 
             let formData = new FormData();
@@ -175,6 +179,8 @@
             formData.append("start_date", start_date);
             formData.append("end_date", end_date);
             formData.append("user_email", user_email);
+            formData.append("status", status);
+            formData.append("price", price);
 
             let http = new XMLHttpRequest();
             http.onreadystatechange = function () {
@@ -185,7 +191,7 @@
                     if(this.response === 'Status Updated.'){
                         Swal.fire(
                             'Product Status Updated',
-                            'E-Mail Is Sent Successfully',
+                            'E-Mail Sent Successfully',
                             'success'
                         )
                     }
@@ -246,6 +252,12 @@
                             </div>
                             <div class="form-group mb-3">
                                 <input type="hidden" name="user_email" id="user_email" class="form-control"/>
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="hidden" name="status" id="status" class="form-control"/>
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="hidden" name="price" id="price" class="form-control"/>
                             </div>
                             <div class="form-group d-flex align-items-center">
                                 <button class="btn btnCat mr-3 px-5" id="btnncat" onclick="UpdateProductStatus()">START

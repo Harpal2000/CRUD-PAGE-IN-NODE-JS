@@ -269,8 +269,9 @@
                             </div>
                             <div class="col col justify-content-center pr-2 pl-2 ">
 
-                            <span><a href="" class="btn btn-light mt-0 pt-2.8 pb-2.8"
-                                        style="background-color:#2a2185;color:white;font-size: 1rem;border-radius: 3rem;width: 11.5rem">Bid Now</a><span class="text-warning me-3 mb-1">
+                            <span><a href="#" class="btn btn-light mt-0 pt-2.8 pb-2.8" onclick="PlaceBid(${value.p_id})"
+                                style="background-color:#2a2185;color:white;font-size: 1rem;border-radius: 3rem;width: 11.5rem">Bid Now</a></span>
+                              <span class="text-warning me-3 mb-1">
                                 </svg></span><span class="text-dark" style="font-size: 1.3rem"> 4.0</span><span class="fs-6 text-muted">
                                 (<i class="fa-solid fa-eye"></i> ${value.p_id})</span>
                             </span>
@@ -288,6 +289,7 @@
         localStorage.setItem("pid", p_id);
         window.location.href = "/users/add-bid";
     }
+
     function winnerView() {
         var http = new XMLHttpRequest();
         http.onreadystatechange = function () {
