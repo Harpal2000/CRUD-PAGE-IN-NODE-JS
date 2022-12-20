@@ -364,6 +364,20 @@ router.post('/insertBid', function (req, res) {
 
 //user profile portal
 
+
+// router.get('/User-Profile', function (req, res) {
+//     // let userSession = session.username;
+//     let winners = "SELECT * from user_products where user_email = '" + session.username + "'";
+//     conn.query(winners, (e, data) => {
+//         if (e) {
+//             return res.render("userprofile", {err: true, data: null});
+//         }
+//         res.render("userprofile", {err: false, data});
+//     });
+// });
+
+
+
 router.get('/profile', (req, res) => {
     if (session.username !== undefined)
         res.render('userprofile');
@@ -372,13 +386,11 @@ router.get('/profile', (req, res) => {
 
 });
 
-router.get('/profileview', function (req, res) {
-    var Query = "select * from usersignup where email = '" + session.username + "'";
-    // console.log(Query);
+router.get('/User-Profile-Data', function (req, res) {
+    let Query = "select * from usersignup where email = '" + session.username + "'";
     conn.query(Query, function (err, row) {
         if (err) throw err;
         if (row.length > 0) {
-            // console.log(rows);
             res.send(row);
         } else {
             res.send('No data Found')
@@ -387,21 +399,47 @@ router.get('/profileview', function (req, res) {
     })
 });
 
-router.post("/updateProfile", (req, res) => {
-    // console.log(req.body);
-    let fullname = req.body.fullname;
-    let fathername = req.body.fathername;
-    let phone_no = req.body.phone_no;
-    let password = req.body.password;
+router.get('/Product-status-Data', function (req, res) {
+    let Query = "select * from user_products where user_products.status = 'Active' and user_products.user_email = '" + session.username + "'";
+    conn.query(Query, function (err, row) {
+        if (err) throw err;
+        if (row.length > 0) {
+            res.send(row);
+        } else {
+            res.send('No-product-found')
+        }
 
-
-    var Query = `update usersignup set  fullname="${fullname}",fathername="${fathername}",password="${password}",phone_no="${phone_no}" where email = '${session.username}'`;
-    // console.log(Query);
-    conn.query(Query, (error) => {
-        if (error) throw error;
-        res.send("Data Updated.");
     })
 });
+
+router.get('/Product-status-Data-pending', function (req, res) {
+    let Query = "select * from user_products where user_products.status = 'Pending' and user_products.user_email = '" + session.username + "'";
+    conn.query(Query, function (err, row) {
+        if (err) throw err;
+        if (row.length > 0) {
+            res.send(row);
+        } else {
+            res.send('No-pending-product-found')
+        }
+
+    })
+});
+
+// router.post("/updateProfile", (req, res) => {
+//     // console.log(req.body);
+//     let fullname = req.body.fullname;
+//     let fathername = req.body.fathername;
+//     let phone_no = req.body.phone_no;
+//     let password = req.body.password;
+//
+//
+//     var Query = `update usersignup set  fullname="${fullname}",fathername="${fathername}",password="${password}",phone_no="${phone_no}" where email = '${session.username}'`;
+//     // console.log(Query);
+//     conn.query(Query, (error) => {
+//         if (error) throw error;
+//         res.send("Data Updated.");
+//     })
+// });
 
 
 module.exports = router;

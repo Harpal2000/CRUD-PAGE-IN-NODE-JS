@@ -128,7 +128,7 @@
                             <input type="text" class="w-75 px-2 pt-4 pb-4" placeholder="Enter Bid Amount Here" name="amount" id="amount"
                                 style="border: 0; height: 36px; padding-bottom: 6px; margin-right: 10px; border-radius: 5px;" >
                             <input type="hidden" name="p_id" id="p_id" class="w-75" value="${value.p_id}">
-                            <button class="btn text-light" onclick="InsertBid()" style="background-color: #279301;margin-bottom: 7px;padding: 0.5rem 3rem">Lock Now</button>
+                            <button class="btn text-light" onclick="InsertBid()" style="background-color: #279301;margin-bottom: 7px;padding: 0.5rem 3rem;border-color: black">Lock Now</button>
                         </div>
                     </div>
                 </form>`
@@ -205,24 +205,14 @@
             let httpreq = new XMLHttpRequest();
             httpreq.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
-                    // alert(this.response);
-                    console.log(this.response)
+                     //alert(this.response);
+                    //console.log(this.response)
                     if(this.response === "lowAmount"){
                             alert("Hey! You enter a low amount ");
                         } else if(this.response === "BidClosed"){
                         alert("Hey! Bid is already closed");
-                        Swal.fire(
-                            'Bid Closed?',
-                            'That thing is still around?',
-                            'question'
-                        )
                     }else{
                         alert("Bid Inserted Successfully");
-                        Swal.fire(
-                            'Bid Inserted',
-                            'That thing is still around?',
-                            'question'
-                        )
                     }
 
                     // document.getElementById("bidForm").reset();

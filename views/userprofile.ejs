@@ -1,181 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Categories</title>
     <%- include('headerfiles') %>
-    <meta charset="utf-8">
-    <title>profile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            margin-top: 20px;
-            color: #1a202c;
-            text-align: left;
-            background-color: #e2e8f0;
-        }
-
-        .main-body {
-            padding: 15px;
-        }
-
-        .card {
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-        }
-
-        .card {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            word-wrap: break-word;
-            background-color: #fff;
-            background-clip: border-box;
-            border: 0 solid rgba(0, 0, 0, .125);
-            border-radius: .25rem;
-        }
-
-        .card-body {
-            flex: 1 1 auto;
-            min-height: 1px;
-            padding: 1rem;
-        }
-
-        .gutters-sm {
-            margin-right: -8px;
-            margin-left: -8px;
-        }
-
-        .gutters-sm > .col, .gutters-sm > [class*=col-] {
-            padding-right: 8px;
-            padding-left: 8px;
-        }
-
-        .mb-3 {
-            margin-bottom: 1rem !important;
-        }
-
-    </style>
-
+    <title>User Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
     <script>
 
         function ProfileData() {
-            var http = new XMLHttpRequest();
-            http.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(JSON.parse(this.response));
-                    var data = JSON.parse(this.response);
-                    console.log(this.response);
-                    let pForm = ``;
-                    let pInfo = ``;
-                    data.forEach(function (value) {
-                        pInfo += `
-                                 <div class="mt-3">
-                                <h4>${value.fullname}</h4>
-                                <p class="text-secondary mb-1">${value.phone_no}</p>
-                                <p class="text-muted font-size-sm">${value.email}</p>
-                                <button class="btn btn-danger w-100" onclick="logout()">Logout</button>
-<!--                                <button class="btn btn-outline-primary">Message</button>-->
-                            </div>
-
-                        `
-
-                        pForm += `
-                             <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Full Name</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" name="fullname" id="fullname" value="${value.fullname}"/>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Father Name</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" name="fathername"
-                                       id="fathername" value="${value.fathername}"/>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Email</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="email" class="form-control" name="email"
-                                      readonly id="email" value="${value.email}">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Phone</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control"  name="phone_no"
-                                       id="phone_no" value="${value.phone_no}">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Password</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" name="password"
-                                       id="password" value="${value.password}">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3"></div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="button" onclick="UpdateProfile()" class="btn btn-primary px-4" value="Save Changes">
-                            </div>
-                    `
-                    });
-                    document.getElementById("profileForm").innerHTML = pForm;
-                    document.getElementById("profileInfo").innerHTML = pInfo;
-                }
-            }
-            http.open("get", "/users/profileview", true);
-            http.send();
-        }
-
-        function UpdateProfile() {
-
-            let fullname = document.getElementById("fullname").value;
-            let fathername = document.getElementById("fathername").value;
-            let email = document.getElementById("email").value;
-            let phone_no = document.getElementById("phone_no").value;
-            let password = document.getElementById("password").value;
-
-
-            let formData = new FormData();
-            formData.append("fullname", fullname);
-            formData.append("fathername", fathername);
-            formData.append("email", email);
-            formData.append("phone_no", phone_no);
-            formData.append("password", password);
-
-
-            var http = new XMLHttpRequest();
-            http.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    // console.log(this.response);
-                    alert(this.response);
-                    ProfileData();
-                }
-            }
-            http.open("post", "/users/updateProfile", true);
-            http.send(formData);
-
-        }
-
-        function logout() {
-            //alert();
             let http = new XMLHttpRequest();
             http.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
+                    // console.log(JSON.parse(this.response));
+                    let data = JSON.parse(this.response);
                     // console.log(this.response);
+                    let uInfo = ``;
+                    data.forEach(function (value) {
+                        uInfo += `<div class="row">
+                                        <div class="col-lg-2 col-md-2 col-sm-2" style="justify-content:center;display: flex;">
+                                            <img src="../${value.photo}" alt="" width="110px" height="110px" class="rounded-circle">
+                                                </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-4 bg" style="align-items: center;display: flex;">
+                                            <h4>${value.email}</h4>
+                                        </div>
+                                        <div class="col-lg-4 col-md-3 col-sm-6" style="align-items: center;justify-content:start;display: flex;">
+                                            <button class="btn btn-danger btn-sm" tabindex="-1" onclick="logout()" role="button" aria-disabled="true">Logout
+                                            <i class="bi bi-box-arrow-right"></i></button>
+                                        </div>
+                                    </div>`
+                    });
+                    document.getElementById("profileInfo").innerHTML = uInfo;
+                }
+            }
+            http.open("get", "/users/User-Profile-Data", true);
+            http.send();
+        }
+
+        function productSA(){
+            let http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    let err1 = ``;
+                    let pInfo = ``;
+                    if(this.response === 'No-product-found'){
+                        err1+=` <div class="text-center alert-danger p-5 mt-5">
+                                    <h6 class="">No Data Found.</h6>
+                                </div>`
+                    }else{
+                        let data1 = JSON.parse(this.response);
+                        data1.forEach(function (value) {
+                            pInfo+=`
+                                        <div class="container mt-5" style="margin:3rem 0 0 0rem;">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-3 col-sm-12 " style="justify-content:start;display:grid;">
+                                                    <img src="../${value.image}"
+                                                    class="img-thumbnail" alt="" width="120px" height="120px">
+                                                </div>
+                                                <div class="col-lg-5 col-md-5 col-sm-12 ">
+                                                    <h4>Your Product Name</h4>
+                                                    <h5>${value.name}</h5>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <h4>Closing Date</h4>
+                                                    <h5>${value.end_date}</h5>
+                                                </div>
+                                            </div>
+                                        </div>`
+                        });
+                    }
+
+                    document.getElementById("productStatus").innerHTML = pInfo;
+                    document.getElementById("ps").innerHTML = err1;
+                }
+            }
+            http.open("get", "/users/Product-status-Data", true);
+            http.send();
+        }
+
+        function productSP(){
+            let http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    let err2 = ``;
+                    let pInfo = ``;
+                    if(this.response === 'No-pending-product-found'){
+                        err2+=` <div class="text-center alert-danger p-5 mt-5">
+                                    <h6 class="">No Data Found.</h6>
+                                </div>`
+                    }else{
+                        let data1 = JSON.parse(this.response);
+                        data1.forEach(function (value) {
+                            pInfo+=`
+                                       <div class="container mt-5" style="margin:3rem 0 0 0rem;">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-3 col-sm-12 " style="justify-content:start;display:grid;">
+                                                    <img src="../${value.image}"
+                                                    class="img-thumbnail" alt="" width="120px" height="120px">
+                                                </div>
+                                                <div class="col-lg-5 col-md-5 col-sm-12 ">
+                                                    <h4>Your Product Name</h4>
+                                                    <h5>${value.name}</h5>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <h4>Product Price</h4>
+                                                    <h5>${value.price}</h5>
+                                                </div>
+                                            </div>
+                                       </div>`
+                        });
+                    }
+
+                    document.getElementById("productStatusPending").innerHTML = pInfo;
+                    document.getElementById("ps2").innerHTML = err2;
+                }
+            }
+            http.open("get", "/users/Product-status-Data-pending", true);
+            http.send();
+        }
+
+        // function UpdateProfile() {
+        //
+        //     let fullname = document.getElementById("fullname").value;
+        //     let fathername = document.getElementById("fathername").value;
+        //     let email = document.getElementById("email").value;
+        //     let phone_no = document.getElementById("phone_no").value;
+        //     let password = document.getElementById("password").value;
+        //
+        //
+        //     let formData = new FormData();
+        //     formData.append("fullname", fullname);
+        //     formData.append("fathername", fathername);
+        //     formData.append("email", email);
+        //     formData.append("phone_no", phone_no);
+        //     formData.append("password", password);
+        //
+        //
+        //     let http = new XMLHttpRequest();
+        //     http.onreadystatechange = function () {
+        //         if (this.readyState === 4 && this.status === 200) {
+        //             // console.log(this.response);
+        //             alert(this.response);
+        //             ProfileData();
+        //         }
+        //     }
+        //     http.open("post", "/users/updateProfile", true);
+        //     http.send(formData);
+        //
+        // }
+
+        function logout() {
+            let http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
                     if (this.response === "logout") {
                         window.location.reload();
                         window.location.href = "/user_login";
@@ -186,41 +163,37 @@
             http.send();
         }
 
+        function Data() {
+            ProfileData();
+            productSA();
+            productSP();
+        }
+
 
     </script>
-
-
 </head>
-<body onload="ProfileData()">
+
+<body onload="Data()">
 <%- include('userheader') %>
-<div class="container mt-5 ">
-    <div class="main-body ">
-        <div class="row gutters-sm">
+    <div class="container-fluid mt-5">
+        <div id="profileInfo"></div>
+    </div>
 
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-column align-items-center text-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
-                                 class="rounded-circle" width="150">
-                            <div id="profileInfo"></div>
-                        </div>
-                    </div>
-                </div>
-
+    <div class="container-fluid" style="margin:5rem 0 0 0;">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 mb-5">
+                <h3 style="justify-content:start;display:grid;margin:0 0 0 1rem;">Your Active Products</h3>
+                <div id="ps"></div>
+                    <div id="productStatus"></div>
             </div>
-
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-body">
-                        <div id="profileForm"></div>
-                    </div>
-                </div>
+            <div class="col-lg-6 col-md-6 col-sm-6" >
+                <h3 style="margin: 0 0 0 1rem;">Your Pending Products</h3>
+                <div id="ps2"></div>
+                <div id="productStatusPending"></div>
             </div>
-
         </div>
     </div>
 
-</div>
+
 </body>
 </html>

@@ -1,37 +1,45 @@
-<div class="container-sm">
-    <div class="container w-50 bg-primary">
-        <div class="row mt-4 bg-light border-bottom">
-            <div class="col-6  text-center" style="padding-top:0.9rem">
-                <div class="photo">
-                    <div class="side-corner-tag">
-                        <img src="../<%= value.image%>" class="rounded" alt="" width="230px" height="230px">
-                        <p><span>${value.status}</span></p>
-                    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <h3 style="justify-content:start;display:grid;margin:0 0 0 1rem;">Your Active Products</h3>
+        <div class="container mt-5" style="margin:3rem 0 0 0rem;">
+            <!-- first product -->
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-12 " style="justify-content:start;display:grid;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy1LqFBIRBghK_oEMQWDlWryxOgkc87BvaPw&usqp=CAU"
+                         class="img-thumbnail"alt="" width="110px" height="110px">
                 </div>
-            </div>
-            <div class="col-6 justify-center  bg-light">
-                <div class="about-product mt-4">
-                    <div class="row">
-                        <div class="col-3 profile-image px-0 mx-0">
-                            <img src="../<%= value.photo%>" alt="" width="70px" height="70px" class="rounded mx-0 px-0">
-                        </div>
-                        <div class="col align-baseline justify-start mt-1 px-0">
-                           <span class="col profile-user-name ">
-                               <h4><%= value.fullname%></h4>
-                           </span>
-                        </div>
-                        <div class="max-bid text-dark mt-1 pt-1 px-1 rounded mt-2">
-                            <h3 class="fw-bold pt-1"><%= value.name%></h3>
-                        </div>
-                        <div class="max-bid text-dark mt-1 pt-1 px-1 rounded mt-2">
-                            <h5 class="">End Date: <%= value.end_date%></h5>
-                        </div>
-                        <div class="max-bid text-dark mt-1 pt-1 px-1 rounded mt-2">
-                            <h5 class="">Winning Bid: <%= value.product_amount%></h5>
-                        </div>
-                    </div>
+                <div class="col-lg-4 col-md-5 col-sm-12 ">
+                    <h4>Your Product Name</h4>
+                    <h5>Honda city</h5>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <h4>Closing Date</h4>
+                    <h5>12/12/2022</h5>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+
+    <div class="col-lg-6 col-md-6 col-sm-6" >
+        <h3 style="margin: 0 0 0 1rem;">Your Pending Products</h3>
+    </div>
+
+
+
+
+
+    if (session.username !== undefined) {
+    let userSession = session.username;
+    let winners = `SELECT winners.*, user_products.name, user_products.price, user_products.image, user_products.start_date, user_products.end_date, usersignup.fullname, usersignup.phone_no, usersignup.photo FROM winners
+    INNER JOIN user_products ON winners.winner_pid=user_products.p_id
+    INNER JOIN usersignup ON winners.winner_email=usersignup.email WHERE winner_email="${userSession}"`;
+    conn.query(winners, (e, data) => {
+    if (e) {
+    return res.send("error");
+    }
+    res.send(data);
+    });
+    } else {
+    res.redirect('/user_login');
+    }
