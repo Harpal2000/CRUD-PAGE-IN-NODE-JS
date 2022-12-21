@@ -22,8 +22,8 @@
         function UserLoginValues() {
             // $('#userlogin').validate();
             // if ($('#userlogin').valid()) {
-                var formcontrols = document.getElementById("userlogin").elements;
-                var formdata = new FormData();
+                let formcontrols = document.getElementById("userlogin").elements;
+                let formdata = new FormData();
                 for (let i = 0; i < formcontrols.length; i++) {
                     if (formcontrols[i].type !== "button")
                         formdata.append(formcontrols[i].name, formcontrols[i].value);
@@ -93,12 +93,12 @@
                                                                          name="chkChecked" class="ez-hide">
                             </div>
                             <div class="" style="padding-left: 133px;">
-                                <a href="" style="text-decoration: none;">Forgot Id/Password</a>
+                                <a href="/UserValidate" style="text-decoration: none;">Forgot Id/Password</a>
                             </div>
 
                         </label>
                         <div class="pt text-end">
-                            <button class="btn btn-primary px-4 shadow text-light w-50 fw-bold" style=""  onclick="UserLoginValues()"
+                            <button class="btn btn-primary px-4 shadow text-light w-50 fw-bold"  onclick="UserLoginValues()"
                                     type="button">SignIn<i class="fa-solid fa-right-to-bracket ms-2"></i></button>
                         </div>
                     </div>

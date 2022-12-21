@@ -138,9 +138,7 @@
             http.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     let data = JSON.parse(this.response);
-                    let tableTag = ``;
-                    let example = ``;
-                    let bidForm = ``;
+                    let DataView = ``;
 
                     data.forEach(function (value) {
                         id_Obj['p_id'] = value.p_id;
@@ -148,7 +146,8 @@
 
                         id_Arr.push({...id_Obj});
 
-                        tableTag += ` <div class="container-sm">
+
+                        DataView+=`<div class="container-sm">
                             <div class="container w-75">
                                 <div class="row mt-4 bg-light border-bottom">
                                      <div class="col col-12 col-lg-4 col-md-12 col-sm-6  text-center" style="padding-top:0.9rem">
@@ -166,63 +165,63 @@
                                                     <p>${value.description}</p>
                                                 </div>
                                         </div>
-                                   <div class="timer mt-4 ">
-                                     <section class="coming-soon1">
-                                        <div>
-                                        <div class="countdown countdown1">
-                                            <div class="container-day countdown-number1">
-                                                <h3 class="day countdown-time" id="day${value.p_id}">Time :</h3>
-                                                <h3 id="tt" class="countdown-text1">Day</h3>
-                                            </div>
-                                            <div class="container-hour countdown-number1">
-                                                <h3 class="hour countdown-time" id="hour${value.p_id}">Time :</h3>
-                                                <h3 id="tt" class="countdown-text1">Hrs</h3>
-                                            </div>
-                                            <div class="container-minute countdown-number1">
-                                                <h3 class="minute countdown-time" id="minute${value.p_id}">Time :</h3>
-                                                <h3 id="tt" class="countdown-text1">Min</h3>
-                                            </div>
-                                            <div class="container-second countdown-number1">
-                                                <h3 class="second countdown-time" id="second${value.p_id}">Time :</h3>
-                                                <h3 id="tt" class="countdown-text1">Sec</h3>
-                                            </div>
+                                        <div class="timer mt-4 ">
+                                            <section class="coming-soon1">
+                                                <div>
+                                                    <div class="countdown countdown1">
+                                                        <div class="container-day countdown-number1">
+                                                            <h3 class="day countdown-time" id="day${value.p_id}">Time :</h3>
+                                                            <h3 id="tt" class="countdown-text1">Day</h3>
+                                                        </div>
+                                                        <div class="container-hour countdown-number1">
+                                                            <h3 class="hour countdown-time" id="hour${value.p_id}">Time :</h3>
+                                                            <h3 id="tt" class="countdown-text1">Hrs</h3>
+                                                        </div>
+                                                        <div class="container-minute countdown-number1">
+                                                            <h3 class="minute countdown-time" id="minute${value.p_id}">Time :</h3>
+                                                            <h3 id="tt" class="countdown-text1">Min</h3>
+                                                        </div>
+                                                        <div class="container-second countdown-number1">
+                                                            <h3 class="second countdown-time" id="second${value.p_id}">Time :</h3>
+                                                            <h3 id="tt" class="countdown-text1">Sec</h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
                                         </div>
                                      </div>
-                                     </section>
-                                   </div>
+                                    <div class="col col-12 col-lg-4 col-md-6 col-sm-12 ">
+                                        <div class="col row mt-4  justify-content-center">
+                                            <div class="row">
+                                                <div class="col-3 profile-image px-0 mx-0">
+                                                    <img src="../${value.photo}" alt="" width="70px" height="70px" class="rounded-circle mx-0 px-0">
+                                                </div>
+                                            <div class="col align-baseline justify-start mt-4">
+                                                <span class="col profile-user-name ">
+                                                    <h4>${value.fullname}</h4>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="max-bid text-dark mt-1 pt-4 px-1 rounded mt-4">
+                                        <h5 class="">Max Bid:  ${value.price}</h5>
+                                    </div>
+                                    <div class="button  mb-3">
+                                        <button type="button" onclick="PlaceBid(${value.p_id})" class=" rounded btn text-light"
+                                        style="background-color:#2a2185">Place Your Bid</button>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>`
 
 
-            <div class="col col-12 col-lg-4 col-md-6 col-sm-12 ">
-                <div class="col row mt-4  justify-content-center">
-                      <div class="row">
-                    <div class="col-3 profile-image px-0 mx-0">
-                        <img src="../${value.photo}" alt="" width="70px" height="70px" class="rounded-circle mx-0 px-0">
-
-                    </div>
-                    <div class="col align-baseline justify-start mt-4">
-                        <span class="col profile-user-name ">
-                            <h4>${value.fullname}</h4>
-                        </span>
-                    </div>
-                </div>
-                </div>
-                <div class="max-bid text-dark mt-1 pt-4 px-1 rounded mt-4">
-                    <h5 class="">Max Bid:  ${value.price}</h5>
-                </div>
-
-                <div class="button  mb-3">
-                    <button type="button" onclick="PlaceBid(${value.p_id})" class=" rounded btn text-light" style="background-color:#2a2185">Place Your Bid</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>`
 
                     });
-                    document.getElementById("photoView").innerHTML = tableTag;
-                    document.getElementById("pv").innerHTML = example;
-                    document.getElementById("bf").innerHTML = bidForm;
+                    // document.getElementById("photoView").innerHTML = PhotoView;
+                    document.getElementById("pData").innerHTML = DataView;
+                    // document.getElementById("timer").innerHTML = TimerView;
+                    // document.getElementById("bf").innerHTML = bidForm;
 
                     countdown(id_Arr);
                     getDate(id_Arr);
@@ -264,6 +263,7 @@
 
 
         function countdown(array) {
+            let aa = ``;
             array.map((value) => {
                 let {p_id, end_date} = value;
                 if (end_date !== null) {
@@ -272,7 +272,12 @@
                     const countDate = new Date(endDate).getTime();
                     const now = new Date().getTime();
                     let remainingTime = countDate - now;
-                    // console.log("=========",remainingTime)
+                    console.log("=========",remainingTime)
+
+                    if(remainingTime < 0){
+                        aa+=`<h4>hello</h4>`
+                    }
+
                     // if (remainingTime.total <= 0) {
                     //     clearInterval();
                     //     var deadline = new Date(Date.parse(new Date().getTime()) + 6 * 1000);
@@ -363,8 +368,12 @@
 </div>
 
 <!--<div class="container">-->
-    <div id="photoView"></div>
+<div id="pData"></div>
 <!--</div>-->
+
+
+
+
 
 </body>
 </html>

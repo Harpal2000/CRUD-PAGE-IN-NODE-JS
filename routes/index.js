@@ -31,6 +31,44 @@ conn.query(Query,function (err,row){
 })
 });
 
+router.get('/UserValidate', function(req, res, next) {
+    res.render('user-validate');
+});
+
+router.post('/Check-User-validation', function(req, res, next) {
+    let uEmail = req.body.email;
+    let oPass = req.body.password;
+    let Query="select * from usersignup where email='"+uEmail+"' and password='"+oPass+"'";
+    conn.query(Query,function (err,row){
+        if(err) throw err;
+        if(row.length>0){
+            session.user= uEmail;
+            res.send('UserValid')
+        }
+        else{
+            res.send('NotValid')
+        }
+    })
+});
+
+router.get('/ForgetPassword', function(req, res, next) {
+    res.render('Forget-Password');
+});
+
+router.post("/Forget-Acc-Pass", (req, res) => {
+    let password = req.body.password;
+    let confirm_password = req.body.confirm_password;
+
+    let Query = `update usersignup set password="${password}",confirm_password="${confirm_password}" where email='${session.user}'`;
+    conn.query(Query, (err) => {
+        if (err) {
+            res.send("Error")
+        } else {
+            res.send("Data Updated");
+        }
+    })
+});
+
 
 router.post('/insertuser', (req, res) => {
     // console.log(req.body);
