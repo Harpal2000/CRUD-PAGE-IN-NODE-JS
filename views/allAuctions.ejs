@@ -63,7 +63,8 @@
             font-size: 11px;
             color: #090b0b;
             font-weight: bold;
-            padding-right: 10px;
+            padding-right: 13px;
+            padding-left: 8px;
         }
 
         .table-div {
@@ -288,10 +289,10 @@
                     const textMinute = Math.floor((remainingTime % hour) / minute);
                     const textSecond = Math.floor((remainingTime % minute) / second);
 
-                    document.getElementById(`day${p_id}`).innerHTML = (textDay + ":");
-                    document.getElementById(`hour${p_id}`).innerHTML = ("0" + textHour + ":").slice(-3);
-                    document.getElementById(`minute${p_id}`).innerHTML = ("0" + textMinute + ":").slice(-3);
-                    document.getElementById(`second${p_id}`).innerHTML = ("0" + textSecond).slice(-2);
+                    document.getElementById(`day${p_id}`).innerHTML = textDay > "0" ? textDay : "0" ;
+                    document.getElementById(`hour${p_id}`).innerHTML = textHour > "0" ? textHour : "0";
+                    document.getElementById(`minute${p_id}`).innerHTML = textMinute > "0" ? textMinute : "0";
+                    document.getElementById(`second${p_id}`).innerHTML = textSecond > "0" ? textSecond : "0";
                 }
             });
         }

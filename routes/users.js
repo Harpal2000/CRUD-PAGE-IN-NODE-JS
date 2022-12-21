@@ -251,21 +251,6 @@ router.get('/Bidder',  (req, res) =>{
     })
 });
 
-// router.get('/BidLeader', function (req, res) {
-//     let p_id = req.query.pid;
-//     let Query = `select  MAX(amount) as maxAmount ,u_email from bid where bid.p_id=${p_id}`;
-//     // console.log(Query);
-//     conn.query(Query, function (err, rows) {
-//         if (err) throw err;
-//         if (rows.length > 0) {
-//             // console.log(rows);
-//             res.send(rows);
-//         } else {
-//             res.send('No Product Found')
-//         }
-//
-//     })
-// });
 
 router.get('/getEndDate', (req, res) =>{
     let p_id = req.query.pid;
