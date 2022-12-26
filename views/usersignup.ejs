@@ -1,27 +1,78 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Signup</title>
     <!--    <link rel="stylesheet" href="/stylesheets/login.css">-->
     <%- include('headerfiles') %>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" </head>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"> </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"> </script> -->
 
+        <style>
+            .logo {
+                padding: 1rem 1rem 1rem 4rem;
+            }
+
+            .l-btn {
+                text-decoration: none;
+                padding: 1rem 1rem 1rem 4rem;
+                display: flex;
+                align-items: center;
+                justify-content: end;
+            }
+
+            .l-text {
+                margin: 0;
+                padding: 0 1rem 0 0;
+            }
+
+            .l-text2 {
+                margin: 0;
+                padding: 0 1rem 0 0;
+                text-align: end;
+                /* display: none !important; */
+            }
+
+            @media screen and (max-width: 800px) {
+                .l-text2 {
+                    margin: 0;
+                    padding: 0 1rem 0 0;
+                    text-align: end;
+                    /* display: visible !important;; */
+                }
+
+                .l-btn {
+                    background-color: white;
+                    border-bottom: 1px solid rgb(187, 186, 186);
+                    height: 11vh;
+                    display: none !important;
+                }
+            }
+
+            .btn:focus,
+            .btn:active {
+                outline: none !important;
+                box-shadow: none !important;
+            }
+
+            .form-control:focus,
+            .form-control:active {
+                outline: none !important;
+                box-shadow: none !important;
+            }
+
+            .terms a {
+                text-decoration: none;
+                color: #0275d8;
+            }
+        </style>
+
+
+        <!-- 
     <style>
-        .btn:focus, .btn:active {
-            outline: none !important;
-            box-shadow: none !important;
-        }
-
-        .form-control:focus, .form-control:active {
-            outline: none !important;
-            box-shadow: none !important;
-        }
-
-        .terms a {
-            text-decoration: none;
-            color: #0275d8;
-        }
 
 
         @media (max-width: 992px) {
@@ -40,148 +91,191 @@
         }
 
 
-    </style>
+    </style> -->
 
-    <script>
-        function UserInsert() {
-            $('#userform').validate();
-            if ($('#userform').valid()) {
-                let formcontrols = document.getElementById("userform").elements;
-                let formdata = new FormData();
-                for (let i = 0; i < formcontrols.length; i++) {
-                    if (formcontrols[i].type !== "button") {
-                        if (formcontrols[i].type === "file") {
-                            formdata.append(formcontrols[i].name, formcontrols[i].files[0]);
-                        } else {
-                            formdata.append(formcontrols[i].name, formcontrols[i].value);
+        <script>
+            function UserInsert() {
+                // $('#userform').validate();
+                // if ($('#userform').valid()) {
+                    let formcontrols = document.getElementById("userform").elements;
+                    let formdata = new FormData();
+                    for (let i = 0; i < formcontrols.length; i++) {
+                        if (formcontrols[i].type !== "button") {
+                            if (formcontrols[i].type === "file") {
+                                formdata.append(formcontrols[i].name, formcontrols[i].files[0]);
+                            } else {
+                                formdata.append(formcontrols[i].name, formcontrols[i].value);
+                            }
                         }
                     }
-                }
 
-                let httpreq = new XMLHttpRequest();
-                httpreq.onreadystatechange = function () {
-                    if (this.readyState === 4 && this.status === 200) {
-                        let CheckResponse = document.getElementById("userresponse");
-                        if (this.response === "exist") {
-                            CheckResponse.className = `alert alert-danger`;
-                            CheckResponse.innerText = `User already exist with this email.`;
-                        } else {
-                            CheckResponse.className = `alert alert-success`;
-                            CheckResponse.innerText = `Register successfully`;
-                            document.getElementById("userform").reset();
+                    let httpreq = new XMLHttpRequest();
+                    httpreq.onreadystatechange = function () {
+                        if (this.readyState === 4 && this.status === 200) {
+                            let CheckResponse = document.getElementById("user-response");
+                            if (this.response === "exist") {
+                                CheckResponse.className = `alert alert-danger`;
+                                CheckResponse.innerText = `E-Mail already exists`;
+                            } else {
+                                CheckResponse.className = `alert alert-success`;
+                                CheckResponse.innerText = `Register successfully`;
+                                document.getElementById("userform").reset();
+                            }
+
                         }
-
                     }
-                }
-                httpreq.open('post', "/insertuser", true);
-                httpreq.send(formdata);
+                    httpreq.open('post', "/insertuser", true);
+                    httpreq.send(formdata);
             }
-        }
 
 
-    </script>
+        </script>
 
 
 </head>
 
 <body class=" bg-light" id="admin_body">
 
-<!-- nav-above  -->
+    <!-- nav-above  -->
 
-<div class="navb d-flex  py-3" style="background-color:white;border-bottom: 1px solid rgb(187, 186, 186);">
-    <div class="logo ps-5 d-flex">
-        <a href="">
-            <img src="/images/logo1.png" alt="" width="45px" height="45px" class="rounded">
-        </a>
-        <div style="font-size: 30px;" class=" d-flex ms-2">
+    <div class="top-bar">
+        <div class="row"
+            style="background-color:white;border-bottom: 1px solid rgb(187, 186, 186);height: 11vh;margin: 0;">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="logo ps-5 d-flex">
+                            <a href="">
+                                <img src="/images/logo1.png" alt="" width="45px" height="45px" class="rounded">
+                            </a>
+                            <div style="font-size: 30px;" class=" d-flex ms-2">
 
-            <span style="color:rgb(10, 134, 250)">Bid</span><span style="color:orange ;">worx</span>
-        </div>
-    </div>
-
-    <div class="right-sec  d-flex" style="float:right;margin-left: 65rem;">
-        <a href="/user_login" class="mt-2 pt-1 me-2" style="text-decoration: none;" class="me-3 ">Already a
-            Member?</a>
-        <button class="btn btn-outline-secondary   px-4 my-2 my-sm-0" type="submit">Sign In</button>
-    </div>
-</div>
-
-
-<!-- navbar  -->
-
-<div class="container align-items-center justify-content-center mt-5 rounded w-50"
-     style="margin-top: 600px;border:1px solid rgba(128, 128, 128, 0.486)">
-    <div class="row align-items-center mt-5 p-0 rounded " style="background-color: rgba(255, 255, 255, 0.192);">
-
-
-        <div class="form">
-            <div class="col px-5 pb-5 " style="background: rgba(255, 255, 255, 0.233);">
-                <form id="userform">
-                    <h3 class=" mb-3" style="color: rgb(10, 134, 250);">Create Your Account </h3>
-
-                    <div class="form-group d-flex ">
-                        <input type="text" name="fullname" id="fullname" data-rule-required="true"
-                               placeholder="Enter Username"
-                               data-msg-required="*Full Name Required" class="form-control mb-1 me-3">
-
-                        <input type="text" name="fathername" id="fathername" data-rule-required="true"
-                               placeholder="Enter Father Name"
-                               data-msg-required="*Fathername Required" class="form-control mb-1">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="email" name="email" id="email" data-rule-required="true" placeholder="Enter E-Mail"
-                               data-msg-required="*E-Mail Required" class="form-control mt-1 mb-1">
-                    </div>
-
-                    <div class="form-group d-flex ">
-                        <input type="password" name="password" id="password" data-rule-required="true"
-                               placeholder="Enter Password"
-                               data-msg-required="*Password Required" class="form-control mt-1 mb-1 me-3">
-
-                        <input type="password" name="confirm_password" id="confirm_password" data-rule-required="true"
-                               data-rule-equalto="#password" placeholder="Enter Password"
-                               data-msg-required="*Enter Password" class="form-control mt-1 mb-1">
-
-                    </div>
-                    <div class="form-group ">
-                        <input type="text" name="phone_no" id="phone_no" data-rule-required="true" maxlength="10"
-                               minlength="10"
-                               data-rule-number="true" placeholder="Enter Mobile Number"
-                               data-msg-required="*Mobile No. Required" class="form-control mt-1 mb-1">
-                    </div>
-                    <div class="form-group ">
-                        <input type="file" class="form-control form-control shadow mt-2"
-                               aria-label="Small file input example" name="photo" id="photo"
-                               required>
-                    </div>
-                    <div class="terms mt-3">
-                        <label class="ll d-flex">
-                            <div class="ez-checkbox sprites me-2"><input id="chkChecked" type="checkbox"
-                                                                         name="chkChecked" class="ez-hide">
+                                <span style="color:rgb(10, 134, 250)">Bid</span><span style="color:orange ;">worx</span>
                             </div>
-                            <p>
-                                I accept the <a href="#"> Terms and Conditions </a> and the <a href="#">Privacy
-                                    Policy</a>
-                                of Bidderboy.com
-                            </p>
-
-                        </label>
-                        <div class="pt text-center">
-                            <!--                            <input type="button" id="btnncat" onclick="UserInsert()" value="REGISTER"-->
-                            <!--                                   class="btn btn-primary px-4 shadow text-light w-100 fw-bold"/>-->
-                            <button class="btn btn-primary px-4 shadow text-light w-100 fw-bold" id="btnncat"
-                                    onclick="UserInsert()" style=""
-                                    type="button">Sign Up
-                            </button>
                         </div>
                     </div>
-                </form>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="l-btn">
+                            <p class="l-text">Already a Member?</p>
+                            <a href="/user_login"><button type="button"
+                                    class="btn btn-outline-primary">LogIn</button></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="userresponse"></div>
-
     </div>
-</div>
+
+
+
+
+    <div class="container mt-5">
+
+        <div class="row ">
+            <div class="col-lg-10 mx-auto">
+                <div class="card mt-2 mx-auto p-4 bg-light">
+                    <div class="card-body bg-light">
+
+                        <div class="container">
+                            <form id="userform">
+                                <div class="text-center">
+                                    <h2 class="text-center mt-0 mb-4 border-bottom"
+                                        style="font-size: 2rem;color: rgb(10, 134, 250);">CREATE YOUR ACCOUNT</h2>
+                                </div>
+                                <div class="controls mb-3">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="fullname" id="fullname" class="form-control"
+                                                    data-rule-required="true" placeholder="Enter Username"
+                                                    data-msg-required="*Username Required" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="fathername" id="fathername"
+                                                    class="form-control" data-rule-number="true"
+                                                    placeholder="Enter Your Father Name"
+                                                    data-msg-required="*Father Name Required" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="email" name="email" id="email" class="form-control"
+                                                    data-rule-required="true" data-rule-number="true"
+                                                    placeholder="Enter Your E-Mail"
+                                                    data-msg-required="*Required email" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="password" name="password" id="password"
+                                                    class="form-control" data-rule-required="true"
+                                                    data-rule-number="true" placeholder="Enter your Password"
+                                                    data-msg-required="*Required password" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="password" name="confirm_password" id="confirm_password"
+                                                    class="form-control" data-rule-equalto="#password"
+                                                    data-rule-required="true" placeholder="Confirm Your Password"
+                                                    data-msg-required="*Password Required" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" name="phone_no" id="phone_no" class="form-control"
+                                                    maxlength="10" minlength="10" data-rule-required="true"
+                                                    data-rule-number="true" placeholder="Enter Your Mobile Number"
+                                                    data-msg-required="*Required Mobile Number" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="file" name="photo" id="photo" class="form-control"
+                                                    data-rule-required="true" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 mb-3 justify-content-end" id="Memeber">
+                                                <a href="/user_login">
+                                                    <p class="l-text2">Already a Member?</p>
+                                                </a>
+                                        </div>
+
+
+                                        <div class="col-md-12">
+                                            <input type="button" onclick="UserInsert()" value="REGISTER"
+                                                class="btn btn-primary btn-send  pt-2 btn-block w-100" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="container">
+                                <div id="user-response"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 </body>

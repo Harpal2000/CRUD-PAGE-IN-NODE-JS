@@ -1,148 +1,122 @@
-<link href="/css/bootstrap.css" rel="stylesheet"/>
-<script src="/js/jquery-3.6.0.min.js"></script>
-<script src="/js/jquery.validate.min.js"></script>
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.js"></script>
-<!--<link rel="stylesheet" href="/stylesheets/home-style.css">-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
-      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
-      crossorigin="anonymous" referrerpolicy="no-referrer">
-<link href="/stylesheets/style.css" rel="stylesheet"/>
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<!--<link href="/css/bootstrap.css" rel="stylesheet"/>-->
+<!--<script src="/js/jquery-3.6.0.min.js"></script>-->
+<!--<script src="/js/jquery.validate.min.js"></script>-->
+<!--<script src="/js/jquery.min.js"></script>-->
+<!--<script src="/js/bootstrap.js"></script>-->
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<!--<link rel="stylesheet" href="/style.css">-->
-<link rel="stylesheet" href="/stylesheets/nav_style.css">
-
-<script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
-<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+<!--<script src="https://unpkg.com/aos@next/dist/aos.js"></script>-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+<link rel="stylesheet" href="/stylesheets/bottom-header.css" />
+<link rel="stylesheet" href="/stylesheets/top-header.css">
+<link rel="stylesheet" href="/stylesheets/banner-style.css">
+<link rel="stylesheet" href="/stylesheets/cards.css">
 
 
 
-<!-- nav-above  -->
 
-<div class="nav-above" style="background-color:#2a2185 ;">
-    <div class="row py-4 mx-3">
-        <div class="col-1 col-xl-1 col-lg-1 col-sm-1 d-flex align-items-center">
-            <div class="logo">
-                <a href="">
-                    <img src="/images/logo1.png" alt="" width="45px" height="45px" class="rounded">
-                </a>
-            </div>
-            <div class="c_name ms-2 text-light mt-2">
-                <h4><span style="color:#e7f8ff ;">Bid</span><span style="color: orange ;">worx</span></h4>
-            </div>
+<div id="top-header">
+    <header>
+        <input type="checkbox" name="" id="chk1">
+        <div class="logo">
+            <img src="/images/main-logo.png" alt="" width="160" height="50" class="d-inline-block">
         </div>
-        <div class=" col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9   d-flex mt-1">
-
-            <div class="inpt w-100" style="margin-left:80px ;">
-                <input type="text" placeholder="Search Inventory here..." class="py-2 ps-3 w-100 rounded"
-                       style="outline: none; height: 45px;">
-            </div>
-
-            <div>
-                <button class="btn search-btn d-flex text-center  align-middle pt-2" type="submit"
-                        style="background:orange ;margin-left: px;height: 45px;">
-                    <i class="fa-solid fa-magnifying-glass pt-1" style="color:black;padding-right: 5px;"></i>
-                    <span class="search-text">Search </span></button>
-
-            </div>
-
+        <div class="search-box">
+            <form>
+                <input type="text" name="search" id="srch" placeholder="Search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
         </div>
-        <div class="col-1 col-lg-1 col-md-1 text-end register mt-1">
-            <a href="/usersignup">
-                <button class="btn mt-1 btn1" type="submit" style="background-color: orange;">Register</button>
-            </a>
+        <button class="btn1 search-btn" type="submit">Search</button>
+        <ul>
+            <li>
+                <a href="/usersignup"><button type="button" class="btn1 btn-register">Register</button></a>
+                <a href="/user_login"><button type="button" class="btn1 btn-sign-in">Login</button></a>
+                <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
+
+            </li>
+        </ul>
+        <div class="menu">
+            <label for="chk1">
+                <i class="bi bi-person-circle"></i>
+            </label>
         </div>
-        <div class="col-1 col-lg-1 col-md-1 text-start  signin mt-1">
-            <a href="/user_login">
-                <button class="btn btn-primary mt-1 btn1" type="submit">SignIn</button>
-            </a>
-        </div>
-    </div>
+    </header>
 </div>
 
-<!-- navbar  -->
 
-<div class="navB " style="background-color:#212529;">
-
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mx-5">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/users/userhome">Home <span class="sr-only">(current)</span></a>
+<div id="bottom-navbar">
+    <header>
+        <nav>
+            <i class="bi bi-border-width" id="ham-menu"></i>
+            <ul id="nav-bar">
+                <li id="n-link">
+                    <a href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/userhome">Contact</a>
+                <li id="n-link">
+                    <a href="/">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/allProducts">Auctions</a>
+                <li id="n-link">
+                    <a href="/users/allProducts">Auctions</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/add-bid">Daily Auctions</a>
+                <li id="n-link">
+                    <a href="/users/add-bid">Daily Winners</a>
                 </li>
-<!--                <li class="nav-item dropdown">-->
-<!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"-->
-<!--                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                        Categories-->
-<!--                    </a>-->
-<!--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-<!--                        <a class="dropdown-item" href="#">Car</a>-->
-<!--                        <a class="dropdown-item" href="#">Bike</a>-->
-<!--                        <a class="dropdown-item" href="#">Accessories</a>-->
-<!--                        <a class="dropdown-item" href="#">Property</a>-->
-<!--                    </div>-->
-<!--                </li>-->
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/win">Winners</a>
+                <li id="n-link">
+                    <a href="/users/win">Winners</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="aTT" title="Hurry !! 50% off on all Auctions !!: Coupon Code `DRM50B` Use it before expired !!">Annoucements</a>
+                <li id="n-link" class="nav-item">
+                    <a class="nav-link p-0" href="#" id="show-option"
+                       title="Hurry !! 50% off on all Auctions !!: Coupon Code `DRM50B` Use it before expired !!">Announcements</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/offers">Offers</a>
+                <li id="n-link">
+                    <a href="/users/offers">Offers</a>
                 </li>
-
             </ul>
-        </div>
-    </nav>
+        </nav>
+    </header>
 </div>
-<script>
-    $( "#aTT" ).tooltip({
-        show: {
-            effect: "slideDown",
-            delay: 250
-        }
-    } );
-</script>
-<!--<style>-->
-<!--    label {-->
-<!--        display: inline-block;-->
-<!--        width: 5em;-->
-<!--    }-->
-<!--</style>-->
-<script>
-    $(document).ready(function () {
-        $('.btn').click(function () {
-            $('.items').toggleClass("show");
-            $('ul li').toggleClass("hide");
-        });
 
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
+
+<script>
+        $("#show-option").tooltip({
+            show: {
+                effect: "slideDown",
+                delay: 250
+            }
+        });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<script>
+    let hamMenuIcon = document.getElementById("ham-menu");
+    let navBar = document.getElementById("nav-bar");
+    let navLinks = navBar.querySelectorAll("#n-link");
+
+    hamMenuIcon.addEventListener("click", () => {
+        navBar.classList.toggle("active");
+        hamMenuIcon.classList.toggle("fa-times");
+    });
+    navLinks.forEach((navLinks) => {
+        navLinks.addEventListener("click", () => {
+            navBar.classList.remove("active");
+            hamMenuIcon.classList.toggle("fa-times");
+        });
     });
 </script>
-
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>

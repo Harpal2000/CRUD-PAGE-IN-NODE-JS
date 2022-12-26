@@ -1,23 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/bootstrap.css" rel="stylesheet"/>
-    <script src="/js/jquery-3.6.0.min.js"></script>
-    <script src="/js/jquery.validate.min.js"></script>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <!--<link rel="stylesheet" href="/stylesheets/home-style.css">-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
-            integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
-          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
-          crossorigin="anonymous" referrerpolic
-          +y="no-referrer"/>
-    <script src="https://kit.fontawesome.com/f39241e0dc.js" crossorigin="anonymous"></script>
+    <title>Offers</title>
 
     <style>
         body {
@@ -29,6 +13,15 @@
             font-weight: bold;
             padding: 3rem;
         }
+
+
+
+            .container-main {
+                max-width: 1320px;
+                display: flex;
+                flex-wrap: wrap;
+                margin-left: 8rem;
+            }
 
         .coupon {
             border: 2px dotted blue;
@@ -69,7 +62,6 @@
             color: red;
         }
     </style>
-    <title></title>
 </head>
 <body>
 <%- include('hompagehead') %>
@@ -82,7 +74,7 @@
 
     </div>
 </div>
-<div class="container">
+<div class="container-main">
     <div class="coupon">
         <div class="container0" style="background-color:white">
             <h2><b>20% OFF YOUR PURCHASE</b></h2>

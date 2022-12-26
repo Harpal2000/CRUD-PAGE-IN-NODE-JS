@@ -77,7 +77,7 @@ router.post('/insert-user-product', (req, res) => {
     let end_date = req.body.end_date;
     let description = req.body.description;
     let status = req.body.status;
-
+    let location = req.body.location;
 
     // console.log(image);
     if (price > 100000000) {
@@ -93,7 +93,7 @@ router.post('/insert-user-product', (req, res) => {
             if (data.length > 0) {
                 res.send('exist');
             } else {
-                let Query = "insert into user_products (name,category,price,description,image,user_email) values ('" + name + "','" + category + "','" + price + "','" + description + "','" + dbpath + "','" + session.username + "')";
+                let Query = "insert into user_products (name,category,price,description,image,user_email,location) values ('" + name + "','" + category + "','" + price + "','" + description + "','" + dbpath + "','" + session.username + "','" + location + "')";
                 // console.log(Query);
                 conn.query(Query, function (err) {
                     if (err) throw err;
