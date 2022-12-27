@@ -1,4 +1,1 @@
-package.json
-package-lock.json
-bin
-.idea
+node_modules
