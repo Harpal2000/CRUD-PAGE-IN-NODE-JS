@@ -1,17 +1,1 @@
-{
-              "version": 1,
-              "builds": [
-                {
-                  "src": "./bin/www",
-                  "use": "@now/node"
-                }
-              ],
-              "routes": [
-                {
-
-                  "src": "/(.*)",
-
-                  "dest": "./bin/www"
-                }
-              ]
-            }
+{ "rewrites": [{ "source": "/(.*)", "destination": "/" }] }
