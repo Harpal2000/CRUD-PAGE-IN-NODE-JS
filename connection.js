@@ -7,7 +7,9 @@ const conn = mysql.createConnection({
     database:'onlineauction'
 })
 conn.connect(function(err) {
-    if (err) throw err;
+    if (err) throw err{
+        console.log("Error in connection")
+    }
     console.log('Connected Successfully...')
 });
 
