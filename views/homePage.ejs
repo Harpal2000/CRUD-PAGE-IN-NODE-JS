@@ -486,13 +486,13 @@
             http.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     let error = ``;
+                    let tableTag = '';
                    if(this.response === "No Data Found"){
                        error+=` <div class="text-center alert-danger p-5 mt-5">
                            <h6 class="">No Data Found.</h6>
                    </div>`
                    }else {
                        let data = JSON.parse(this.response);
-                       let tableTag = '';
                        data.forEach(function (value) {
                            tableTag += `         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mt-3">
             <div class="card">
@@ -508,10 +508,11 @@
                 </div>
                 <div class="card-body text-center">
                     <div class="ad-title m-auto">
-                        <h5>Honda Accord LX</h5>
+                        <h5>${value.name}</h5>
                         <h6>Bid Winning Amount</h6>
                          <h6>${value.product_amount}</h6>
                         <h6>Bid Ending Date</h6>
+                        <h6>${value.end_date}e</h6>
                     </div>
                 </div>
             </div>
