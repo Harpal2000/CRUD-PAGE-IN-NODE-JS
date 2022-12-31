@@ -3,8 +3,13 @@ const router = express.Router();
 const conn = require('../connection')
 const session = require('express-session')
 const {response} = require("express");
+// express.use(express.static(path.join(__dirname, "/images")));
 
 const nodemailer = require('nodemailer');
+// const path = require(__dirname, "/images");
+
+
+
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -36,7 +41,7 @@ router.post("/announce-winner", (req, res) => {
     let {p_id, email, amount} = req.body;
     const output = `<div class="container">
         <div style="color:black;background-color: white">
-                       <h2><b><img src="/images/72.png" alt="">Hi! ${email} We are happy to announce you as winner</b></h2>
+                       <h2><b>Hi! ${email} We are happy to announce you as winner</b></h2>
                        <h3>Your Winning Product Amount : ${amount}</h3>
                        <h3>Book your product by just follow below three steps:-
                        </h3>
