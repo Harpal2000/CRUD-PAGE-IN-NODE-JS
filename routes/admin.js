@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
 const conn = require('../connection')
 const session = require('express-session')
 const {response} = require("express");
